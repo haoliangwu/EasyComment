@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Easy Comments",
+  "version": "1.0",
+  "description": "Smart key tool for comments",
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "images/icon38.png"
+    },
+    "default_title": "Easy Comments",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "permissions":[
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://issues.liferay.com/browse/*"],
+      "js": [
+        "js/jquery-2.1.4.min.js",
+        "js/smart_key.js"]
+    }
+  ]
+
+}
