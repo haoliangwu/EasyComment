@@ -119,9 +119,9 @@ function commentTemplate(obj) {
         LPS + "[can/can't] be reproduced on Portal {portal-head-branch} GIT ID: {GITK}.\n" +
         "NOTE: Additional information that you think is helpful. If there is a lot thing you need to add, feel free to add a new comment instead.",
 
-        "crv": "The " + LPS + " can't be reproduced on 6.2.10 EE SP11, need another person to verify this again.",
+        "crv": "The " + LPS + " can't be reproduced on "+portal_branch+", need another person to verify this again.",
 
-        "fv": "The " + LPS + " is failed on 6.2.10 EE SP11 + " + fix_pack_name + ", need another person to verify this again.",
+        "fv": "The " + LPS + " is failed on "+portal_branch+" + " + fix_pack_name + ", need another person to verify this again.",
 
         "ma": "Send email to developer for help."
     };
