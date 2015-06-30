@@ -19,10 +19,16 @@
   ],
   "content_scripts": [
     {
-      "matches": ["*://issues.liferay.com/browse/*"],
+      "matches": ["*://issues.liferay.com/browse/LRQA-*"],
       "js": [
         "js/jquery-2.1.4.min.js",
-        "js/smart_key.js"]
+        "js/smart_key_LRQA.js"]
+    },
+    {
+      "matches":["*://issues.liferay.com/browse/BPR-*"],
+      "js":[
+        "js/jquery-2.1.4.min.js",
+        "js/smart_key_BPR.js"]
     }
   ]
 

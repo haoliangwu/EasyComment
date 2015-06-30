@@ -6,17 +6,20 @@
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/popup.js"></script>
 <style>
-    p{
-        text-align:center;
+    p {
+        text-align: center;
         font-size: 20px;
     }
-    *{
-        margin:0;
-        padding:0;
+
+    * {
+        margin: 0;
+        padding: 0;
     }
-    select{
+
+    select {
         font-size: 20px;
     }
+
     div {
         font-size: 20px;
         text-align: center;
@@ -27,8 +30,8 @@
         height: auto;
     }
 
-    td{
-        text-align:center;
+    td {
+        text-align: center;
     }
 
 
@@ -37,57 +40,82 @@
 <p>Easy Comment</p>
 <hr/>
 <div>
-    <select>
-        <option value="fixpack" >FixPack</option>
-        <option value="qar" >QA-R</option>
-    </select>
-    <table>
-        <tr>
-            <td>Smart Key</td>
-            <td>Comment</td>
-        </tr>
-        <tr>
-            <td>pa</td>
-            <td>Sub Tasks Passed Comment</td>
-        </tr>
-        <tr>
-            <td>pacr</td>
-            <td>Sub Tasks Cannot Reproduced Passed Comment</td>
-        </tr>
-        <tr>
-            <td>fcr</td>
-            <td>Sub Tasks Failed Comment</td>
-        </tr>
+    <div class="team">
+        <select>
+            <option value="fixpack">FixPack</option>
+            <option value="qar">QA-R</option>
+        </select>
+    </div>
 
-        <tr>
-            <td>f</td>
-            <td>Sub Tasks Actual Failed Comment</td>
-        </tr>
-        <tr>
-            <td>ct</td>
-            <td>Sub Tasks Cannot be tested Comment</td>
-        </tr>
-        <tr>
-            <td>rm</td>
-            <td>Sub Tasks Removed Comment</td>
-        </tr>
-        <tr>
-            <td>bprc</td>
-            <td>BPR Cannot Reproduced Comment</td>
-        </tr>
-        <tr>
-            <td>bprf</td>
-            <td>BPR Failed Comment</td>
-        </tr>
-        <tr>
-            <td>crv</td>
-            <td>Sub Tasks Cannot Reproduced Comment</td>
-        </tr>
-        <tr>
-            <td>fv</td>
-            <td>Sub Tasks Failed Comment</td>
-        </tr>
-    </table>
+    <div id="fixpack">
+        <div class="smartkey">
+
+            <table>
+                <tr>
+                    <td>Smart Key</td>
+                    <td>Comment</td>
+                </tr>
+                <tr>
+                    <td>pa</td>
+                    <td>Sub Tasks Passed Comment</td>
+                </tr>
+                <tr>
+                    <td>pacr</td>
+                    <td>Sub Tasks Cannot Reproduced Passed Comment</td>
+                </tr>
+                <tr>
+                    <td>fcr</td>
+                    <td>Sub Tasks Failed Comment</td>
+                </tr>
+
+                <tr>
+                    <td>f</td>
+                    <td>Sub Tasks Actual Failed Comment</td>
+                </tr>
+                <tr>
+                    <td>ct</td>
+                    <td>Sub Tasks Cannot be tested Comment</td>
+                </tr>
+                <tr>
+                    <td>rm</td>
+                    <td>Sub Tasks Removed Comment</td>
+                </tr>
+                <tr>
+                    <td>bprc</td>
+                    <td>BPR Cannot Reproduced Comment</td>
+                </tr>
+                <tr>
+                    <td>bprf</td>
+                    <td>BPR Failed Comment</td>
+                </tr>
+                <tr>
+                    <td>crv</td>
+                    <td>Sub Tasks Cannot Reproduced Comment</td>
+                </tr>
+                <tr>
+                    <td>fv</td>
+                    <td>Sub Tasks Failed Comment</td>
+                </tr>
+            </table>
+        </div>
+        <div class="parameter">
+            <br>
+            Portal Version:
+            <select>
+                <option value="6.2.10 EE SP11">
+                    6.2.10 EE SP11
+                </option>
+                <option value="6.1.30 EE GA3 SP4">
+                    6.1.30 EE GA3 SP4
+                </option>
+            </select>
+        </div>
+
+    </div>
+    <div id="qa-r">
+
+    </div>
+
 </div>
 </body>
 
