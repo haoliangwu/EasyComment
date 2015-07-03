@@ -19,22 +19,20 @@
   ],
   "content_scripts": [
     {
+      "matches":["*://*/*"],
+      "js":["js/jquery-2.1.4.min.js"]
+    },
+    {
       "matches": ["*://issues.liferay.com/browse/LRQA-*"],
-      "js": [
-        "js/jquery-2.1.4.min.js",
-        "js/smart_key_LRQA.js"]
+      "js": ["js/smart_key_LRQA.js"]
     },
     {
       "matches":["*://issues.liferay.com/browse/BPR-*"],
-      "js":[
-        "js/jquery-2.1.4.min.js",
-        "js/smart_key_BPR.js"]
+      "js":["js/smart_key_BPR.js"]
     },
     {
       "matches":["*://issues.liferay.com/browse/LPS-*"],
-      "js":[
-        "js/jquery-2.1.4.min.js",
-        "js/smart_key_LPS.js"]
+      "js":["js/smart_key_LPS.js"]
     }
   ]
 
