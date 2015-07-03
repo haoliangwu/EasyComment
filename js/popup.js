@@ -26,6 +26,9 @@ $(document).ready(function () {
 })
 
 function init() {
+
+    init_custom();
+
     chrome.storage.local.get('team', function (result) {
 
         if (result.team) {
@@ -54,14 +57,14 @@ function init_qar() {
 
     chrome.storage.local.get("parameter_qar", function (result) {
         if (result.parameter_qar) {
-            var obj=result.parameter_qar;
+            var obj = result.parameter_qar;
             $('#server_master').val(obj.server_master);
             $('#server_61').val(obj.server_61);
             $('#db').val(obj.db);
             $('#x61').val(obj.x61);
             $('#x62').val(obj.x62);
             $('#master').val(obj.master);
-            $("input").keyup(function () {
+            $("#qa_r input").keyup(function () {
                 var id = $(this).attr('id');
                 var value = $(this).val();
                 obj[id] = value;
@@ -98,4 +101,36 @@ function init_fixpack() {
     chrome.storage.local.get('portal_branch', function (result) {
         $(".parameter_fixpack select").val(result.portal_branch);
     });
+}
+
+function init_custom() {
+    chrome.storage.local.get('custom_content', function (result) {
+        if (result.custom_content) {
+
+        }
+        else {
+
+        }
+    });
+
+    $('#custom_toggle').click(function () {
+        $('#custom_content').toggle();
+    });
+
+    $('#custom_new').click(function () {
+        var $input1 = $('<input type="text" class="table_input one_input"/>');
+        var $input2 = $('<input type="text" class="table_input two_input"/>');
+        $input1.keyup(function () {
+            $(this).attr('id', $(this).val());
+            $input2.attr('id', $(this).val() + "_d");
+
+            //create list and add to local storage
+        });
+        var $td1 = $('<td></td>').append($input1);
+        var $td2 = $('<td></td>').append($input2);
+        var $tr = $('<tr></tr>').append($td1);
+        $tr.append($td2);
+        var $table = $('#custom_content table').append($tr);
+    });
+
 }

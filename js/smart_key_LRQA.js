@@ -61,9 +61,7 @@ function convert_selected_fixpack(dictionary) {
         return 0;
     }
     else {
-        console.log(sel.toString());
         var $focused = $(":focus");
-        console.log($focused[0].tagName);
         if (dictionary[sel.toString()])
             $focused.val(dictionary[sel.toString()]);
     }
