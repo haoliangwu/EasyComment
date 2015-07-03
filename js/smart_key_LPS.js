@@ -39,7 +39,7 @@ function convert_selected_fixpack(dictionary) {
 
 function commentTemplate(obj) {
     var server_master = obj.server_master;
-    var server_61=obj.server_61+'0';
+    var server_61=obj.server_61;
     var db = obj.db;
 
     var rep=server_master +" + "+ db +". "+"Portal Master GIT ID: ***.\n"+
