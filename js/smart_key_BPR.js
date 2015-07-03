@@ -30,6 +30,7 @@ $(document).ready(function () {
             if (event.keyCode == 17) {
                 $(this).one("mouseup", function () {
                     chrome.storage.local.get('team', function (result) {
+                        var dictionary = commentTemplate(template_obj);
                         //console.log(result);
                         if (result.team == 'qar') {
 
@@ -42,8 +43,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
 });
 
 
