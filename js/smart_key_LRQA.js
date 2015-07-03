@@ -1,57 +1,57 @@
 $(document).ready(function () {
-    chrome.storage.local.get("portal_branch", function (result) {
-
-        var title = $("#summary-val").text();
-        var fix_pack_name = title ? title.match(/portal-\d{2}-\d{4}/ig)[0] : "portal-version-branch";
-        var LPE = title ? title.match(/LPE-\d{5}/ig)[0]: "LPE-*****";
-        var LPS = title ? title.match(/LPS-\d{5}/ig)[0]: "LPS-*****";
-        var portal_branch = result.portal_branch ? result.portal_branch : "Portal-Branch";
-        var BPR = "BPR-*****";
-        var a_links=$(".issue-link.link-title").each(function() {
-            var text=$(this).text();
-            //console.log(text);
-            if(text.match(/BPR-\d{4}/ig)){
-                BPR = text;
-            }
-        });
-
-        var template_obj = {
-            "LPS": LPS,
-            "LPE": LPE,
-            "BPR": BPR,
-            "portal_branch": portal_branch,
-            "fix_pack_name": fix_pack_name
-        }
-
-
-
-        var team = chrome.storage.local.get('team', function (result) {
-            if (!result.team) {
-                chrome.storage.local.set({'team': 'fixpack'}, function () {
-                    console.log("Easy Comment initialize successfully.");
-                });
-            }
-        });
-
-        $("#comment").keydown(function () {
-            if (event.keyCode == 17) {
-                $(this).one("mouseup", function () {
-                    chrome.storage.local.get('team', function (result) {
-                        var dictionary = commentTemplate(template_obj);
-                        //console.log(result);
+    $("#comment").keydown(function () {
+        if (event.keyCode == 17) {
+            $(this).one("mouseup", function () {
+                chrome.storage.local.get('team', function (result) {
+                    if (!result.team) {
+                        chrome.storage.local.set({'team': 'fixpack'}, function () {
+                            console.log("Easy Comment initialize successfully.");
+                        });
+                    }
+                    else {
                         if (result.team == 'qar') {
-
+                            alert("Your team is QA-R,but the current page is Fix Pack sub-task page, please set team to Fix Pack.")
                         }
                         else if (result.team == 'fixpack') {
-                            convert_selected_fixpack(dictionary);
+
+                            chrome.storage.local.get("portal_branch", function (result) {
+
+                                var title = $("#summary-val").text();
+                                var fix_pack_name = title ? title.match(/portal-\d{2}-\d{4}/ig)[0] : "portal-version-branch";
+                                var LPE = title ? title.match(/LPE-\d{5}/ig)[0] : "LPE-*****";
+                                var LPS = title ? title.match(/LPS-\d{5}/ig)[0] : "LPS-*****";
+                                var portal_branch = result.portal_branch ? result.portal_branch : "Portal-Branch";
+                                var BPR = "BPR-*****";
+                                var a_links = $(".issue-link.link-title").each(function () {
+                                    var text = $(this).text();
+                                    //console.log(text);
+                                    if (text.match(/BPR-\d{4}/ig)) {
+                                        BPR = text;
+                                    }
+                                });
+
+                                var template_obj = {
+                                    "LPS": LPS,
+                                    "LPE": LPE,
+                                    "BPR": BPR,
+                                    "portal_branch": portal_branch,
+                                    "fix_pack_name": fix_pack_name
+                                }
+
+                                var dictionary = commentTemplate(template_obj);
+                                convert_selected_fixpack(dictionary);
+                            });
+
+
                         }
-                    });
+                        else {
+                            alert("Please set Your team in right-top setting page.")
+                        }
+                    }
                 });
-            }
-        });
+            });
+        }
     });
-
-
 });
 
 
@@ -72,7 +72,7 @@ function convert_selected_fixpack(dictionary) {
 function commentTemplate(obj) {
     var LPS = obj.LPS;
     var LPE = obj.LPE;
-    var BPR= obj.BPR;
+    var BPR = obj.BPR;
     var fix_pack_name = obj.fix_pack_name;
     var portal_branch = obj.portal_branch;
 
@@ -94,12 +94,12 @@ function commentTemplate(obj) {
         "Passed on:\n" +
         portal_branch + " + " + fix_pack_name + ".",
 
-        "fcr": "FAILED Manual Testing for " + LPS + "("+BPR+").\n" +
+        "fcr": "FAILED Manual Testing for " + LPS + "(" + BPR + ").\n" +
         "\n" +
         "Cannot be reproduced on:\n" +
         portal_branch + " + {the depends on patches}.",
 
-        "f": "FAILED Manual Testing for " + LPS + "("+BPR+").\n" +
+        "f": "FAILED Manual Testing for " + LPS + "(" + BPR + ").\n" +
         "\n" +
         "Reproduced on:\n" +
         portal_branch + " + {the depends on patches}.\n" +
@@ -120,9 +120,9 @@ function commentTemplate(obj) {
         LPS + "[can/can't] be reproduced on Portal {portal-head-branch} GIT ID: {GITK}.\n" +
         "NOTE: Additional information that you think is helpful. If there is a lot thing you need to add, feel free to add a new comment instead.",
 
-        "crv": "The " + LPS + " can't be reproduced on "+portal_branch+", need another person to verify this again.",
+        "crv": "The " + LPS + " can't be reproduced on " + portal_branch + ", need another person to verify this again.",
 
-        "fv": "The " + LPS + " is failed on "+portal_branch+" + " + fix_pack_name + ", need another person to verify this again.",
+        "fv": "The " + LPS + " is failed on " + portal_branch + " + " + fix_pack_name + ", need another person to verify this again.",
 
         "ma": "Send email to developer for help."
     };
