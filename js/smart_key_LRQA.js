@@ -23,7 +23,7 @@ $(document).ready(function () {
             "fix_pack_name": fix_pack_name
         }
 
-
+        var dictionary = commentTemplate(template_obj);
 
         var team = chrome.storage.local.get('team', function (result) {
             if (!result.team) {
@@ -37,7 +37,6 @@ $(document).ready(function () {
             if (event.keyCode == 17) {
                 $(this).one("mouseup", function () {
                     chrome.storage.local.get('team', function (result) {
-                        var dictionary = commentTemplate(template_obj);
                         //console.log(result);
                         if (result.team == 'qar') {
 
