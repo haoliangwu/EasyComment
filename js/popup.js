@@ -99,11 +99,11 @@ function init_fixpack() {
     });
 
     chrome.storage.local.get('portal_branch', function (result) {
-        if(result.portal_branch) {
-        $(".parameter_fixpack select").val(result.portal_branch);
+        if (result.portal_branch) {
+            $(".parameter_fixpack select").val(result.portal_branch);
         }
         else {
-            chrome.storage.local.set({'portal_branch':"6.2.10 EE SP11"},function() {
+            chrome.storage.local.set({'portal_branch': "6.2.10 EE SP11"}, function () {
                 console.log("Init portal_branch obj successfully")
             })
         }
@@ -127,16 +127,21 @@ function init_custom() {
     $('#custom_new').click(function () {
         var $input1 = $('<input type="text" class="table_input one_input"/>');
         var $input2 = $('<input type="text" class="table_input two_input"/>');
+        var $save = $('<input type="button" value="save" class="table_input three_input"/>');
+        var $more = $('<input type="button" value="more" class="table_input three_input"/>');
+
         $input1.keyup(function () {
             $(this).attr('id', $(this).val());
             $input2.attr('id', $(this).val() + "_d");
 
             //create list and add to local storage
         });
+
+
         var $td1 = $('<td></td>').append($input1);
         var $td2 = $('<td></td>').append($input2);
-        var $tr = $('<tr></tr>').append($td1);
-        $tr.append($td2);
+        var $td3 = $('<td></td>').append($save, $more);
+        var $tr = $('<tr></tr>').append($td1, $td2, $td3);
         var $table = $('#custom_content table').append($tr);
     });
 

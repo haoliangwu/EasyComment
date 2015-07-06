@@ -61,12 +61,26 @@ input {
     width: 100%;
 }
 
+
+
 .one{
     width: 20%;
 }
 
 .two{
-    width: 80%;
+    width: 70%;
+}
+
+.three{
+    width: 10%;
+}
+
+.three_input{
+    width: 50%;
+    height: 100%;
+    font-size:7px;
+    border: solid slategray 1px;
+    background-color: #CCCCCC;
 }
 
 #custom_new{
