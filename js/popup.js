@@ -103,7 +103,7 @@ function init_fixpack() {
         $(".parameter_fixpack select").val(result.portal_branch);
         }
         else {
-            chrome.storage.local.set('portal_branch',function() {
+            chrome.storage.local.set({'portal_branch':"6.2.10 EE SP11"},function() {
                 console.log("Init portal_branch obj successfully")
             })
         }
@@ -116,6 +116,7 @@ function init_custom() {
 
         }
         else {
+
         }
     });
 
