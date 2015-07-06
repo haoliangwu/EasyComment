@@ -99,7 +99,14 @@ function init_fixpack() {
     });
 
     chrome.storage.local.get('portal_branch', function (result) {
+        if(result.portal_branch) {
         $(".parameter_fixpack select").val(result.portal_branch);
+        }
+        else {
+            chrome.storage.local.set('portal_branch',function() {
+                console.log("Init portal_branch obj successfully")
+            })
+        }
     });
 }
 
@@ -109,7 +116,6 @@ function init_custom() {
 
         }
         else {
-
         }
     });
 
