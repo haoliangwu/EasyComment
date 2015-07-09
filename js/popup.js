@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    //chrome.storage.local.clear(function() {
-    //    console.log("clear all");
-    //})
 
     init();
 

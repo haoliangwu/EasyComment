@@ -8,6 +8,13 @@
 })(jQuery);
 
 $(document).ready(function() {
+
+    $("#reset").click(function () {
+        chrome.storage.local.clear(function() {
+            console.log("Clear Local Storage and reset all setting.");
+        })
+    });
+
     var url = $.getUrlParam('id');
     console.log(url);
 });
