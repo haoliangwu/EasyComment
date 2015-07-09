@@ -198,12 +198,12 @@ function addNewSmartKey(obj) {
                 chrome.storage.local.get('custom_obj', function (result) {
 
                     var custom_obj = result.custom_obj;
-                    custom_obj[$input1.attr('id')] = cc_obj;
+                    custom_obj[count] = cc_obj;
 
                     chrome.storage.local.set({'custom_obj': custom_obj}, function () {
                         console.log("Change custom obj to %o successfully.", custom_obj);
                         $more.click(function () {
-                            location.href = "/options.html";
+                            location.href = "/options.html?id="+cc_obj.id;
                         });
                     });
 
@@ -234,7 +234,7 @@ function addNewSmartKey(obj) {
                 chrome.storage.local.get('custom_obj', function (result) {
 
                     var custom_obj = result.custom_obj;
-                    custom_obj[$input1.attr('id')] = cc_obj;
+                    custom_obj[obj.id] = cc_obj;
 
                     chrome.storage.local.set({'custom_obj': custom_obj}, function () {
                         console.log("Change custom obj to %o successfully.", custom_obj);
@@ -245,7 +245,7 @@ function addNewSmartKey(obj) {
             });
 
             $more.click(function () {
-                location.href = "/options.html?id=" + obj.id;
+                window.open("/options.html?id=" + obj.id,window);
             });
         });
     }

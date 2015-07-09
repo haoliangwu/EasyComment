@@ -15,6 +15,9 @@ $(document).ready(function() {
         })
     });
 
-    var url = $.getUrlParam('id');
-    console.log(url);
+    chrome.storage.local.get('custom_obj',function(result) {
+        var obj=result.custom_obj;
+        var id_comment = $.getUrlParam('id');
+        console.log(id_comment);
+    })
 });

@@ -1,0 +1,31 @@
+.title{
+    width:20%;
+}
+
+.input_text {
+    width:20%;
+}
+
+.input_textarea{
+    width:100%;
+}
+
+.input_textarea textarea{
+    height:40%;
+    width:30%;
+}
+
+.editor{
+    margin-top:5%;
+}
+
+.editor div{
+    margin-left: 20%;
+
+}
+
+#save{
+    position: relative;
+    left:45%;
+    width:5%;
+}
