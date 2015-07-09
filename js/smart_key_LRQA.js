@@ -14,13 +14,13 @@ $(document).ready(function () {
                         }
                         else if (result.team == 'fixpack') {
 
-                            chrome.storage.local.get("portal_branch", function (result) {
-
+                            chrome.storage.local.get("parameter_fp", function (result) {
+                                var obj = result.parameter_fp;
                                 var title = $("#summary-val").text();
                                 var fix_pack_name = title ? title.match(/portal-\d{2}-\d{4}/ig)[0] : "portal-version-branch";
                                 var LPE = title ? title.match(/LPE-\d{5}/ig)[0] : "LPE-*****";
                                 var LPS = title ? title.match(/LPS-\d{5}/ig)[0] : "LPS-*****";
-                                var portal_branch = result.portal_branch ? result.portal_branch : "Portal-Branch";
+                                var portal_branch = obj.portal_branch ? obj.portal_branch : "Portal-Branch";
                                 var BPR = "BPR-*****";
                                 var a_links = $(".issue-link.link-title").each(function () {
                                     var text = $(this).text();
@@ -34,9 +34,12 @@ $(document).ready(function () {
                                     "LPS": LPS,
                                     "LPE": LPE,
                                     "BPR": BPR,
+                                    "isRegressionStyle": obj.isRegressionStyle,
                                     "portal_branch": portal_branch,
                                     "fix_pack_name": fix_pack_name
                                 }
+
+                                console.log(template_obj);
 
                                 var dictionary = commentTemplate(template_obj);
                                 convert_selected_fixpack(dictionary);
@@ -73,6 +76,7 @@ function commentTemplate(obj) {
     var BPR = obj.BPR;
     var fix_pack_name = obj.fix_pack_name;
     var portal_branch = obj.portal_branch;
+    var regression_env = obj.isRegressionStyle ? '+ {the depends on patches}.' : '.';
 
     var template = {
         "pa": "PASSED Manual Testing for " + LPS + ".\n" +
@@ -86,7 +90,7 @@ function commentTemplate(obj) {
         "pacr": "PASSED Manual Testing for " + LPS + ".\n" +
         "\n" +
         "Cannot be reproduced on:\n" +
-        portal_branch + "+ {the depends on patches}.\n" +
+        portal_branch + regression_env + "\n" +
         "Due to this issue is caused by " + LPS + " and " + LPS + " is also in the same patch, so I can't reproduced it.\n" +
         "\n" +
         "Passed on:\n" +
@@ -95,12 +99,12 @@ function commentTemplate(obj) {
         "fcr": "FAILED Manual Testing for " + LPS + "(" + BPR + ").\n" +
         "\n" +
         "Cannot be reproduced on:\n" +
-        portal_branch + " + {the depends on patches}.",
+        portal_branch + regression_env + "\n",
 
         "f": "FAILED Manual Testing for " + LPS + "(" + BPR + ").\n" +
         "\n" +
         "Reproduced on:\n" +
-        portal_branch + " + {the depends on patches}.\n" +
+        portal_branch + regression_env + "\n" +
         "\n" +
         "Failed on:\n" +
         portal_branch + " + " + fix_pack_name + ".",
@@ -110,7 +114,7 @@ function commentTemplate(obj) {
 
         "rm": "I'll close this sub-task as complete because it is removed from " + fix_pack_name + ".",
 
-        "bprc": "Can't reproduce " + LPS + " on " + portal_branch + "  + {the depends on patches}.\n" +
+        "bprc": "Can't reproduce " + LPS + " on " + portal_branch + regression_env + "\n" +
         "[No/A] regression was found on " + portal_branch + " + " + fix_pack_name + " by using the steps in " + LPS + ".\n" +
         "{Give more information about the regression you have found}",
 

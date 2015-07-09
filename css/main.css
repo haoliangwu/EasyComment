@@ -46,12 +46,13 @@ td {
 }
 
 .parameter_fixpack, .parameter_qav {
+    width:300px;
     position: relative;
     left: 30%;
 }
 
 input {
-    width: 200px;
+    width: 100%;
     font-size: 20px;
 }
 
@@ -82,7 +83,23 @@ input {
     border: solid slategray 1px;
     background-color: #CCCCCC;
 }
-
+#custom_toggle{
+    float:left;
+}
 #custom_new{
     float:right;
+}
+
+div.parameter_fixpack div{
+    width:250px;
+}
+
+div.parameter_fixpack input{
+    vertical-align: middle;
+    height: 20px;
+    width:30px;
+}
+
+div.parameter_fixpack form{
+    width:100%;
 }
