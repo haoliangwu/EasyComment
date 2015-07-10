@@ -118,7 +118,7 @@ function init_fixpack() {
         }
         else {
             var parameter_fp = {
-                "portal_branch": "6.2.10 EE SP4",
+                "portal_branch": "6.2.10 EE SP11",
                 "isRegressionStyle": false
             }
             chrome.storage.local.set({"parameter_fp": parameter_fp}, function () {
@@ -156,9 +156,7 @@ function init_custom() {
         });
 
         $('#custom_new').click(function () {
-
             addNewSmartKey(null);
-
         });
     });
 

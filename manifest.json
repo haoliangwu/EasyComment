@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Easy Comments",
   "version": "1.0",
-  "description": "Smart key tool for comments",
+  "description": "Smart key tool forcomments",
   "icons": {
     "128": "images/icon128.png"
   },
