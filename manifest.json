@@ -23,12 +23,8 @@
       "js":["js/jquery-2.1.4.min.js"]
     },
     {
-      "matches": ["*://issues.liferay.com/browse/LRQA-*"],
+      "matches": ["*://issues.liferay.com/browse/LRQA-*","*://issues.liferay.com/browse/BPR-*"],
       "js": ["js/smart_key_LRQA.js"]
-    },
-    {
-      "matches":["*://issues.liferay.com/browse/BPR-*"],
-      "js":["js/smart_key_BPR.js"]
     },
     {
       "matches":["*://issues.liferay.com/browse/LPS-*"],

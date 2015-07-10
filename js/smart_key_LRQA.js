@@ -22,9 +22,9 @@ $(document).ready(function () {
                             chrome.storage.local.get("parameter_fp", function (result) {
                                 var obj = result.parameter_fp;
                                 var title = $("#summary-val").text();
-                                var fix_pack_name = title ? title.match(/portal-\d{2}-\d{4}/ig)[0] : "portal-version-branch";
-                                var LPE = title ? title.match(/LPE-\d{5}/ig)[0] : "LPE-*****";
-                                var LPS = title ? title.match(/LPS-\d{5}/ig)[0] : "LPS-*****";
+                                var fix_pack_name = title.match(/portal-\d{2}-\d{4}/ig) ? title.match(/portal-\d{2}-\d{4}/ig)[0] : "portal-version-branch";
+                                var LPE = title.match(/LPE-\d{5}/ig) ? title.match(/LPE-\d{5}/ig)[0] : "LPE-*****";
+                                var LPS = title.match(/LPS-\d{5}/ig) ? title.match(/LPS-\d{5}/ig)[0] : "LPS-*****";
                                 var portal_branch = obj.portal_branch ? obj.portal_branch : "Portal-Branch";
                                 var BPR = "BPR-*****";
                                 var a_links = $(".issue-link.link-title").each(function () {
