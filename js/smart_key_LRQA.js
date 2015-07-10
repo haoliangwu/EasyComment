@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    $("#comment").keydown(function () {
-        if (event.keyCode == 17) {
-            $(this).one("mouseup", function () {
+    $("#comment").mouseup(function (e) {
+        if (e.ctrlKey&& e.which==1) {
                 chrome.storage.local.get('team', function (result) {
                     if (!result.team) {
                         chrome.storage.local.set({'team': 'fixpack'}, function () {
@@ -39,8 +38,6 @@ $(document).ready(function () {
                                     "fix_pack_name": fix_pack_name
                                 }
 
-                                console.log(template_obj);
-
                                 var dictionary = commentTemplate(template_obj);
                                 convert_selected_fixpack(dictionary);
                             });
@@ -52,7 +49,6 @@ $(document).ready(function () {
                         }
                     }
                 });
-            });
         }
     });
 });
@@ -67,6 +63,16 @@ function convert_selected_fixpack(dictionary) {
         var $focused = $(":focus");
         if (dictionary[sel.toString()])
             $focused.val(dictionary[sel.toString()]);
+        else{
+            chrome.storage.local.get('custom_obj',function(result) {
+                var obj=result.custom_obj;
+                for(var e in obj){
+                    if(sel.toString()== obj[e].key) {
+                        $focused.val(obj[e].template);
+                    }
+                }
+            });
+        }
     }
 }
 

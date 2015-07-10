@@ -33,6 +33,17 @@ function convert_selected_fixpack(dictionary) {
         console.log($focused[0].tagName);
         if (dictionary[sel.toString()])
             $focused.val(dictionary[sel.toString()]);
+        else{
+            chrome.storage.local.get('custom_obj',function(result) {
+                var obj=result.custom_obj;
+                for(var e in obj){
+                    if(sel.toString()== e.key) {
+                        $focused.val(e.template);
+                    }
+                }
+            });
+
+        }
     }
 }
 

@@ -192,7 +192,8 @@ function addNewSmartKey(obj) {
                 var cc_obj = {
                     "id": count,
                     "key": $input1.val(),
-                    "des": $input2.val()
+                    "des": $input2.val(),
+                    "template":''
                 };
 
                 chrome.storage.local.get('custom_obj', function (result) {
@@ -228,12 +229,14 @@ function addNewSmartKey(obj) {
                 var cc_obj = {
                     "id": obj.id,
                     "key": $input1.val(),
-                    "des": $input2.val()
+                    "des": $input2.val(),
+                    "template":''
                 };
 
                 chrome.storage.local.get('custom_obj', function (result) {
 
                     var custom_obj = result.custom_obj;
+                    cc_obj.template=custom_obj.template;
                     custom_obj[obj.id] = cc_obj;
 
                     chrome.storage.local.set({'custom_obj': custom_obj}, function () {

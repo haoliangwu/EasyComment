@@ -16,8 +16,24 @@ $(document).ready(function() {
     });
 
     chrome.storage.local.get('custom_obj',function(result) {
-        var obj=result.custom_obj;
         var id_comment = $.getUrlParam('id');
-        console.log(id_comment);
+        var custom_obj=result.custom_obj;
+        var obj=result.custom_obj[id_comment];
+
+        $('#smart_id').val(obj.key);
+        $('#desc').val(obj.des);
+        if(obj.template == undefined || obj.template =='') {
+            $('#template').focus();
+        }
+        else {
+            $('#template').val(obj.template);
+        }
+        $('#save').click(function () {
+            obj.template = $('#template').val();
+            custom_obj[id_comment] = obj;
+            chrome.storage.local.set({'custom_obj':custom_obj},function() {
+                console.log("Update custom obj %o.", obj);
+            });
+        });
     })
 });
