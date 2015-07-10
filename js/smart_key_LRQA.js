@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    //chrome.storage.local.get('fp_obj',function(result) {
+    //    console.log(result.fp_obj);
+    //});
+
+
     $("#comment").mouseup(function (e) {
         if (e.ctrlKey&& e.which==1) {
                 chrome.storage.local.get('team', function (result) {
@@ -39,7 +45,7 @@ $(document).ready(function () {
                                 }
 
                                 var dictionary = commentTemplate(template_obj);
-                                convert_selected_fixpack(dictionary);
+
                             });
 
 
@@ -83,8 +89,9 @@ function commentTemplate(obj) {
     var fix_pack_name = obj.fix_pack_name;
     var portal_branch = obj.portal_branch;
     var regression_env = obj.isRegressionStyle ? '+ {the depends on patches}.' : '.';
+    var template = {};
 
-    var template = {
+    var template1 = {
         "pa": "PASSED Manual Testing for " + LPS + ".\n" +
         "\n" +
         "Reproduced on:\n" +
@@ -135,6 +142,17 @@ function commentTemplate(obj) {
         "ma": "Send email to developer for help."
     };
 
-    return template;
-
+    chrome.storage.local.get('fp_obj',function(result) {
+        var obj = result.fp_obj;
+        for(var e in obj) {
+            var temp=obj[e].template;
+            temp=temp.replace(/\$LPS/ig,LPS);
+            temp=temp.replace(/\$portal_branch/ig,portal_branch);
+            temp=temp.replace(/\$fix_pack_name/ig,fix_pack_name);
+            temp=temp.replace(/\$BPR/ig,BPR);
+            temp=temp.replace(/\$regression_env/ig, regression_env);
+            template[obj[e].key]=temp;
+        }
+        convert_selected_fixpack(template);
+    });
 }

@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    //chrome.storage.local.get('fp_obj',function(result) {
+    //    console.log(result.fp_obj);
+    //});
 
     init();
 
@@ -87,6 +90,51 @@ function init_qar() {
 
 function init_fixpack() {
 
+    var template = {
+        "pa": "PASSED Manual Testing for " + "$LPS" + ".\n" +
+        "\n" +
+        "Reproduced on:\n" +
+        "$portal_branch" + ".\n" +
+        "\n" +
+        "Passed on:\n" +
+        "$portal_branch" + " + " + "$fix_pack_name" + ".",
+
+        "pacr": "PASSED Manual Testing for " + "$LPS" + ".\n" +
+        "\n" +
+        "Cannot be reproduced on:\n" +
+        "$portal_branch" + "$regression_env" + "\n" +
+        "Due to this issue is caused by " + "$LPS" + " and " + "$LPS" + " is also in the same patch, so I can't reproduced it.\n" +
+        "\n" +
+        "Passed on:\n" +
+        "$portal_branch" + " + " + "$fix_pack_name" + "."
+    }
+
+    chrome.storage.local.get("fp_obj", function (result) {
+        if (!result.fp_obj) {
+
+            var obj = {};
+            for (var e in template) {
+                obj[e] = {
+                    'id': e,
+                    'key': e,
+                    'des': e,
+                    'template': template[e]
+                };
+            }
+
+            chrome.storage.local.set({'fp_obj': obj}, function () {
+                console.log("Initiate fixpack obj to %o successfully.", obj)
+            });
+        } else {
+            //initiate UI
+
+            for (var e in result.fp_obj) {
+                //create element
+                addNewSmartKey(result.fp_obj[e], '#fixpack table', 'fp');
+            }
+        }
+    });
+
     chrome.storage.local.get("parameter_fp", function (result) {
         if (result.parameter_fp) {
             var obj = result.parameter_fp;
@@ -140,7 +188,7 @@ function init_custom() {
             //initiate UI
             for (var e in result.custom_obj) {
                 //create element
-                addNewSmartKey(result.custom_obj[e]);
+                addNewSmartKey(result.custom_obj[e], '#custom_content table','custom');
             }
         }
     });
@@ -156,14 +204,14 @@ function init_custom() {
         });
 
         $('#custom_new').click(function () {
-            addNewSmartKey(null);
+            addNewSmartKey(null, '#custom_content table', 'custom');
         });
     });
 
 
 }
 
-function addNewSmartKey(obj) {
+function addNewSmartKey(obj, selector, team) {
     var $input1 = $('<input type="text" class="table_input one_input"/>');
     var $input2 = $('<input type="text" class="table_input two_input"/>');
     var $save = $('<input type="button" value="save" class="table_input three_input"/>');
@@ -180,7 +228,8 @@ function addNewSmartKey(obj) {
             var $td2 = $('<td></td>').append($input2);
             var $td3 = $('<td></td>').append($save, $more);
             var $tr = $('<tr></tr>').append($td1, $td2, $td3);
-            var $table = $('#custom_content table').append($tr);
+            //var $table = $('#custom_content table').append($tr);
+            var $table = $(selector).append($tr);
 
             chrome.storage.local.set({'custom_count': ++count}, function () {
                 console.log("Change custom count to %s successfully.", count);
@@ -191,7 +240,7 @@ function addNewSmartKey(obj) {
                     "id": count,
                     "key": $input1.val(),
                     "des": $input2.val(),
-                    "template":''
+                    "template": ''
                 };
 
                 chrome.storage.local.get('custom_obj', function (result) {
@@ -202,7 +251,7 @@ function addNewSmartKey(obj) {
                     chrome.storage.local.set({'custom_obj': custom_obj}, function () {
                         console.log("Change custom obj to %o successfully.", custom_obj);
                         $more.click(function () {
-                            location.href = "/options.html?id="+cc_obj.id;
+                            window.open("/options.html?id=" + obj.id + "&team=" + team, window);
                         });
                     });
 
@@ -221,24 +270,25 @@ function addNewSmartKey(obj) {
             var $td2 = $('<td></td>').append($input2);
             var $td3 = $('<td></td>').append($save, $more);
             var $tr = $('<tr></tr>').append($td1, $td2, $td3);
-            var $table = $('#custom_content table').append($tr);
+            var $table = $(selector).append($tr);
 
             $save.click(function () {
                 var cc_obj = {
                     "id": obj.id,
                     "key": $input1.val(),
                     "des": $input2.val(),
-                    "template":''
+                    "template": ''
                 };
 
-                chrome.storage.local.get('custom_obj', function (result) {
-
-                    var custom_obj = result.custom_obj;
-                    cc_obj.template=custom_obj.template;
+                chrome.storage.local.get(team+'_obj', function (result) {
+                    var custom_obj = result[team+'_obj'];
+                    cc_obj.template = custom_obj[obj.id].template;
                     custom_obj[obj.id] = cc_obj;
+                    var temp={};
+                    temp[team+'_obj']=custom_obj;
 
-                    chrome.storage.local.set({'custom_obj': custom_obj}, function () {
-                        console.log("Change custom obj to %o successfully.", custom_obj);
+                    chrome.storage.local.set(temp, function () {
+                        console.log("Change custom obj to %o successfully.", cc_obj);
                     });
 
 
@@ -246,7 +296,7 @@ function addNewSmartKey(obj) {
             });
 
             $more.click(function () {
-                window.open("/options.html?id=" + obj.id,window);
+                window.open("/options.html?id=" + obj.id + "&team=" + team, window);
             });
         });
     }
