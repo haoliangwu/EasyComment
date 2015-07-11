@@ -64,6 +64,27 @@ $(document).ready(function() {
             })
             break;
         case 'qar':
+            chrome.storage.local.get('qar_obj',function(result) {
+                var id_comment = $.getUrlParam('id');
+                var qar_obj=result.qar_obj;
+                var obj=result.qar_obj[id_comment];
+
+                $('#smart_id').val(obj.key);
+                $('#desc').val(obj.des);
+                if(obj.template == undefined || obj.template =='') {
+                    $('#template').focus();
+                }
+                else {
+                    $('#template').val(obj.template);
+                }
+                $('#save').click(function () {
+                    obj.template = $('#template').val();
+                    fp_obj[id_comment] = obj;
+                    chrome.storage.local.set({'qar_obj':qar_obj},function() {
+                        console.log("Update fp obj %o.", obj);
+                    });
+                });
+            })
             break;
     }
 

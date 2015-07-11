@@ -27,26 +27,32 @@ $(document).ready(function () {
 
 function init() {
 
-    init_custom();
+
 
     chrome.storage.local.get('team', function (result) {
 
         if (result.team) {
+            init_custom();
+            init_qar();
+            init_fixpack();
+
             $(".team select").val(result.team);
             if (result.team == 'qar') {
                 $("#fixpack").hide();
                 $("#qa-r").show();
-                init_qar();
             }
             else {
                 $("#qa-r").hide();
                 $("#fixpack").show();
-                init_fixpack();
             }
         }
         else {
             chrome.storage.local.set({"team": "fixpack"}, function () {
-                console.log("Init team to %s", "fixpack");
+                console.log("Init team to %s and Init setting", "fixpack");
+                init_custom();
+                init_qar();
+                init_fixpack();
+                init();
             });
         }
 
@@ -54,6 +60,87 @@ function init() {
 }
 
 function init_qar() {
+
+    var rep = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: ***.\n" +
+        "$server_master" + " + " + "$db" + ". " + "Portal 6.2.x EE GIT ID: ***.\n" +
+        "$server_61" + " + " + "$db" + ". " + "Portal 6.1.x EE GIT ID: ***.\n";
+
+    var fix = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: " + "$gitk_master" + ".\n" +
+        "$server_master" + " + " + "$db" + ". " + "Portal 6.2.x EE GIT ID: " + "$gitk_62x" + ".\n" +
+        "$server_61r" + " + " + "$db" + ". " + "Portal 6.1.x EE GIT ID: " + "$gitk_61x" + ".\n";
+
+    var content = "\n" +
+        "Reproduced on:\n" +
+        rep +
+        "\n" +
+        "Explanation.\n" +
+        "\n" +
+        "Fixed on:\n" +
+        fix +
+        "\n" +
+        "Explanation.\n";
+
+    var template = {
+        "pani": "PASSED Manual Testing using the following steps:\n" +
+        "\n" +
+        "# Step1\n# Step2\n# Step3\n" +
+        content,
+
+        "pai": "PASSED Manual Testing following the steps in the description.\n" +
+        content,
+
+        "nlni": "No Longer Reproducible through Manual Testing using the following steps:\n" +
+        "\n" +
+        "# Step1\n# Step2\n# Step3\n" +
+        content,
+
+        "nli": "No Longer Reproducible through Manual Testing following the steps in the description.\n" +
+        content,
+
+        "fani": "FAILED Manual Testing using the following steps:\n" +
+        "\n" +
+        "# Step1\n# Step2\n# Step3\n" +
+        content,
+
+        "fai": "FAILED Manual Testing following the steps in the description.\n" +
+        content,
+
+        "qavr": "Reproduced on:\n" +
+        rep +
+        "\n" +
+        "Explanation.\n",
+
+        "qavnl": "No Longer Reproducible on:\n" +
+        rep +
+        "\n" +
+        "Explanation.\n"
+    };
+
+    chrome.storage.local.get("qar_obj", function (result) {
+        if (!result.qar_obj) {
+
+            var obj = {};
+            for (var e in template) {
+                obj[e] = {
+                    'id': e,
+                    'key': e,
+                    'des': e,
+                    'template': template[e]
+                };
+            }
+
+            chrome.storage.local.set({'qar_obj': obj}, function () {
+                console.log("Initiate fixpack obj to %o successfully.", obj)
+            });
+        } else {
+            //initiate UI
+
+            for (var e in result.qar_obj) {
+                //create element
+                addNewSmartKey(result.qar_obj[e], '#qar_basic', 'qar');
+            }
+        }
+    });
 
     chrome.storage.local.get("parameter_qar", function (result) {
         if (result.parameter_qar) {
@@ -164,7 +251,7 @@ function init_fixpack() {
 
             for (var e in result.fp_obj) {
                 //create element
-                addNewSmartKey(result.fp_obj[e], '#fixpack table', 'fp');
+                addNewSmartKey(result.fp_obj[e], '#fp_basic', 'fp');
             }
         }
     });
