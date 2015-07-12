@@ -1,24 +1,34 @@
 $(document).ready(function () {
-    $("#comment").keydown(function () {
-        if (event.keyCode == 17) {
-            $(this).one("mouseup", function () {
-                chrome.storage.local.get('team', function (result) {
-                    chrome.storage.local.get("parameter_qar", function (result) {
-                        var obj = result.parameter_qar;
-                        if (obj) {
-                            var dictionary = commentTemplate(obj);
-                            if (result.team == 'qar') {
-                                convert_selected_fixpack(dictionary);
-                            }
-                            else if (result.team == 'fixpack') {
 
-                            }
-                        }
+    $('#comment').mouseup(function (e) {
+        if (e.ctrlKey && e.which == 1) {
+            chrome.storage.local.get('team', function (result) {
+                if (!result.team) {
+                    chrome.storage.local.set({'team': 'qar'}, function () {
+                        console.log("Easy Comment initialize team to %s successfully.", 'qar');
                     });
-                });
+                }
+                else {
+                    if (result.team == 'fixpack') {
+                        alert("Your team setting is fixpack,but the current page is qa-r LPS page, please set team to qa-r.");
+                    }
+                    else if (result.team == 'qar') {
+                        chrome.storage.local.get("parameter_qar", function (result) {
+                            var obj = result.parameter_qar;
+                            commentTemplate(obj);
+                        });
+                    }
+                    else {
+                        alert("Please set Your team in right-top setting page.");
+                    }
+
+                }
+
+
             });
         }
     });
+
 });
 
 
@@ -28,17 +38,15 @@ function convert_selected_fixpack(dictionary) {
         return 0;
     }
     else {
-        console.log(sel.toString());
         var $focused = $(":focus");
-        console.log($focused[0].tagName);
         if (dictionary[sel.toString()])
             $focused.val(dictionary[sel.toString()]);
-        else{
-            chrome.storage.local.get('custom_obj',function(result) {
-                var obj=result.custom_obj;
-                for(var e in obj){
-                    if(sel.toString()== e.key) {
-                        $focused.val(e.template);
+        else {
+            chrome.storage.local.get('custom_obj', function (result) {
+                var obj = result.custom_obj;
+                for (var e in obj) {
+                    if (sel.toString() == obj[e].key) {
+                        $focused.val(obj[e].template);
                     }
                 }
             });
@@ -51,9 +59,9 @@ function commentTemplate(obj) {
     var server_master = obj.server_master;
     var server_61 = obj.server_61;
     var db = obj.db;
-    var gitk_master=obj.master;
-    var gitk_62x=obj.x62;
-    var gitk_61x=obj.x61;
+    var gitk_master = obj.master;
+    var gitk_62x = obj.x62;
+    var gitk_61x = obj.x61;
     var template = {};
 
     //var rep = server_master + " + " + db + ". " + "Portal Master GIT ID: ***.\n" +
@@ -113,16 +121,16 @@ function commentTemplate(obj) {
 
 
     chrome.storage.local.get('qar_obj', function (result) {
-        var obj=result.fp_obj;
+        var obj = result.qar_obj;
 
-        for(var e in obj) {
-            var temp=obj[e].template;
-            temp = temp.relace(/\$server_master/, server_master);
-            temp = temp.replace(/\$gitk_master/, gitk_master);
-            temp = temp.replace(/\$gitk_62x/, gitk_62x);
-            temp = temp.replace(/\$gitk_61x/, gitk_61x);
-            temp = temp.replace(/\$server_61/, server_61);
-            temp = temp.replace(/\$db/, db);
+        for (var e in obj) {
+            var temp = obj[e].template;
+            temp = temp.replace(/\$server_master/ig, server_master);
+            temp = temp.replace(/\$gitk_master/ig, gitk_master);
+            temp = temp.replace(/\$gitk_62x/ig, gitk_62x);
+            temp = temp.replace(/\$gitk_61x/ig, gitk_61x);
+            temp = temp.replace(/\$server_61/ig, server_61);
+            temp = temp.replace(/\$db/ig, db);
             template[obj[e].key] = temp;
         }
         convert_selected_fixpack(template);

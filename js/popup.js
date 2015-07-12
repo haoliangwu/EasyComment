@@ -151,7 +151,7 @@ function init_qar() {
             $('#x61').val(obj.x61);
             $('#x62').val(obj.x62);
             $('#master').val(obj.master);
-            $("#qa_r input").keyup(function () {
+            $("#qa-r input").keyup(function () {
                 var id = $(this).attr('id');
                 var value = $(this).val();
                 obj[id] = value;

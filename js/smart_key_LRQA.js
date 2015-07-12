@@ -10,12 +10,12 @@ $(document).ready(function () {
                 chrome.storage.local.get('team', function (result) {
                     if (!result.team) {
                         chrome.storage.local.set({'team': 'fixpack'}, function () {
-                            console.log("Easy Comment initialize successfully.");
+                            console.log("Easy Comment initialize team to %s successfully.",'fixpack');
                         });
                     }
                     else {
                         if (result.team == 'qar') {
-                            alert("Your team is QA-R,but the current page is Fix Pack sub-task page, please set team to Fix Pack.")
+                            alert("Your team setting is QA-R,but the current page is Fix Pack sub-task page, please set team to Fix Pack.")
                         }
                         else if (result.team == 'fixpack') {
 
@@ -44,14 +44,14 @@ $(document).ready(function () {
                                     "fix_pack_name": fix_pack_name
                                 }
 
-                                var dictionary = commentTemplate(template_obj);
+                                commentTemplate(template_obj);
 
                             });
 
 
                         }
                         else {
-                            alert("Please set Your team in right-top setting page.")
+                            alert("Please set Your team in right-top setting page.");
                         }
                     }
                 });
