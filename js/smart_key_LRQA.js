@@ -68,13 +68,13 @@ function convert_selected_fixpack(dictionary) {
     else {
         var $focused = $(":focus");
         if (dictionary[sel.toString()])
-            $focused.val(dictionary[sel.toString()]);
+            $focused.selection().replace(dictionary[sel.toString()], false);
         else{
             chrome.storage.local.get('custom_obj',function(result) {
                 var obj=result.custom_obj;
                 for(var e in obj){
                     if(sel.toString()== obj[e].key) {
-                        $focused.val(obj[e].template);
+                        $focused.selection().replace(obj[e].template, false);
                     }
                 }
             });
