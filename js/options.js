@@ -7,8 +7,12 @@
     }
 })(jQuery);
 
-$(document).ready(function() {
+function test() {
+    $('.editor, .variate_qar, .variate_fixpack').show();
+}
 
+$(document).ready(function() {
+    test();
     var team = $.getUrlParam('team');
 
     $("#reset").click(function () {
@@ -18,6 +22,7 @@ $(document).ready(function() {
     });
     switch (team) {
         case 'custom':
+            $('.editor').show();
             chrome.storage.local.get('custom_obj',function(result) {
                 var id_comment = $.getUrlParam('id');
                 var custom_obj=result.custom_obj;
@@ -41,6 +46,7 @@ $(document).ready(function() {
             })
             break;
         case 'fp':
+            $('.editor, .variate_fixpack').show();
             chrome.storage.local.get('fp_obj',function(result) {
                 var id_comment = $.getUrlParam('id');
                 var fp_obj=result.fp_obj;
@@ -64,6 +70,8 @@ $(document).ready(function() {
             })
             break;
         case 'qar':
+            $('.editor, .variate_qar').show();
+
             chrome.storage.local.get('qar_obj',function(result) {
                 var id_comment = $.getUrlParam('id');
                 var qar_obj=result.qar_obj;
@@ -85,6 +93,9 @@ $(document).ready(function() {
                     });
                 });
             })
+            break;
+        default :
+            $('.setting').show();
             break;
     }
 

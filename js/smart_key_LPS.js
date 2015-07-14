@@ -56,12 +56,12 @@ function convert_selected_fixpack(dictionary) {
 }
 
 function commentTemplate(obj) {
-    var server_master = obj.server_master;
-    var server_61 = obj.server_61;
-    var db = obj.db;
-    var gitk_master = obj.master;
-    var gitk_62x = obj.x62;
-    var gitk_61x = obj.x61;
+    var server_master = obj.server_master ? obj.server_master : '{Master-server}';
+    var server_61 = obj.server_61 ? obj.server_61 : '{61-server}';
+    var db = obj.db != '' ? obj.db : 'MySQL 5.5.xx';
+    var gitk_master = obj.master != '' ? obj.master : 'GIT ID of master branch';
+    var gitk_62x = obj.x62 != '' ? obj.x62 : 'GIT ID of 62 branch';
+    var gitk_61x = obj.x61 != '' ? obj.x61 : 'GIT ID of 61 branch';
     var template = {};
 
     //var rep = server_master + " + " + db + ". " + "Portal Master GIT ID: ***.\n" +
