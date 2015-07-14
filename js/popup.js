@@ -162,11 +162,11 @@ function init_qar() {
         }
         else {
             var parameter_qar = {
-                "server": "Tomcat-7.0.**",
-                "db": "MySQL 5.5.**",
-                "x61": "***",
-                "x62": "***",
-                "master": "***"
+                "server": "",
+                "db": "",
+                "x61": "",
+                "x62": "",
+                "master": ""
             }
             chrome.storage.local.set({"parameter_qar": parameter_qar}, function () {
                 console.log("Init Parameter_qar %o successfully", parameter_qar)

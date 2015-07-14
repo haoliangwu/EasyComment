@@ -35,8 +35,8 @@ html body {
 
 .table_input {
     border: 0;
-    background: transparent;
     width: 100%;
+    background-color: transparent;
 }
 
 .parameter_qav input{
@@ -50,8 +50,6 @@ html body {
 .one{
     width: 20%;
 }
-
-
 
 .two{
     width: 60%;
@@ -73,6 +71,10 @@ html body {
     font-size: 12px;
     line-height: 2;
     border-radius: 3px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: #FFFFCC;
 }
 
 
