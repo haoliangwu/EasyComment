@@ -1,27 +1,29 @@
+<!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/popup.js"></script>
 <body>
-<p>Easy Comment</p>
-<hr/>
 <div>
     <div class="team">
-        Team(Current):
+        <strong>Team(Current):</strong>
         <select>
             <option value="fixpack">FixPack</option>
             <option value="qar">QA-R</option>
         </select>
     </div>
-    <hr/>
     <div id="fixpack">
         <div class="smartkey">
             <p>SmartKey-Comment List</p>
-            <table id="fp_basic">
+            <table id="fp_basic" class="table table-striped table-condensed">
                 <tr>
                     <th class="one">Smart Key</th>
                     <th class="two">Description</th>
@@ -33,36 +35,43 @@
         <p>Parameters</p>
 
         <div class="parameter_fixpack">
+            <div class="container-fluid">
 
-            <br/>
-            <div>
-                <form>
-                    Regression Style:
+                <div class="row">
 
-                    YES
-                <input type="radio" name="regression" value="y" />
-                    NO
-                <input type="radio" name="regression" value="n" />
-                </form>
+                    <div class="col-sm-4">
 
+                        Regression Style:
+
+                        <strong>YES</strong>
+                        <input type="radio" name="regression" value="y"/>
+                        <strong>NO</strong>
+                        <input type="radio" name="regression" value="n"/>
+
+
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-4">
+
+                        Portal Version:
+                        <select>
+                            <option value="6.2.10 EE SP11">
+                                6.2.10 EE SP11
+                            </option>
+                            <option value="6.1.30 EE GA3 SP4">
+                                6.1.30 EE GA3 SP4
+                            </option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <br/>
-            Portal Version:
-            <select>
-                <option value="6.2.10 EE SP11">
-                    6.2.10 EE SP11
-                </option>
-                <option value="6.1.30 EE GA3 SP4">
-                    6.1.30 EE GA3 SP4
-                </option>
-            </select>
+
         </div>
 
     </div>
     <div id="qa-r" style="display:none">
         <div class="smartkey">
             <p>SmartKey-Comment List</p>
-            <table id="qar_basic">
+            <table id="qar_basic" class="table table-striped">
                 <tr>
                     <th class="one">Smart Key</th>
                     <th class="two">Description</th>
@@ -74,26 +83,27 @@
         <p>Parameters</p>
 
         <div class="parameter_qav">
-            <br>
-            <ul>
-                <li>
-                    Server Version(master/62):
-                    <input id="server_master" type="text" value="Tomcat-7.0.62"/>
-                </li>
-                <li>
-                    Server Version(61):
-                    <input id="server_61" type="text" value="Tomcat-7.0.42"/>
-                </li>
-                <li>
-                    DB Version:
-                    <input id="db" type="text" value="MySQL 5.5.29"/>
-                </li>
-            </ul>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-4">Server Version(master/62):
+                        <input id="server_master" type="text" value="Tomcat-7.0.62"/>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        Server Version(61):
+                        <input id="server_61" type="text" value="Tomcat-7.0.42"/>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        DB Version:
+                        <input id="db" type="text" value="MySQL 5.5.29"/>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <br/>
 
         <p>Preset GIT ID</p>
-        <table>
+        <table class="table">
             <tr>
                 <th class="one">Portal Branch</th>
                 <th class="two">GIT ID</th>
@@ -113,11 +123,10 @@
         </table>
     </div>
     <div id="custom">
-        <a id="custom_toggle" href="#">Custom Setting Toggle</a>
-        <a id="custom_new" href="#">Add New SmartKey</a>
-
+        <button id="custom_toggle" class="btn btn-default">Custom Setting Toggle</button>
+        <button id="custom_new" class="btn btn-default">Add New SmartKey</button>
         <div id="custom_content" style="display: none;">
-            <table>
+            <table class="table table-striped table-condensed">
                 <tr>
                     <th class="one">Smart Key</th>
                     <th class="two">Description</th>

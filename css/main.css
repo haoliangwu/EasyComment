@@ -4,30 +4,22 @@ p {
     color: slategray;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
-select {
-    font-size: 20px;
+.parameter_fixpack select{
+    width:55%;
 }
 
 table {
-    border: 1px solid #222222;
+    border:2px solid #e0e0e0;
     border-collapse: collapse;
-    margin: 0 auto;
     width: 100%;
-    text-align: center;
 }
 
-table td {
-    border: 1px solid #ccc;
-}
-
-table th {
-    border: 1px solid #222222;
+th{
     background-color: #CCCCCC;
+}
+
+td, th{
+    border:2px solid #e0e0e0;
 }
 
 div[class="team"] {
@@ -37,23 +29,8 @@ div[class="team"] {
 }
 
 html body {
-    width: 700px;
+    width: 780px;
     height:100%;
-}
-
-td {
-    text-align: center;
-}
-
-.parameter_fixpack, .parameter_qav {
-    width:300px;
-    position: relative;
-    left: 30%;
-}
-
-input {
-    width: 100%;
-    font-size: 20px;
 }
 
 .table_input {
@@ -62,27 +39,28 @@ input {
     width: 100%;
 }
 
+.parameter_qav input{
+    width:100%;
+}
 
+#fp_basic input, #qar_basic input {
+    height:100%;
+}
 
 .one{
     width: 20%;
 }
 
+
+
 .two{
-    width: 70%;
+    width: 60%;
 }
 
 .three{
-    width: 10%;
+    width: 12%;
 }
 
-.three_input{
-    width: 50%;
-    height: 100%;
-    font-size:7px;
-    border: solid slategray 1px;
-    background-color: #CCCCCC;
-}
 #custom_toggle{
     float:left;
 }
@@ -90,16 +68,11 @@ input {
     float:right;
 }
 
-div.parameter_fixpack div{
-    width:250px;
+.btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 2;
+    border-radius: 3px;
 }
 
-div.parameter_fixpack input{
-    vertical-align: middle;
-    height: 20px;
-    width:30px;
-}
 
-div.parameter_fixpack form{
-    width:100%;
-}

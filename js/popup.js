@@ -333,10 +333,10 @@ function init_custom() {
 }
 
 function addNewSmartKey(obj, selector, team) {
-    var $input1 = $('<input type="text" class="table_input one_input"/>');
-    var $input2 = $('<input type="text" class="table_input two_input"/>');
-    var $save = $('<input type="button" value="save" class="table_input three_input"/>');
-    var $more = $('<input type="button" value="more" class="table_input three_input"/>');
+    var $input1 = $('<input type="text" class="table_input one_input" placeholder="smartkey"/>');
+    var $input2 = $('<input type="text" class="table_input two_input" placeholder="description"/>');
+    var $save = $('<button type="button" value="save" class=" three_input btn btn-default btn-xs">Save</button>');
+    var $more = $('<button type="button" value="more" class=" three_input btn btn-info btn-xs">More</button>');
 
     if (!obj) {
 
