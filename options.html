@@ -2,42 +2,92 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Options</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/option.css">
 </head>
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/options.js"></script>
 <body>
-<div class="title">
-    <button id="reset">Reset</button>
-</div>
-<div class="panel">
-    <div class="menu">
-        <div class="comment_list"></div>
-    </div>
-    <div class="editor">
-        <div class="custom_tempate_edit">
-            <div class="title">
-                SmartKey:
-            </div>
-            <div class="input_text">
-                <input id="smart_id" type="text" disabled/>
-            </div>
-            <div class="title">
-                Description:
-            </div>
-            <div class="input_text">
-                <input id="desc" type="text"/>
-            </div>
-            <div class="title">
-                Template:
-            </div>
-            <div class="input_textarea">
-                <textarea id="template"></textarea>
-            </div>
-            <button id="save">Save</button>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="title">
+            <button id="reset">Reset</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="menu">
+                <div class="comment_list"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="editor">
+                <div class="custom_tempate_edit">
+                    <div class="title">
+                        SmartKey:
+                    </div>
+                    <div class="input_text">
+                        <input id="smart_id" type="text" disabled/>
+                    </div>
+                    <div class="title">
+                        Description:
+                    </div>
+                    <div class="input_text">
+                        <input id="desc" type="text"/>
+                    </div>
+                    <div class="title">
+                        Template:
+                    </div>
+                    <div class="input_textarea">
+                        <textarea id="template"></textarea>
+                    </div>
+                    <button id="save">Save</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="variate">
+                <p>The variate for <strong>Fix-Pack</strong> comment</p>
+                <dl class="dl-horizontal">
+                    <dt>$LPS</dt>
+                    <dd>The LPS number related to current sub-task.</dd>
+                    <dt>$LPE</dt>
+                    <dd>The LPE number related to current sub-task.</dd>
+                    <dt>$BPR</dt>
+                    <dd>The BPR number related to current sub-task.</dd>
+                    <dt>$portal_branch</dt>
+                    <dd>The portal branch of the branch setting.</dd>
+                    <dt>$fix_pack_name</dt>
+                    <dd>The patch name related to current sub-task.</dd>
+                    <dt>$regression_env</dt>
+                    <dd>The regression label of the regression style setting.</dd>
+                </dl>
+                <p>The variate for <strong>QA-R</strong> comment</p>
+                <dl class="dl-horizontal">
+                    <dt>$server_master</dt>
+                    <dd>The server name of portal master branch.</dd>
+                    <dt>$server_62</dt>
+                    <dd>The server name of portal 6.2.x branch.</dd>
+                    <dt>$server_61</dt>
+                    <dd>The server name of portal 6.1.x branch.</dd>
+                    <dt>$db</dt>
+                    <dd>The SQL name of SQL setting.</dd>
+                    <dt>$gitk_master</dt>
+                    <dd>The GIT ID of portal master branch.</dd>
+                    <dt>$gitk_62x</dt>
+                    <dd>The GIT ID of portal 6.2.x branch.</dd>
+                    <dt>$gitk_61x</dt>
+                    <dd>The GIT ID of portal 6.1.x branch.</dd>
+                </dl>
+
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 </body>
 </html>

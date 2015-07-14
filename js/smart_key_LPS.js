@@ -126,10 +126,11 @@ function commentTemplate(obj) {
         for (var e in obj) {
             var temp = obj[e].template;
             temp = temp.replace(/\$server_master/ig, server_master);
+            temp = temp.replace(/\$server_62/ig, server_master);
+            temp = temp.replace(/\$server_61/ig, server_61);
             temp = temp.replace(/\$gitk_master/ig, gitk_master);
             temp = temp.replace(/\$gitk_62x/ig, gitk_62x);
             temp = temp.replace(/\$gitk_61x/ig, gitk_61x);
-            temp = temp.replace(/\$server_61/ig, server_61);
             temp = temp.replace(/\$db/ig, db);
             template[obj[e].key] = temp;
         }

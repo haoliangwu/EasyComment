@@ -62,12 +62,12 @@ function init() {
 function init_qar() {
 
     var rep = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: ***.\n" +
-        "$server_master" + " + " + "$db" + ". " + "Portal 6.2.x EE GIT ID: ***.\n" +
-        "$server_61" + " + " + "$db" + ". " + "Portal 6.1.x EE GIT ID: ***.\n";
+        "$server_62" + " + " + "$db" + ". " + "Portal ee-6.2.x EE GIT ID: ***.\n" +
+        "$server_61" + " + " + "$db" + ". " + "Portal ee-6.1.x EE GIT ID: ***.\n";
 
     var fix = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: " + "$gitk_master" + ".\n" +
-        "$server_master" + " + " + "$db" + ". " + "Portal 6.2.x EE GIT ID: " + "$gitk_62x" + ".\n" +
-        "$server_61r" + " + " + "$db" + ". " + "Portal 6.1.x EE GIT ID: " + "$gitk_61x" + ".\n";
+        "$server_62" + " + " + "$db" + ". " + "Portal ee-6.2.x EE GIT ID: " + "$gitk_62x" + ".\n" +
+        "$server_61r" + " + " + "$db" + ". " + "Portal ee-6.1.x EE GIT ID: " + "$gitk_61x" + ".\n";
 
     var content = "\n" +
         "Reproduced on:\n" +
