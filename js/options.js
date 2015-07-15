@@ -12,7 +12,6 @@ function test() {
 }
 
 $(document).ready(function () {
-
     $("#reset").click(function () {
         chrome.storage.local.clear(function () {
             console.log("Clear Local Storage and reset all setting.");
@@ -129,18 +128,148 @@ function init_team(team) {
 }
 
 function multiple_browser() {
-    $('#browser_detail input:checkbox').change(function() {
-        console.log($(this).attr('id'));
-        $('#' + $(this).attr('id') + '_detail').toggle();
+    $('#browser_detail input:checkbox').change(function () {
+        $('#' + $(this).attr('id') + '_detail').toggle('middle');
+        $('#' + $(this).attr('id') + '_tb').toggle('middle');
+    })
+
+    $('#ctrl_c').click(function () {
+        $('#magic textarea').selection().select(0);
     })
 
     $('#magic_submit').click(function () {
         var browsers = browser_init_obj();
         var portal_branch = portal_branch_init_obj();
-        console.log("Browser obj is %o", browsers);
-        console.log("portal_branch obj is %o", portal_branch);
+        //console.log("Browser obj is %o", browsers);
+        //console.log("portal_branch obj is %o", portal_branch);
         var template = magic_template(browsers, portal_branch);
         $('#magic textarea').val(template);
+    });
+
+    $('#shortcut button').each(function () {
+
+        var $chrome = $('#chrome');
+        var $chrome_detail = $('#chrome_detail input:checkbox');
+        var $ff = $('#ff');
+        var $ff_detail = $('#ff_detail input:checkbox');
+        var $ie = $('#ie');
+        var $ie_detail = $('#ie_detail input:checkbox');
+        var $ee_version = $('#ee_version input:checkbox');
+        var $released_version = $('#released_version input:checkbox');
+
+        $(this).click(function () {
+            var e = $.Event('click');
+            switch ($(this).attr('id')) {
+
+                case 'all_chrome':
+                    $('#shortcut_reset').trigger(e);
+                    $chrome.trigger(e);
+                    $chrome_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'all_ff':
+                    $('#shortcut_reset').trigger(e);
+                    $ff.trigger(e);
+                    $ff_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'all_ie':
+                    $('#shortcut_reset').trigger(e);
+                    $ie.trigger(e);
+                    $ie_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'all_portal':
+                    $('#shortcut_reset').trigger(e);
+                    $released_version.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $ee_version.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'release_portal':
+                    $('#shortcut_reset').trigger(e);
+                    $released_version.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'ee_portal':
+                    $('#shortcut_reset').trigger(e);
+                    $ee_version.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'fixpack':
+                    $('#shortcut_reset').trigger(e);
+                    $chrome.trigger(e);
+                    $chrome_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $ff.trigger(e);
+                    $ff_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $ie.trigger(e);
+                    $ie_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $released_version.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'qar':
+                    $('#shortcut_reset').trigger(e);
+                    $chrome.trigger(e);
+                    $chrome_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $ff.trigger(e);
+                    $ff_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $ie.trigger(e);
+                    $ie_detail.each(function () {
+                        $(this).trigger(e);
+                    })
+                    $ee_version.each(function () {
+                        $(this).trigger(e);
+                    })
+                    break;
+                case 'shortcut_reset':
+                    $('#chrome_detail').hide('middle');
+                    $('#ff_detail').hide('middle');
+                    $('#ie_detail').hide('middle');
+                    $('#chrome_tb').hide('middle');
+                    $('#ff_tb').hide('middle');
+                    $('#ie_tb').hide('middle');
+
+                    $chrome.attr('checked',false);
+                    $chrome_detail.each(function () {
+                        $(this).attr('checked',false);
+                    })
+                    $ff.attr('checked',false);
+                    $ff_detail.each(function () {
+                        $(this).attr('checked',false);
+                    })
+                    $ie.attr('checked',false);
+                    $ie_detail.each(function () {
+                        $(this).attr('checked',false);
+                    })
+                    $released_version.each(function () {
+                        $(this).attr('checked',false);
+                    })
+                    $ee_version.each(function () {
+                        $(this).attr('checked',false);
+                    })
+                    break;
+                default :
+                    break;
+            }
+        })
     });
 }
 
@@ -159,16 +288,16 @@ function magic_template(browsers, portal_branch) {
             var ee_versions = portal_branch.ee_version;
             if (ee_versions) {
                 for (var e2 in ee_versions) {
-                    var line='|' + ee_versions[e2] +'| $Result | $Result |\n';
-                    sub_title+=line;
+                    var line = '|' + ee_versions[e2] + '| $Result | $Result |\n';
+                    sub_title += line;
                 }
             }
 
-            var release_versions=portal_branch.released_version;
-            if(release_versions) {
-                for( var e2 in release_versions) {
-                    var line='|' + release_versions[e2]+'| $Result | $Result |\n';
-                    sub_title+=line;
+            var release_versions = portal_branch.released_version;
+            if (release_versions) {
+                for (var e2 in release_versions) {
+                    var line = '|' + release_versions[e2] + '| $Result | $Result |\n';
+                    sub_title += line;
                 }
             }
 
@@ -241,3 +370,5 @@ function util_each(JqueryObj) {
     })
     return temp;
 }
+
+

@@ -15,8 +15,17 @@
     width:100%;
 }
 
+.tool-bar{
+    border: 1px solid rgb(169, 169, 169);
+    height:60%
+}
+
+#browser_tb{
+    margin: auto;
+}
+
 #magic textarea{
-    height:50%;
+    height:60%;
     width: 80%;
 }
 
@@ -29,10 +38,6 @@
 }
 
 .editor div{
-
-}
-
-#save{
 
 }
 

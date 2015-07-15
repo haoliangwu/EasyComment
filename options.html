@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/option.css">
 </head>
 <script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/jquery-selection.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/options.js"></script>
 <body>
@@ -89,12 +90,44 @@
         </div>
     </div>
     <div class="row" id="magic">
-        <div class="col-md-5">
+        <div class="col-md-5 tool-bar">
+            <div class="row"><p>Portal Branch Setting</p></div>
+            <div class="row">
+                <div id="portal_branch">
+                    <dl class="dl-horizontal">
+                        <div id="ee_version">
+                            <dt>EE Latest Version</dt>
+                            <dd>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="master" value="master"> Master
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="62x" value="ee-6.2.x"> ee-6.2.x
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="61x" value="ee-6.1.x"> ee-6.1.x
+                                </label>
+                            </dd>
+                        </div>
+                        <div id="released_version">
+                            <dt>Released Latest Version</dt>
+                            <dd>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="6210" value="6.2.10 EE SP11"> 6.2.10 EE SP11
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="6130" value="6.1.30 EE GA3 SP4"> 6.1.30 EE GA3 SP4
+                                </label>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
             <div class="row"><p>Browser Setting</p></div>
             <div class="row">
                 <dl class="dl-horizontal">
                     <div id="browser_detail">
-                        <dt>Browser</dt>
+                        <dt>Browsers Version</dt>
                         <dd>
                             <label class="checkbox-inline">
                                 <input type="checkbox" id="chrome" value="chrome"> Chrome
@@ -148,36 +181,56 @@
                     </div>
                 </dl>
             </div>
-            <div class="row"><p>Portal Branch Setting</p></div>
+            <div class="row"><p>Typical Shortcuts</p></div>
+            <div id="shortcut">
             <div class="row">
-                <div id="portal_branch">
-                    <dl class="dl-horizontal">
-                        <div id="ee_version">
-                            <dt>EE Latest Version</dt>
-                            <dd>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="master" value="master"> Master
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="62x" value="ee-6.2.x"> ee-6.2.x
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="61x" value="ee-6.1.x"> ee-6.1.x
-                                </label>
-                            </dd>
-                        </div>
-                        <div id="released_version">
-                            <dt>Released Latest Version</dt>
-                            <dd>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="6210" value="6.2.10 EE SP11"> 6.2.10 EE SP11
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="6130" value="6.1.30 EE GA3 SP4"> 6.1.30 EE GA3 SP4
-                                </label>
-                            </dd>
-                        </div>
-                    </dl>
+                <div class="col-xs-4">
+                    <button id="all_chrome" class="btn btn-block btn-primary">All Chrome</button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="all_ff" class="btn btn-block btn-primary">All FireFox</button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="all_ie" class="btn btn-block btn-primary">All IE</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-4">
+                    <button id="all_portal" class="btn btn-block btn-primary">All Portal</button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="release_portal" class="btn btn-block btn-primary">Released Portal</button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="ee_portal" class="btn btn-block btn-primary">EE Portal</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-4">
+                    <button id="fixpack" class="btn btn-block btn-primary">Fix Pack</button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="qar" class="btn btn-block btn-primary">QA-R</button>
+                </div>
+                <div class="col-xs-4">
+                    <button id="shortcut_reset" class="btn btn-block btn-default">Reset</button>
+                </div>
+            </div>
+            </div>
+            <br>
+            <div class="row">
+                <div id="browser_tb">
+                <div id="chrome_tb" class="col-xs-4" style="display:none;">
+                    <img src="images/chrome.jpg">
+                </div>
+                <div id="ff_tb" class="col-xs-4" style="display:none;">
+                    <img src="images/ff.jpg">
+                </div>
+                <div id="ie_tb" class="col-xs-4" style="display:none;">
+                    <img src="images/ie.jpg">
+                </div>
                 </div>
             </div>
         </div>
@@ -186,8 +239,12 @@
                 <textarea></textarea>
             </div>
             <div class="row">
-                <button id="magic_submit" class="btn btn-default">Magic</button>
-                <button id="magic_reset" class="btn btn-default">Reset</button>
+                <div class="col-xs-4">
+                    <button id="magic_submit" class="btn btn-default">Magic</button>
+                </div>
+                <div class="col-xs-2 col-xs-offset-3">
+                    <button id="ctrl_c" class="btn btn-default">Select All</button>
+                </div>
             </div>
         </div>
     </div>
