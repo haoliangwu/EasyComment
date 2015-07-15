@@ -20,7 +20,7 @@
   "content_scripts": [
     {
       "matches":["*://*/*"],
-      "js":["js/jquery-2.1.4.min.js","js/jquery-selection.js"]
+      "js":["js/lib/jquery-2.1.4.min.js","js/lib/jquery-selection.js"]
     },
     {
       "matches": ["*://issues.liferay.com/browse/LRQA-*","*://issues.liferay.com/browse/BPR-*"],
