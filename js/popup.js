@@ -27,7 +27,7 @@ $(document).ready(function () {
 
 function init() {
 
-
+    init_magic();
 
     chrome.storage.local.get('team', function (result) {
 
@@ -422,4 +422,22 @@ function addNewSmartKey(obj, selector, team) {
         });
     }
 
+}
+
+function init_magic() {
+    $('#mb_c').click(function() {
+        window.open("/options.html?magic=" + 'mb', window);
+    });
+
+    $('#dl_c').click(function() {
+        window.open("/options.html?magic=" + 'dl', window);
+    });
+
+    $('#ct_c').click(function() {
+        window.open("/options.html?magic=" + 'ct', window);
+    });
+
+    $('#de_c').click(function() {
+        window.open("/options.html?magic=" + 'de', window);
+    });
 }

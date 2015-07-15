@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div class="variate" >
+            <div class="variate">
                 <div class="variate_fixpack" style="display: none;">
                     <p>The variate for <strong>Fix-Pack</strong> comment</p>
                     <dl class="dl-horizontal">
@@ -85,6 +85,109 @@
                         <dd>The GIT ID of portal 6.1.x branch.</dd>
                     </dl>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="magic">
+        <div class="col-md-5">
+            <div class="row"><p>Browser Setting</p></div>
+            <div class="row">
+                <dl class="dl-horizontal">
+                    <div id="browser_detail">
+                        <dt>Browser</dt>
+                        <dd>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="chrome" value="chrome"> Chrome
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ff" value="ff"> FireFox
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ie" value="ie"> IE
+                            </label>
+                        </dd>
+                    </div>
+                    <div id="chrome_detail" style="display:none;">
+                        <dt>Chrome Details</dt>
+                        <dd>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="chrome_stable" value="Chrome Stable"> Stable
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="chrome_latest" value="Chrome Latest"> Latest
+                            </label>
+                        </dd>
+                    </div>
+                    <div id="ff_detail" style="display:none;">
+                        <dt>FireFox Details</dt>
+                        <dd>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ff_22" value="FireFox22"> FireFox22
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ff_28" value="FireFox28"> FireFox28
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ff_latest" value="FireFox Latest"> Latest
+                            </label>
+                        </dd>
+                    </div>
+                    <div id="ie_detail" style="display:none;">
+                        <dt>IE Details</dt>
+                        <dd>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ie_9" value="IE9"> IE9
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ie_10" value="IE10"> IE10
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="ie_11" value="IE11"> IE11
+                            </label>
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+            <div class="row"><p>Portal Branch Setting</p></div>
+            <div class="row">
+                <div id="portal_branch">
+                    <dl class="dl-horizontal">
+                        <div id="ee_version">
+                            <dt>EE Latest Version</dt>
+                            <dd>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="master" value="master"> Master
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="62x" value="ee-6.2.x"> ee-6.2.x
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="61x" value="ee-6.1.x"> ee-6.1.x
+                                </label>
+                            </dd>
+                        </div>
+                        <div id="released_version">
+                            <dt>Released Latest Version</dt>
+                            <dd>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="6210" value="6.2.10 EE SP11"> 6.2.10 EE SP11
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="6130" value="6.1.30 EE GA3 SP4"> 6.1.30 EE GA3 SP4
+                                </label>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <textarea></textarea>
+            </div>
+            <div class="row">
+                <button id="magic_submit" class="btn btn-default">Magic</button>
+                <button id="magic_reset" class="btn btn-default">Reset</button>
             </div>
         </div>
     </div>
