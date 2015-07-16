@@ -15,8 +15,17 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="setting" style="display: none;">
-            <button id="reset">Reset</button>
+        <div id="setting_toolbar" class="setting" style="display: none;">
+            <div class="col-xs-2">
+                <button id="reset" class="btn btn-danger">Reset Setting</button>
+            </div>
+            <div class="col-xs-6">
+                    <button id="mb_c" class="btn btn-default">Multiple Browsers</button>
+                    <button id="dl_c" class="btn btn-default">Different Lists</button>
+                    <button id="ct_c" class="btn btn-default">Custom Tables</button>
+                    <button id="de_c" class="btn btn-default">Descriptions</button>
+            </div>
+
         </div>
     </div>
     <div class="row">
@@ -185,54 +194,57 @@
             </div>
             <div class="row"><p>Typical Shortcuts</p></div>
             <div id="shortcut">
-            <div class="row">
-                <div class="col-xs-4">
-                    <button id="all_chrome" class="btn btn-block btn-primary">All Chrome</button>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button id="all_chrome" class="btn btn-block btn-primary">All Chrome</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button id="all_ff" class="btn btn-block btn-primary">All FireFox</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button id="all_ie" class="btn btn-block btn-primary">All IE</button>
+                    </div>
                 </div>
-                <div class="col-xs-4">
-                    <button id="all_ff" class="btn btn-block btn-primary">All FireFox</button>
+                <br>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button id="all_portal" class="btn btn-block btn-primary">All Portal</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button id="release_portal" class="btn btn-block btn-primary">Released Portal</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button id="ee_portal" class="btn btn-block btn-primary">EE Portal</button>
+                    </div>
                 </div>
-                <div class="col-xs-4">
-                    <button id="all_ie" class="btn btn-block btn-primary">All IE</button>
+                <br>
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button id="fixpack" class="btn btn-block btn-primary">Fix Pack</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button id="qar" class="btn btn-block btn-primary">QA-R</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button id="shortcut_reset" class="btn btn-block btn-default">Reset</button>
+                    </div>
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="col-xs-4">
-                    <button id="all_portal" class="btn btn-block btn-primary">All Portal</button>
-                </div>
-                <div class="col-xs-4">
-                    <button id="release_portal" class="btn btn-block btn-primary">Released Portal</button>
-                </div>
-                <div class="col-xs-4">
-                    <button id="ee_portal" class="btn btn-block btn-primary">EE Portal</button>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-xs-4">
-                    <button id="fixpack" class="btn btn-block btn-primary">Fix Pack</button>
-                </div>
-                <div class="col-xs-4">
-                    <button id="qar" class="btn btn-block btn-primary">QA-R</button>
-                </div>
-                <div class="col-xs-4">
-                    <button id="shortcut_reset" class="btn btn-block btn-default">Reset</button>
-                </div>
-            </div>
-            </div>
-            <br>
+
             <div class="row">
                 <div id="browser_tb">
-                <div id="chrome_tb" class="col-xs-4" style="display:none;">
-                    <img src="images/chrome.jpg">
-                </div>
-                <div id="ff_tb" class="col-xs-4" style="display:none;">
-                    <img src="images/ff.jpg">
-                </div>
-                <div id="ie_tb" class="col-xs-4" style="display:none;">
-                    <img src="images/ie.jpg">
-                </div>
+                    <div id="chrome_tb" class="col-xs-4" style="display:none;">
+                        <img src="images/chrome.jpg" class="img-rounded">
+                    </div>
+                    <div id="ff_tb" class="col-xs-4" style="display:none;">
+                        <img src="images/ff.jpg" class="img-rounded">
+                    </div>
+                    <div id="ie_tb" class="col-xs-4" style="display:none;">
+                        <img src="images/ie.jpg" class="img-rounded">
+                    </div>
                 </div>
             </div>
         </div>

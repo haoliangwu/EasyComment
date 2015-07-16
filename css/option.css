@@ -16,7 +16,8 @@
 }
 
 .tool-bar{
-    border: 1px solid rgb(169, 169, 169);
+    border: 1px solid #ADCD3C;
+    background-color: #EEFAFF;
     height:60%
 }
 
@@ -27,11 +28,17 @@
 #magic textarea{
     height:60%;
     width: 80%;
+    background-color: #FFFFDD;
+
 }
 
 #magic, #custom_table{
     margin-left:10%;
     margin-top:4%;
+}
+
+#setting_toolbar{
+    margin-left:15%
 }
 
 .editor{

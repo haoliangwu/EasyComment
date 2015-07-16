@@ -12,24 +12,32 @@ function test() {
 }
 
 $(document).ready(function () {
-    $("#reset").click(function () {
-        chrome.storage.local.clear(function () {
-            console.log("Clear Local Storage and reset all setting.");
-        })
-    });
+
 
     var magic = $.getUrlParam('magic');
     var team = $.getUrlParam('team');
 
+    init_setting();
     init_team(team);
     init_magic(magic);
 
 
 });
 
-function init_magic(magic) {
-    $('.setting').hide();
+function init_setting() {
+    $(".setting").show();
+    $("#reset").click(function () {
+        var flag = confirm("Are you sure to clean all setting?");
+        if (flag) {
 
+            chrome.storage.local.clear(function () {
+                console.log("Clear Local Storage and reset all setting.");
+            })
+        }
+    });
+};
+
+function init_magic(magic) {
     switch (magic) {
         case 'mb':
             multiple_browser();
@@ -46,7 +54,6 @@ function init_magic(magic) {
 }
 
 function init_team(team) {
-
     switch (team) {
         case 'custom':
             $('.editor').show();
