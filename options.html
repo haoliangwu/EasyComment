@@ -20,10 +20,10 @@
                 <button id="reset" class="btn btn-danger">Reset Setting</button>
             </div>
             <div class="col-xs-6">
-                    <button id="mb_c" class="btn btn-default">Multiple Browsers</button>
-                    <button id="dl_c" class="btn btn-default">Different Lists</button>
-                    <button id="ct_c" class="btn btn-default">Custom Tables</button>
-                    <button id="de_c" class="btn btn-default">Descriptions</button>
+                <button id="mb_c" class="btn btn-default">Multiple Browsers</button>
+                <button id="dl_c" class="btn btn-default">Different Lists</button>
+                <button id="ct_c" class="btn btn-default">Custom Tables</button>
+                <button id="de_c" class="btn btn-default">Descriptions</button>
             </div>
 
         </div>
@@ -100,153 +100,232 @@
             </div>
         </div>
     </div>
-    <div class="row" id="magic" style="display:none;">
-        <div class="col-md-5 tool-bar">
-            <div class="row"><p>Portal Branch Setting</p></div>
-            <div class="row">
-                <div id="portal_branch">
+    <div class="row" id="magic">
+
+        <div class="col-md-6 col-md-offset-1 tool-bar">
+            <div class="row" id="magic_mb" style="display:none;">
+                <div class="row"><p>Portal Branch Setting</p></div>
+                <div class="row">
+                    <div id="portal_branch">
+                        <dl class="dl-horizontal">
+                            <div id="ee_version">
+                                <dt>EE Latest Version</dt>
+                                <dd>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="master" value="master"> Master
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="62x" value="ee-6.2.x"> ee-6.2.x
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="61x" value="ee-6.1.x"> ee-6.1.x
+                                    </label>
+                                </dd>
+                            </div>
+                            <div id="released_version">
+                                <dt>Released Latest Version</dt>
+                                <dd>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="6210" value="6.2.10 EE SP11"> 6.2.10 EE SP11
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="6130" value="6.1.30 EE GA3 SP4"> 6.1.30 EE GA3 SP4
+                                    </label>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row"><p>Browser Setting</p></div>
+                <div class="row">
                     <dl class="dl-horizontal">
-                        <div id="ee_version">
-                            <dt>EE Latest Version</dt>
+                        <div id="browser_detail">
+                            <dt>Browsers Version</dt>
                             <dd>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="master" value="master"> Master
+                                    <input type="checkbox" id="chrome" value="chrome"> Chrome
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="62x" value="ee-6.2.x"> ee-6.2.x
+                                    <input type="checkbox" id="ff" value="ff"> FireFox
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="61x" value="ee-6.1.x"> ee-6.1.x
+                                    <input type="checkbox" id="ie" value="ie"> IE
                                 </label>
                             </dd>
                         </div>
-                        <div id="released_version">
-                            <dt>Released Latest Version</dt>
+                        <div id="chrome_detail" style="display:none;">
+                            <dt>Chrome Details</dt>
                             <dd>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="6210" value="6.2.10 EE SP11"> 6.2.10 EE SP11
+                                    <input type="checkbox" id="chrome_stable" value="Chrome Stable"> Stable
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" id="6130" value="6.1.30 EE GA3 SP4"> 6.1.30 EE GA3 SP4
+                                    <input type="checkbox" id="chrome_latest" value="Chrome Latest"> Latest
+                                </label>
+                            </dd>
+                        </div>
+                        <div id="ff_detail" style="display:none;">
+                            <dt>FireFox Details</dt>
+                            <dd>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="ff_22" value="FireFox22"> FireFox22
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="ff_28" value="FireFox28"> FireFox28
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="ff_latest" value="FireFox Latest"> Latest
+                                </label>
+                            </dd>
+                        </div>
+                        <div id="ie_detail" style="display:none;">
+                            <dt>IE Details</dt>
+                            <dd>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="ie_9" value="IE9"> IE9
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="ie_10" value="IE10"> IE10
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="ie_11" value="IE11"> IE11
                                 </label>
                             </dd>
                         </div>
                     </dl>
                 </div>
-            </div>
-            <div class="row"><p>Browser Setting</p></div>
-            <div class="row">
-                <dl class="dl-horizontal">
-                    <div id="browser_detail">
-                        <dt>Browsers Version</dt>
-                        <dd>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="chrome" value="chrome"> Chrome
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ff" value="ff"> FireFox
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ie" value="ie"> IE
-                            </label>
-                        </dd>
+                <div class="row"><p>Typical Shortcuts</p></div>
+                <div id="shortcut">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button id="all_chrome" class="btn btn-block btn-primary">All Chrome</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button id="all_ff" class="btn btn-block btn-primary">All FireFox</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button id="all_ie" class="btn btn-block btn-primary">All IE</button>
+                        </div>
                     </div>
-                    <div id="chrome_detail" style="display:none;">
-                        <dt>Chrome Details</dt>
-                        <dd>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="chrome_stable" value="Chrome Stable"> Stable
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="chrome_latest" value="Chrome Latest"> Latest
-                            </label>
-                        </dd>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button id="all_portal" class="btn btn-block btn-primary">All Portal</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button id="release_portal" class="btn btn-block btn-primary">Released Portal</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button id="ee_portal" class="btn btn-block btn-primary">EE Portal</button>
+                        </div>
                     </div>
-                    <div id="ff_detail" style="display:none;">
-                        <dt>FireFox Details</dt>
-                        <dd>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ff_22" value="FireFox22"> FireFox22
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ff_28" value="FireFox28"> FireFox28
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ff_latest" value="FireFox Latest"> Latest
-                            </label>
-                        </dd>
-                    </div>
-                    <div id="ie_detail" style="display:none;">
-                        <dt>IE Details</dt>
-                        <dd>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ie_9" value="IE9"> IE9
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ie_10" value="IE10"> IE10
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="ie_11" value="IE11"> IE11
-                            </label>
-                        </dd>
-                    </div>
-                </dl>
-            </div>
-            <div class="row"><p>Typical Shortcuts</p></div>
-            <div id="shortcut">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <button id="all_chrome" class="btn btn-block btn-primary">All Chrome</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button id="all_ff" class="btn btn-block btn-primary">All FireFox</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button id="all_ie" class="btn btn-block btn-primary">All IE</button>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button id="fixpack" class="btn btn-block btn-primary">Fix Pack</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button id="qar" class="btn btn-block btn-primary">QA-R</button>
+                        </div>
+                        <div class="col-xs-4">
+                            <button id="shortcut_reset" class="btn btn-block btn-default">Reset</button>
+                        </div>
                     </div>
                 </div>
                 <br>
 
                 <div class="row">
-                    <div class="col-xs-4">
-                        <button id="all_portal" class="btn btn-block btn-primary">All Portal</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button id="release_portal" class="btn btn-block btn-primary">Released Portal</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button id="ee_portal" class="btn btn-block btn-primary">EE Portal</button>
+                    <div id="browser_tb">
+                        <div id="chrome_tb" class="col-xs-4" style="display:none;">
+                            <img src="images/chrome.jpg" class="img-rounded">
+                        </div>
+                        <div id="ff_tb" class="col-xs-4" style="display:none;">
+                            <img src="images/ff.jpg" class="img-rounded">
+                        </div>
+                        <div id="ie_tb" class="col-xs-4" style="display:none;">
+                            <img src="images/ie.jpg" class="img-rounded">
+                        </div>
                     </div>
                 </div>
-                <br>
+            </div>
+            <div class="row" id="magic_ct" style="display:none;">
+                <div class="row" id="custom_table_size">
+                    <p>Custom Table Size</p>
+                    <dl>
+                        <dt>Table Size</dt>
+                        <dd>
+                            <label class="radio-inline">
+                                <input type="radio" name="ts" value="ss"> Small
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="ts" value="ms"> Middle
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="ts" value="ls"> Large
+                            </label>
+                            <label class="radio-inline">
+                                <div id="custom_size">
+                                    <div id="custom_size_title" class="col-xs-3">
+                                        <input type="radio" name="ts" value="cs">Custom
+                                    </div>
 
+                                    <div id="custom_size_value" class="col-xs-8" style="display: none;">
+                                        <strong>Line</strong>
+                                        <select class="line">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        <select class="col">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select> <strong>Col</strong>
+                                    </div>
+                                </div>
+                            </label>
+
+                        </dd>
+                    </dl>
+                    <p>Typical Shortcuts</p>
+                    <div id="shortcut_ct">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <button id="fixpack_performance" class="btn btn-block btn-primary">FP Performance</button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button id="2" class="btn btn-block btn-primary">Shortcut2</button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button id="3" class="btn btn-block btn-primary">Shortcut3</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
                 <div class="row">
-                    <div class="col-xs-4">
-                        <button id="fixpack" class="btn btn-block btn-primary">Fix Pack</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button id="qar" class="btn btn-block btn-primary">QA-R</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button id="shortcut_reset" class="btn btn-block btn-default">Reset</button>
+                    <div id="preview_panel" style="display:none;">
+                        <p>Table in your mind</p>
+                        <table id="preview_ct" class="table table-striped table-condensed"></table>
                     </div>
                 </div>
             </div>
-            <br>
 
-            <div class="row">
-                <div id="browser_tb">
-                    <div id="chrome_tb" class="col-xs-4" style="display:none;">
-                        <img src="images/chrome.jpg" class="img-rounded">
-                    </div>
-                    <div id="ff_tb" class="col-xs-4" style="display:none;">
-                        <img src="images/ff.jpg" class="img-rounded">
-                    </div>
-                    <div id="ie_tb" class="col-xs-4" style="display:none;">
-                        <img src="images/ie.jpg" class="img-rounded">
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="col-md-4">
             <div class="row">
@@ -261,9 +340,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row" id="custom_table" style="display:none;"></div>
 
+    </div>
 </div>
 </body>
 </html>

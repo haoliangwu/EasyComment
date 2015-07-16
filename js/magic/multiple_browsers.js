@@ -1,12 +1,8 @@
 function multiple_browser() {
-    $('#magic').show();
+    $('#magic_mb').show();
     $('#browser_detail input:checkbox').change(function () {
         $('#' + $(this).attr('id') + '_detail').toggle('middle');
         $('#' + $(this).attr('id') + '_tb').toggle('middle');
-    })
-
-    $('#ctrl_c').click(function () {
-        $('#magic textarea').selection().select(0);
     })
 
     $('#magic_submit').click(function () {
@@ -117,7 +113,7 @@ function multiple_browser() {
                     })
                     break;
                 case 'shortcut_reset':
-                    $('#magic textarea').val('');
+                    $('#magic_mb textarea').val('');
                     $('#chrome_detail').hide('middle');
                     $('#ff_detail').hide('middle');
                     $('#ie_detail').hide('middle');

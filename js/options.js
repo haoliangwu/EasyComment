@@ -38,6 +38,10 @@ function init_setting() {
 };
 
 function init_magic(magic) {
+    $('#ctrl_c').click(function () {
+        $('#magic textarea').selection().select(0);
+    })
+
     switch (magic) {
         case 'mb':
             multiple_browser();
@@ -45,6 +49,7 @@ function init_magic(magic) {
         case 'dl':
             break;
         case 'ct':
+            custom_table();
             break;
         case 'de':
             break;
