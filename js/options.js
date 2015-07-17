@@ -39,7 +39,7 @@ function init_setting() {
 
 function init_magic(magic) {
     $('#ctrl_c').click(function () {
-        $('#magic textarea').selection().select(0);
+        $('#editor').selection().select(0);
     })
 
     switch (magic) {
@@ -52,6 +52,7 @@ function init_magic(magic) {
             custom_table();
             break;
         case 'de':
+            description();
             break;
         default :
             break;

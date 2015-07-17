@@ -8,8 +8,9 @@
 <script src="js/lib/jquery-2.1.4.min.js"></script>
 <script src="js/lib/jquery-selection.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
-<script src="js/magic/custom_tables.js"></script>
 <script src="js/magic/multiple_browsers.js"></script>
+<script src="js/magic/custom_tables.js"></script>
+<script src="js/magic/descriptions.js"></script>
 <script src="js/options.js"></script>
 <body>
 
@@ -303,16 +304,18 @@
                         </dd>
                     </dl>
                     <p>Typical Shortcuts</p>
+
                     <div id="shortcut_ct">
                         <div class="row">
                             <div class="col-xs-4">
-                                <button id="fixpack_performance" class="btn btn-block btn-primary">FP Performance</button>
+                                <button id="fixpack_performance" class="btn btn-block btn-primary">FP Performance
+                                </button>
                             </div>
                             <div class="col-xs-4">
-                                <button id="2" class="btn btn-block btn-primary">Shortcut2</button>
+                                <button id="shortcut_2" class="btn btn-block btn-primary">Shortcut2</button>
                             </div>
                             <div class="col-xs-4">
-                                <button id="3" class="btn btn-block btn-primary">Shortcut3</button>
+                                <button id="shortcut_3" class="btn btn-block btn-primary">Shortcut3</button>
                             </div>
                         </div>
                     </div>
@@ -325,11 +328,118 @@
                     </div>
                 </div>
             </div>
+            <div class="row" id="magic_de" style="display: none;">
+                <div id="steps" class="row steps_div">
+                    <div class="row">
+                        <div id="steps_macro" class="col-xs-12">
+                            <p>Steps Macro <span class="glyphicon glyphicon-hourglass"
+                                                 aria-hidden="true"></span></p>
+
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <button id="init_1" class="btn btn-block btn-primary">Start Portal & Login by
+                                            Test
+                                            User
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button id="init_2" class="btn btn-block btn-primary">Create Site & Create Page
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button id="init_3" class="btn btn-block btn-primary">Create User & Assign to
+                                            Site
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <button id="init_4" class="btn btn-block btn-primary">Create Basic WC & Add to
+                                            Page
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button id="init_5" class="btn btn-block btn-primary">Create Basic DM & Upload
+                                            an
+                                            File
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button id="init_6" class="btn btn-block btn-primary">Create Structure &
+                                            Template
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <button id="init_7" class="btn btn-block btn-primary">Create Vocabulary &
+                                            Category
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <select id="init_others" class="form-control">
+                                            <option value="wiki_page">Create Wiki & Wiki Page</option>
+                                            <option value="mb_thread">Create MB Category & Post a thread</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button id="init_reset" class="btn btn-block btn-default">Reset Initialization
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="steps_init" class="col-xs-12" style="display: none;">
+                            <p>Initialization <span class="glyphicon glyphicon-arrow-right"
+                                                    aria-hidden="true"></span></p>
+
+                            <div class="row">
+                                <div id="init_part1" class="col-xs-4" style="display: none;">
+                                </div>
+                                <div id="init_part2" class="col-xs-4" style="display: none;">
+                                </div>
+                                <div id="init_part3" class="col-xs-4" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="results" class="row results">
+                    <div id="actual_result" class="col-xs-6">
+                        <p>Actual Result <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></p>
+                        <textarea class="form-control" rows="6"></textarea>
+                    </div>
+                    <div id="expected_result" class="col-xs-6">
+                        <p>Expected Result <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></p>
+                        <textarea class="form-control" rows="6"></textarea>
+                    </div>
+                </div>
+
+                <div id="note" class="row note_div">
+                    <div id="note_detail" class="col-xs-6">
+                        <p>Note <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></p>
+                        <textarea class="form-control" rows="6"></textarea>
+                    </div>
+                    <div id="note_code" class="col-xs-6">
+                        <p>Error Logs <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></p>
+                        <textarea class="form-control" rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div class="col-md-4">
             <div class="row">
-                <textarea></textarea>
+                <textarea id="editor"></textarea>
             </div>
             <div class="row">
                 <div class="col-xs-4">

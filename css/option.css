@@ -39,12 +39,13 @@
 
 td, th{
     border:2px solid #e0e0e0;
-    height:40px;
+    height:42px;
 }
 
 p {
     margin-left:20%;
     font-style: oblique;
+    color:#888888;
 }
 
 table input{
@@ -71,14 +72,14 @@ table input{
     margin-left:40%;
 }
 
-#magic textarea{
+#editor{
     height:60%;
     width: 80%;
     background-color: #FFFFDD;
 
 }
 
-#magic_mb, #magic_ct{
+#magic_mb, #magic_ct,#magic_de{
     margin-left:5%;
     margin-right:5%;
     margin-top:2%;
@@ -90,4 +91,22 @@ table input{
 #custom_size{
     width:300px;
 }
+
+/*magic_de*/
+#magic_de p{
+    margin-left:3%;
+}
+
+.steps_div{
+    height:30%;
+}
+
+.results{
+    height:30%;
+}
+
+.note_div{
+    height:30%;
+}
+
 
