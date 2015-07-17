@@ -1,4 +1,6 @@
 function custom_table() {
+    var tableName = '';
+
     $('#magic_ct').show();
 
     $('#magic_submit').click(function () {
@@ -32,9 +34,9 @@ function custom_table() {
             default :
                 break;
         }
-        console.log(size);
+
         var rootTableElement = $('#preview_ct');
-        var template = magic_template_ct(size, rootTableElement);
+        var template = magic_template_ct(size, rootTableElement,tableName);
         $('#magic textarea').val(template);
 
     });
@@ -44,6 +46,8 @@ function custom_table() {
             var e = $.Event('click');
             switch ($(this).attr('id')) {
                 case 'fixpack_performance':
+                    tableName='Pass performance testing.\n'
+
                     $('#custom_size_title input').trigger(e);
                     $('.col').val(7);
                     $('.line').val(6);
@@ -75,7 +79,7 @@ function custom_table() {
                     for (var i = 1; i < 7; ++i) {
                         (function (a) {
                             $th2_input.eq(a).keyup(function () {
-                                var e2 = parseInt($(this).eq(a).val());
+                                var e2 = parseInt($(this).val());
                                 var e3 = parseInt($th3_input.eq(a).val());
                                 var e5 = parseInt($th5_input.eq(a).val());
                                 var r1 = ((e3 - e2) / e2).toFixed(4);
@@ -153,7 +157,7 @@ function custom_table() {
                 break;
             case 'cs':
                 $(this).change(function () {
-                    $('#custom_size_value').show();
+                    $('#custom_size_value').show('slow');
                     $('.line,.col').change(function () {
                         var size = {
                             'x': $('.line').val(),
@@ -204,7 +208,7 @@ function generate_table(size, rootTableElement) {
     }
 }
 
-function magic_template_ct(size, rootTableElement) {
+function magic_template_ct(size, rootTableElement, tableName) {
     var line = size.x;
     var col = size.y;
     var body = '';
@@ -229,6 +233,9 @@ function magic_template_ct(size, rootTableElement) {
             body += table_tr + '\n';
         }
     }
+
+    if(tableName!=undefined)
+        body = (tableName += body);
 
     return body;
 }
