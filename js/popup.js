@@ -429,8 +429,8 @@ function init_magic() {
         window.open("/options.html?magic=" + 'mb', window);
     });
 
-    $('#dl_c').click(function() {
-        window.open("/options.html?magic=" + 'dl', window);
+    $('#other_c').click(function() {
+        window.open("/options.html?magic=" + 'other', window);
     });
 
     $('#ct_c').click(function() {

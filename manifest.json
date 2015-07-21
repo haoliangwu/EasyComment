@@ -15,7 +15,7 @@
   },
   "options_page": "options.html",
   "permissions":[
-    "storage"
+    "storage","tabs" ,"http://*/", "https://*/"
   ],
   "content_scripts": [
     {

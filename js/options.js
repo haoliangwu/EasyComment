@@ -46,7 +46,8 @@ function init_magic(magic) {
         case 'mb':
             multiple_browser();
             break;
-        case 'dl':
+        case 'other':
+            other_tools();
             break;
         case 'ct':
             custom_table();
