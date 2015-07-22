@@ -79,7 +79,7 @@ table input{
 
 }
 
-#magic_mb, #magic_ct,#magic_de{
+#magic_mb, #magic_ct, #magic_de, #magic_other{
     margin-left:5%;
     margin-right:5%;
     margin-top:2%;
@@ -109,4 +109,16 @@ table input{
     height:30%;
 }
 
+/*other tools*/
+#create_all_things{
+    height: 85%;
+}
+
+#magic_other p{
+    font-size:14px;
+}
+
+.menulist{
+    height: 10%;
+}
 
