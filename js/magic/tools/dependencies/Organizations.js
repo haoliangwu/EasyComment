@@ -18,7 +18,7 @@ Organizations.prototype.createBasicOrgs = function (obj) {
 
     this.form_62x.name = name;
 
-    if (parentId != '' || parentId)
+    if (parentId != '' && parentId)
         this.form_62x.parentOrganizationId = parentId;
 
     invoke('/organization/add-organization', this.form_62x, true);

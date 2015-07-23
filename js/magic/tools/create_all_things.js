@@ -139,7 +139,7 @@ function create_all_things_init() {
                     panel_show_slow($('#sites'));
 
                     $('#sites_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                        switch ($('#sites_menu option:selected').val()) {
                             case '1':
                                 $start.unbind('click');
                                 $start.click(function () {
@@ -169,23 +169,79 @@ function create_all_things_init() {
                     break;
 
                 case 'Pages':
-                    panel_show_slow($('#organizations'));
+                    panel_show_slow($('#pages'));
 
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                    $('#pages_menu').click(function () {
+
+                        company.getCompanyIdByWebId('liferay.com', function (result) {
+                            var site = new Sites();
+                            site.getSitesByCompanyId(result.companyId, null, function (result) {
+                                appendOptionToSelection($('#pages_sites'), result, 'site');
+                            })
+                        });
+
+                        switch ($('#pages_menu option:selected').val()) {
                             case '1':
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
 
-                                });
+                                    var obj = {
+                                        basename: $('#pages_prefix').val(),
+                                        number: $('#pages_number').val(),
+                                        groupId: $('#pages_sites').val(),
+                                        isWithChild:false
+                                    }
 
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var page = new Pages();
+                                        obj.name = obj.basename + i;
+
+                                        page.createPublicPages(obj);
+                                    }
+
+                                });
                                 break;
 
                             case '2':
+                                $('.pages_2').each(function () {
+                                    $(this).show();
+                                });
+
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#pages_prefix').val(),
+                                        basename_sub: $('#pages_sub_prefix').val(),
+                                        number: $('#pages_number').val(),
+                                        number_sub: $('#pages_sub_number').val(),
+                                        groupId: $('#pages_sites').val(),
+                                        isWithChild:true
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var page = new Pages();
+                                        obj.name = obj.basename + i;
+                                        (function (a) {
+                                            page.createPublicPages(obj, function(result,payload) {
+                                                for(var j=1;j<=payload.number_sub;j++) {
+                                                    var page = new Pages();
+                                                    payload.parentLayoutId=result.layoutId;
+                                                    payload.name = 'Sub'+payload.basename_sub + a+'_'+j;
+                                                    page.createPublicPages(payload)
+                                                }
+                                            })
+                                        })(i);
+
+                                    }
+
+                                });
                                 break;
                         }
                     });
+                    $('#pages_menu').trigger('click');
                     break;
 
                 case 'Web Contents':
@@ -344,6 +400,8 @@ function create_all_things_init() {
 
 
 function appendOptionToSelection($select, obj, type) {
+    $select.empty();
+
     for (var e in obj) {
         switch (type) {
             case 'site':
@@ -378,7 +436,7 @@ function invoke(method, payload, log, callback) {
             }
 
             if (callback)
-                callback(result);
+                callback(result, payload);
         });
     })
 

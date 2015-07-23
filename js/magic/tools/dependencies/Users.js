@@ -38,13 +38,13 @@ Users.prototype.createBasicUser_62x = function (obj) {
     this.form_62x.emailAddress = name + '@liferay.com';
     this.form_62x.firstName = name;
 
-    if (roleId != '' || roleId)
+    if (roleId != '' && roleId)
         this.form_62x.roleIds = roleId;
 
-    if (siteId != '' || siteId)
+    if (siteId != '' && siteId)
         this.form_62x.groupIds = siteId;
 
-    if (orgId != '' || orgId)
+    if (orgId != '' && orgId)
         this.form_62x.organizationIds = orgId;
 
     invoke('/user/add-user', this.form_62x, true);

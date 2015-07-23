@@ -19,7 +19,7 @@ Sites.prototype.createBasicSites=function(obj) {
 
     this.form_62x.name=name;
 
-    if(parentGroupId!='' || parentGroupId)
+    if(parentGroupId!='' && parentGroupId)
         this.form_62x.parentGroupId = parentGroupId;
 
     invoke('/group/add-group', this.form_62x, true);

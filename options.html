@@ -13,10 +13,19 @@
 <script src="js/magic/custom_tables.js"></script>
 <script src="js/magic/descriptions.js"></script>
 
-<script src="js/magic/tools/dependencies/Users.js"></script>
-<script src="js/magic/tools/dependencies/Sites.js"></script>
-<script src="js/magic/tools/dependencies/Organizations.js"></script>
 <script src="js/magic/tools/dependencies/Company.js"></script>
+<script src="js/magic/tools/dependencies/Sites.js"></script>
+<script src="js/magic/tools/dependencies/Pages.js"></script>
+
+<script src="js/magic/tools/dependencies/Users.js"></script>
+<script src="js/magic/tools/dependencies/Organizations.js"></script>
+
+<script src="js/magic/tools/dependencies/Blogs.js"></script>
+<script src="js/magic/tools/dependencies/DDL.js"></script>
+<script src="js/magic/tools/dependencies/MessageBoard.js"></script>
+<script src="js/magic/tools/dependencies/Documents.js"></script>
+<script src="js/magic/tools/dependencies/WebContent.js"></script>
+<script src="js/magic/tools/dependencies/Wiki.js"></script>
 
 
 <script src="js/magic/tools/create_all_things.js"></script>
@@ -489,15 +498,18 @@
                         <div id="basic_setting">
                             <div class="form-group">
                                 <label for="portal_host">Portal Host</label>
-                                <input type="text" class="form-control" id="portal_host" placeholder="The URL of Portal, eg: localhost, 127.0.0.1.. ">
+                                <input type="text" class="form-control" id="portal_host"
+                                       placeholder="The URL of Portal, eg: localhost, 127.0.0.1.. ">
                             </div>
                             <div class="form-group">
                                 <label for="portal_port">Portal Port</label>
-                                <input type="text" class="form-control" id="portal_port" placeholder="The Port of Portal, eg: 8080, 9080..">
+                                <input type="text" class="form-control" id="portal_port"
+                                       placeholder="The Port of Portal, eg: 8080, 9080..">
                             </div>
                             <div class="form-group">
                                 <label for="portal_port">Portal Port</label>
-                                <input type="text" class="form-control" id="portal_auth" placeholder="The Auth of Portal, eg: pDvB2TNC..">
+                                <input type="text" class="form-control" id="portal_auth"
+                                       placeholder="The Auth of Portal, eg: pDvB2TNC..">
                             </div>
                             <div class="form-group">
                                 <br>
@@ -506,7 +518,7 @@
                         </div>
                         <div id="users" style="display: none;">
                             <div class="row menulist">
-                                <select id="users_menu" class="form-control" >
+                                <select id="users_menu" class="form-control">
                                     <option value="1">Add Multiple Basic Users to Default Liferay.com</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -515,15 +527,18 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6" >
+                                <div class="col-xs-6">
                                     <h4><strong>Payload Parameter</strong></h4>
+
                                     <div class="form-group">
                                         <label for="users_prefix">Name Prefix</label>
-                                        <input type="text" class="form-control" id="users_prefix" placeholder="The Prefix Of User Name..">
+                                        <input type="text" class="form-control" id="users_prefix"
+                                               placeholder="The Prefix Of User Name..">
                                     </div>
                                     <div class="form-group">
                                         <label for="users_roleId">Role to Assign</label>
-                                        <input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">
+                                        <input type="text" class="form-control" id="users_roleId"
+                                               placeholder="The RoleId of Liferay.com..">
                                     </div>
                                     <div class="form-group">
                                         <label for="users_sites">Site to Assign</label>
@@ -540,9 +555,11 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <h4><strong>Script Parameter</strong></h4>
+
                                     <div class="form-group">
                                         <label for="users_number">Number of Users</label>
-                                        <input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">
+                                        <input type="text" class="form-control" id="users_number"
+                                               placeholder="Number of Users created..">
                                     </div>
                                 </div>
                             </div>
@@ -550,7 +567,7 @@
                         </div>
                         <div id="organizations" style="display: none;">
                             <div class="row menulist">
-                                <select id="orgs_menu" class="form-control" >
+                                <select id="orgs_menu" class="form-control">
                                     <option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -559,29 +576,34 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6" >
+                                <div class="col-xs-6">
                                     <h4><strong>Payload Parameter</strong></h4>
+
                                     <div class="form-group">
                                         <label for="orgs_prefix">Name Prefix</label>
-                                        <input type="text" class="form-control" id="orgs_prefix" placeholder="The Prefix Of Org Name..">
+                                        <input type="text" class="form-control" id="orgs_prefix"
+                                               placeholder="The Prefix Of Org Name..">
                                     </div>
                                     <div class="form-group">
                                         <label for="orgs_prarentId">Parent Org Id</label>
-                                        <input type="text" class="form-control" id="orgs_prarentId" placeholder="The Id Of Parent Org..">
+                                        <input type="text" class="form-control" id="orgs_prarentId"
+                                               placeholder="The Id Of Parent Org..">
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <h4><strong>Script Parameter</strong></h4>
+
                                     <div class="form-group">
                                         <label for="orgs_number">Number of Organizations</label>
-                                        <input type="text" class="form-control" id="orgs_number" placeholder="Number of Orgs created..">
+                                        <input type="text" class="form-control" id="orgs_number"
+                                               placeholder="Number of Orgs created..">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="sites" style="display: none;">
                             <div class="row menulist">
-                                <select id="sites_menu" class="form-control" >
+                                <select id="sites_menu" class="form-control">
                                     <option value="1">Add Multiple Basic Sites to Default Liferay.com</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -590,325 +612,337 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6" >
+                                <div class="col-xs-6">
                                     <h4><strong>Payload Parameter</strong></h4>
+
                                     <div class="form-group">
                                         <label for="sites_prefix">Name Prefix</label>
-                                        <input type="text" class="form-control" id="sites_prefix" placeholder="The Prefix Of Site Name..">
+                                        <input type="text" class="form-control" id="sites_prefix"
+                                               placeholder="The Prefix Of Site Name..">
                                     </div>
                                     <div class="form-group">
                                         <label for="sites_parentId">Parent Site Id</label>
-                                        <input type="text" class="form-control" id="sites_parentId" placeholder="The Prefix Of Site Name..">
+                                        <input type="text" class="form-control" id="sites_parentId"
+                                               placeholder="The Prefix Of Site Name..">
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <h4><strong>Script Parameter</strong></h4>
+
                                     <div class="form-group">
                                         <label for="sites_number">Number of Sites</label>
-                                        <input type="text" class="form-control" id="sites_number" placeholder="Number of Sites created..">
+                                        <input type="text" class="form-control" id="sites_number"
+                                               placeholder="Number of Sites created..">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--<div id="pages" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="pages_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="pages_prefix" placeholder="The Prefix Of Page Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="pages_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <div id="pages" style="display: none;">
+                            <div class="row menulist">
+                                <select id="pages_menu" class="form-control">
+                                    <option value="1">Add Multiple Public Pages to Proper Site</option>
+                                    <option value="2">Add Multiple Public Pages with Child Pages</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4><strong>Payload Parameter</strong></h4>
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="pages_number" placeholder="Number of Pages created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
+                                    <div class="form-group">
+                                        <label for="pages_prefix">Page Name Prefix</label>
+                                        <input type="text" class="form-control" id="pages_prefix"
+                                               placeholder="The Prefix Of Page Name..">
+                                    </div>
+                                    <div class="form-group pages_2" style="display: none;">
+                                        <label for="pages_sub_prefix">Child Page Name Prefix</label>
+                                        <input type="text" class="form-control" id="pages_sub_prefix"
+                                               placeholder="The Prefix Of Child Page Name..">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pages_sites">Site to Add</label>
+                                        <select id='pages_sites' class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4><strong>Script Parameter</strong></h4>
+
+                                    <div class="form-group">
+                                        <label for="pages_number">Number of Pages</label>
+                                        <input type="text" class="form-control" id="pages_number"
+                                               placeholder="Number of Pages created..">
+                                    </div>
+                                    <div class="form-group pages_2" style="display: none;">
+                                        <label for="pages_sub_number">Number of Child Pages</label>
+                                        <input type="text" class="form-control" id="pages_sub_number"
+                                               placeholder="Number of Pages created..">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!--<div id="wc" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="wc_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="wc_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Role to Assign</label>-->
+                        <!--<label for="users_roleId">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Site to Assign</label>-->
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Organization to Assign</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div id="blogs" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="blogs_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="blogs_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Role to Assign</label>-->
+                        <!--<label for="users_roleId">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Site to Assign</label>-->
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Organization to Assign</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div id="document" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="document_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="document_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Role to Assign</label>-->
+                        <!--<label for="users_roleId">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Site to Assign</label>-->
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Organization to Assign</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div id="mb" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="mb_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="mb_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Role to Assign</label>-->
+                        <!--<label for="users_roleId">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Site to Assign</label>-->
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Organization to Assign</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div id="wiki" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="wiki_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="wiki_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Role to Assign</label>-->
+                        <!--<label for="users_roleId">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Site to Assign</label>-->
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Organization to Assign</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div id="tag_category" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="tag_category_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Role to Assign</label>-->
-                                        <!--<label for="users_roleId">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Site to Assign</label>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="tag_category_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Role to Assign</label>-->
+                        <!--<label for="users_roleId">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Site to Assign</label>-->
 
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label>Organization to Assign</label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label>Organization to Assign</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                         <!--<div id="ddl" style="display: none;">-->
-                            <!--<div class="row menulist">-->
-                                <!--<select id="ddl_menu" class="form-control" >-->
-                                    <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                    <!--<option>4</option>-->
-                                    <!--<option>5</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-6" >-->
-                                    <!--<h4><strong>Payload Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_firstName">Name Prefix</label>-->
-                                        <!--<input type="text" class="form-control" id="" placeholder="The Prefix Of Name..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-6">-->
-                                    <!--<h4><strong>Script Parameter</strong></h4>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="users_number">Number of Users</label>-->
-                                        <!--<input type="text" class="form-control" id="" placeholder="Number of Users created..">-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--<div class="row menulist">-->
+                        <!--<select id="ddl_menu" class="form-control" >-->
+                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
+                        <!--<option>2</option>-->
+                        <!--<option>3</option>-->
+                        <!--<option>4</option>-->
+                        <!--<option>5</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="col-xs-6" >-->
+                        <!--<h4><strong>Payload Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_firstName">Name Prefix</label>-->
+                        <!--<input type="text" class="form-control" id="" placeholder="The Prefix Of Name..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-6">-->
+                        <!--<h4><strong>Script Parameter</strong></h4>-->
+                        <!--<div class="form-group">-->
+                        <!--<label for="users_number">Number of Users</label>-->
+                        <!--<input type="text" class="form-control" id="" placeholder="Number of Users created..">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>-->
                     </div>
                 </div>
