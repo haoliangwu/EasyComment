@@ -57,6 +57,7 @@ WebContent.prototype = {
         var update_obj={
             version:obj.version,
             version_number:obj.version_number,
+
             articleId:obj.articleId,
             folderId:0,
             groupId:obj.groupId,

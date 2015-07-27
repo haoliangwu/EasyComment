@@ -20,7 +20,6 @@
 <script src="js/magic/tools/dependencies/Users.js"></script>
 <script src="js/magic/tools/dependencies/Organizations.js"></script>
 
-<script src="js/magic/tools/dependencies/Blogs.js"></script>
 <script src="js/magic/tools/dependencies/DDL.js"></script>
 <script src="js/magic/tools/dependencies/MessageBoard.js"></script>
 <script src="js/magic/tools/dependencies/Documents.js"></script>
@@ -486,7 +485,6 @@
                             <li role="presentation"><a href="#">Sites</a></li>
                             <li role="presentation"><a href="#">Pages</a></li>
                             <li role="presentation"><a href="#">Web Contents</a></li>
-                            <li role="presentation"><a href="#">Blogs</a></li>
                             <li role="presentation"><a href="#">Documents</a></li>
                             <li role="presentation"><a href="#">Message Board</a></li>
                             <li role="presentation"><a href="#">Wiki</a></li>
@@ -714,94 +712,59 @@
                                     <div class="form-group">
                                         <label for="wc_number">Number of WCs</label>
                                         <input type="text" class="form-control" id="wc_number"
-                                               placeholder="Number of Web Content..">
+                                               placeholder="Number of WC, eg: 10, 20, 30..">
                                     </div>
                                     <div class="form-group wc_2" style="display: none;">
                                         <label for="wc_number">The Final Version of WC</label>
                                         <input type="text" class="form-control" id="wc_versions"
-                                               placeholder="The final version of WC..">
+                                               placeholder="The version of WC, eg: 1.1, 1.2, 1.3..">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--<div id="blogs" style="display: none;">-->
-                        <!--<div class="row menulist">-->
-                        <!--<select id="blogs_menu" class="form-control" >-->
-                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                        <!--<option>2</option>-->
-                        <!--<option>3</option>-->
-                        <!--<option>4</option>-->
-                        <!--<option>5</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="row">-->
-                        <!--<div class="col-xs-6" >-->
-                        <!--<h4><strong>Payload Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_firstName">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Role to Assign</label>-->
-                        <!--<label for="users_roleId">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Site to Assign</label>-->
+                        <div id="document" style="display: none;">
+                            <div class="row menulist">
+                                <select id="document_menu" class="form-control">
+                                    <option value="1">Add Multiple Basic DM to Default Liferay.com</option>
+                                    <option value="2">Add Multiple Basic DM with Different Versions</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4><strong>Payload Parameter</strong></h4>
 
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Organization to Assign</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-xs-6">-->
-                        <!--<h4><strong>Script Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_number">Number of Users</label>-->
-                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div id="document" style="display: none;">-->
-                        <!--<div class="row menulist">-->
-                        <!--<select id="document_menu" class="form-control" >-->
-                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                        <!--<option>2</option>-->
-                        <!--<option>3</option>-->
-                        <!--<option>4</option>-->
-                        <!--<option>5</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="row">-->
-                        <!--<div class="col-xs-6" >-->
-                        <!--<h4><strong>Payload Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_firstName">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Role to Assign</label>-->
-                        <!--<label for="users_roleId">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Site to Assign</label>-->
+                                    <div class="form-group">
+                                        <label for="document_prefix">Name Prefix</label>
+                                        <input type="text" class="form-control" id="document_prefix"
+                                               placeholder="The Prefix Of DM Name..">
+                                    </div>
 
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Organization to Assign</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-xs-6">-->
-                        <!--<h4><strong>Script Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_number">Number of Users</label>-->
-                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
+                                    <div class="form-group">
+                                        <label>Site to Assign</label>
+                                        <select id='document_sites' class="form-control">
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4><strong>Script Parameter</strong></h4>
+
+                                    <div class="form-group">
+                                        <label for="documents_number">Number of DM</label>
+                                        <input type="text" class="form-control" id="documents_number"
+                                               placeholder="Number of DMs created..">
+                                    </div>
+                                    <div class="form-group dm_2" style="display: none;">
+                                        <label for="dm_versions">The Final Version of WC</label>
+                                        <input type="text" class="form-control" id="dm_versions"
+                                               placeholder="The version of DM, eg: 1.0, 2.0, 3.0..">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!--<div id="mb" style="display: none;">-->
                         <!--<div class="row menulist">-->
                         <!--<select id="mb_menu" class="form-control" >-->

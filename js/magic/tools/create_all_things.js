@@ -306,46 +306,66 @@ function create_all_things_init() {
                     $('#wc_menu').trigger('click');
                     break;
 
-                case 'Blogs':
-                    panel_show_slow($('#organizations'));
-
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
-                            case '1':
-                                $start.unbind('click');
-                                $start.click(function () {
-                                    $('#editor').val('');
-
-                                });
-
-                                break;
-
-                            case '2':
-                                break;
-
-                        }
-                    });
-                    break;
-
                 case 'Documents':
-                    panel_show_slow($('#organizations'));
+                    panel_show_slow($('#document'));
 
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                    company.getCompanyIdByWebId('liferay.com', function (result) {
+                        var site = new Sites();
+                        site.getSitesByCompanyId(result.companyId, null, function (result) {
+                            appendOptionToSelection($('#document_sites'), result, 'site');
+                        })
+                    });
+
+                    $('#document_menu').click(function () {
+                        switch ($('#document_menu option:selected').val()) {
                             case '1':
+                                hide_all_panels($('.dm_2'));
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
+                                    var obj = {
+                                        basename: $('#document_prefix').val(),
+                                        number: $('#documents_number').val(),
+                                        groupId: $('#document_sites').val()
+                                    }
 
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var dm = new Documents();
+                                        obj.name = obj.basename + i;
+
+                                        dm.createDocument(obj);
+                                    }
                                 });
 
                                 break;
 
                             case '2':
+                                panel_show_slow($('.dm_2'));
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#document_prefix').val(),
+                                        number: $('#documents_number').val(),
+                                        groupId: $('#document_sites').val(),
+                                        version_number: $('#dm_versions').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var dm = new Documents();
+                                        obj.name = obj.basename + i;
+
+                                        dm.createDocument(obj,createDocumentWithDiffVersion);
+                                    }
+
+                                })
+
                                 break;
 
                         }
                     });
+                    $('#document_menu').trigger('click');
                     break;
 
                 case 'Message Board':
@@ -447,6 +467,17 @@ function createWebContentWithDiffVersion(result, payload) {
     payload.groupId = result.groupId;
 
     wc.updateWebContent(payload, createWebContentWithDiffVersion);
+}
+
+function createDocumentWithDiffVersion(result, payload) {
+    var dm = new Documents();
+
+    payload.version = result.version;
+    payload.fileEntryId = result.fileEntryId;
+    payload.title=result.title;
+    payload.sourceFileName=result.title;
+
+    dm.updateDocument(payload, createDocumentWithDiffVersion);
 }
 
 function appendOptionToSelection($select, obj, type) {
