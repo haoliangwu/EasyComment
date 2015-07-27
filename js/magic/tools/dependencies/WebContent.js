@@ -34,15 +34,39 @@ function WebContent() {
         indexable: true,
         articleURL: 'ArticleURL'
     }
+
 }
 
-WebContent.prototype.createWebContent = function (obj) {
+WebContent.prototype = {
+    createWebContent: function (obj, callback) {
 
-    var name = obj.name;
-    var groupId = obj.groupId;
+        var name = obj.name;
+        var groupId = obj.groupId;
 
-    this.form_62x.titleMap = "{\"en_US\":\""+name+"\"}";
-    this.form_62x.groupId = groupId;
+        this.form_62x.titleMap = "{\"en_US\":\"" + name + "\"}";
+        this.form_62x.groupId = groupId;
 
-    invoke('/journalarticle/add-article', this.form_62x, true);
-};
+        if(callback)
+        this.form_62x.version_number=obj.version_number;
+
+        invoke('/journalarticle/add-article', this.form_62x, true, callback);
+    },
+
+    updateWebContent: function (obj, callback) {
+
+        var update_obj={
+            version:obj.version,
+            version_number:obj.version_number,
+            articleId:obj.articleId,
+            folderId:0,
+            groupId:obj.groupId,
+            content:this.form_62x.content
+        }
+
+        if (obj.version_number != update_obj.version)
+            invoke('/journalarticle/update-article', update_obj, true, callback);
+        else
+            return 0;
+
+    }
+}

@@ -13,7 +13,7 @@ function Pages() {
 }
 
 
-Pages.prototype.createPublicPages = function (obj, callback) {
+Pages.prototype.createPublicPages = function (obj) {
     var name = obj.name;
     var friendlyURL = '/' + name;
     var groupId = obj.groupId;
@@ -22,7 +22,7 @@ Pages.prototype.createPublicPages = function (obj, callback) {
     this.form_62.friendlyURL = friendlyURL;
     this.form_62.groupId = groupId;
 
-    invoke('/layout/add-layout', this.form_62, true, callback);
+    invoke('/layout/add-layout', this.form_62, true);
 };
 
 Pages.prototype.createPublicPagesWithChild = function (obj, callback) {

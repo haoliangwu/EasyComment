@@ -182,6 +182,7 @@ function create_all_things_init() {
 
                         switch ($('#pages_menu option:selected').val()) {
                             case '1':
+                                hide_all_panels($('.pages_2'));
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
@@ -204,9 +205,7 @@ function create_all_things_init() {
                                 break;
 
                             case '2':
-                                $('.pages_2').each(function () {
-                                    $(this).show();
-                                });
+                                panel_show_slow($('.pages_2'));
 
                                 $start.unbind('click');
                                 $start.click(function () {
@@ -258,6 +257,7 @@ function create_all_things_init() {
                     $('#wc_menu').click(function () {
                         switch ($('#wc_menu option:selected').val()) {
                             case '1':
+                                hide_all_panels($('.wc_2'));
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
@@ -278,6 +278,27 @@ function create_all_things_init() {
                                 break;
 
                             case '2':
+                                panel_show_slow($('.wc_2'));
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#wc_prefix').val(),
+                                        number: $('#wc_number').val(),
+                                        groupId: $('#wc_sites').val(),
+                                        version_number: $('#wc_versions').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var wc = new WebContent();
+                                        obj.name = obj.basename + i;
+
+                                        wc.createWebContent(obj, createWebContentWithDiffVersion);
+                                    }
+
+                                })
+
                                 break;
 
                         }
@@ -418,9 +439,21 @@ function create_all_things_init() {
     })
 }
 
+function createWebContentWithDiffVersion(result, payload) {
+    var wc = new WebContent();
+
+    payload.version = result.version;
+    payload.articleId = result.articleId;
+    payload.groupId = result.groupId;
+
+    wc.updateWebContent(payload, createWebContentWithDiffVersion);
+}
 
 function appendOptionToSelection($select, obj, type) {
     $select.empty();
+
+    if (!obj)
+        return 0;
 
     for (var e in obj) {
         switch (type) {
@@ -431,6 +464,7 @@ function appendOptionToSelection($select, obj, type) {
                 var $option = $('<option value="' + obj[e].organizationId + '">' + obj[e].name + '</option>')
                 break;
         }
+
         $select.append($option);
     }
 }
@@ -476,7 +510,10 @@ function hide_all_panels($e) {
 }
 
 function panel_show_slow($e) {
-    $e.show('slow');
+    $e.each(function () {
+        $(this).show('slow');
+    })
 }
+
 
 

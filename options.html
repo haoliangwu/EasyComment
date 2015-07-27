@@ -651,7 +651,7 @@
                                 <div class="col-xs-6">
                                     <h4><strong>Payload Parameter</strong></h4>
 
-                                    <div class="form-group">
+                                    <div class="form-group pages_1">
                                         <label for="pages_prefix">Page Name Prefix</label>
                                         <input type="text" class="form-control" id="pages_prefix"
                                                placeholder="The Prefix Of Page Name..">
@@ -661,7 +661,7 @@
                                         <input type="text" class="form-control" id="pages_sub_prefix"
                                                placeholder="The Prefix Of Child Page Name..">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group pages_1">
                                         <label for="pages_sites">Site to Add</label>
                                         <select id='pages_sites' class="form-control">
                                         </select>
@@ -670,7 +670,7 @@
                                 <div class="col-xs-6">
                                     <h4><strong>Script Parameter</strong></h4>
 
-                                    <div class="form-group">
+                                    <div class="form-group pages_1">
                                         <label for="pages_number">Number of Pages</label>
                                         <input type="text" class="form-control" id="pages_number"
                                                placeholder="Number of Pages created..">
@@ -687,7 +687,7 @@
                             <div class="row menulist">
                                 <select id="wc_menu" class="form-control">
                                     <option value="1">Add Multiple Basic WCs to Default Liferay.com</option>
-                                    <option>2</option>
+                                    <option value="2">Add Multiple Basic WCs with Different Versions</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
@@ -712,9 +712,14 @@
                                     <h4><strong>Script Parameter</strong></h4>
 
                                     <div class="form-group">
-                                        <label for="wc_number">Number of Users</label>
+                                        <label for="wc_number">Number of WCs</label>
                                         <input type="text" class="form-control" id="wc_number"
-                                               placeholder="Number of Web Content created..">
+                                               placeholder="Number of Web Content..">
+                                    </div>
+                                    <div class="form-group wc_2" style="display: none;">
+                                        <label for="wc_number">The Final Version of WC</label>
+                                        <input type="text" class="form-control" id="wc_versions"
+                                               placeholder="The final version of WC..">
                                     </div>
                                 </div>
                             </div>

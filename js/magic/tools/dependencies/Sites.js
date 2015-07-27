@@ -1,5 +1,5 @@
 function Sites() {
-    this.form_62x={
+    this.form_62x = {
         parentGroupId: 0,
         liveGroupId: 0,
         name: '',
@@ -13,24 +13,28 @@ function Sites() {
     }
 }
 
-Sites.prototype.createBasicSites=function(obj) {
-    var name = obj.name;
-    var parentGroupId = obj.parentId;
+Sites.prototype = {
+    createBasicSites: function (obj) {
+        var name = obj.name;
+        var parentGroupId = obj.parentId;
 
-    this.form_62x.name=name;
+        this.form_62x.name = name;
 
-    if(parentGroupId!='' && parentGroupId)
-        this.form_62x.parentGroupId = parentGroupId;
+        if (parentGroupId != '' && parentGroupId)
+            this.form_62x.parentGroupId = parentGroupId;
 
-    invoke('/group/add-group', this.form_62x, true);
+        invoke('/group/add-group', this.form_62x, true);
 
-};
+    },
 
-Sites.prototype.getSitesByCompanyId = function (companyId, parentGroupId, callback) {
-    invoke('/group/get-groups', {
-            companyId: companyId,
-            parentGroupId: parentGroupId ? parentGroupId : 0,
-            site: true
-        }, false, callback
-    );
-};
+    getSitesByCompanyId: function (companyId, parentGroupId, callback) {
+        invoke('/group/get-groups', {
+                companyId: companyId,
+                parentGroupId: parentGroupId ? parentGroupId : 0,
+                site: true
+            }, false, callback
+        );
+    }
+}
+
+
