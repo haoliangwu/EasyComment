@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    <div class="row" id="magic">
+    <div class="row" id="magic" style="display:none;">
 
         <div class="col-md-6 col-md-offset-1 tool-bar">
             <div class="row" id="magic_mb" style="display:none;">
@@ -683,45 +683,42 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div id="wc" style="display: none;">-->
-                        <!--<div class="row menulist">-->
-                        <!--<select id="wc_menu" class="form-control" >-->
-                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                        <!--<option>2</option>-->
-                        <!--<option>3</option>-->
-                        <!--<option>4</option>-->
-                        <!--<option>5</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="row">-->
-                        <!--<div class="col-xs-6" >-->
-                        <!--<h4><strong>Payload Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_firstName">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Role to Assign</label>-->
-                        <!--<label for="users_roleId">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Site to Assign</label>-->
+                        <div id="wc" style="display: none;">
+                            <div class="row menulist">
+                                <select id="wc_menu" class="form-control">
+                                    <option value="1">Add Multiple Basic WCs to Default Liferay.com</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4><strong>Payload Parameter</strong></h4>
 
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Organization to Assign</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-xs-6">-->
-                        <!--<h4><strong>Script Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_number">Number of Users</label>-->
-                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
+                                    <div class="form-group">
+                                        <label for="wc_prefix">Name Prefix</label>
+                                        <input type="text" class="form-control" id="wc_prefix"
+                                               placeholder="The Prefix Of Web Content..">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="wc_sites">Site to Add</label>
+                                        <select id='wc_sites' class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4><strong>Script Parameter</strong></h4>
+
+                                    <div class="form-group">
+                                        <label for="wc_number">Number of Users</label>
+                                        <input type="text" class="form-control" id="wc_number"
+                                               placeholder="Number of Web Content created..">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!--<div id="blogs" style="display: none;">-->
                         <!--<div class="row menulist">-->
                         <!--<select id="blogs_menu" class="form-control" >-->

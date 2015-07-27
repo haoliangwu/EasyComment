@@ -44,15 +44,19 @@ function init_magic(magic) {
 
     switch (magic) {
         case 'mb':
+            $('#magic').show();
             multiple_browser();
             break;
         case 'other':
+            $('#magic').show();
             other_tools();
             break;
         case 'ct':
+            $('#magic').show();
             custom_table();
             break;
         case 'de':
+            $('#magic').show();
             description();
             break;
         default :

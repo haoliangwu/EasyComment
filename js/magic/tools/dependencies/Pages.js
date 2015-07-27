@@ -12,7 +12,20 @@ function Pages() {
     }
 }
 
+
 Pages.prototype.createPublicPages = function (obj, callback) {
+    var name = obj.name;
+    var friendlyURL = '/' + name;
+    var groupId = obj.groupId;
+
+    this.form_62.name = name;
+    this.form_62.friendlyURL = friendlyURL;
+    this.form_62.groupId = groupId;
+
+    invoke('/layout/add-layout', this.form_62, true, callback);
+};
+
+Pages.prototype.createPublicPagesWithChild = function (obj, callback) {
     var name = obj.name;
     var friendlyURL = '/' + name;
     var groupId = obj.groupId;
@@ -24,8 +37,8 @@ Pages.prototype.createPublicPages = function (obj, callback) {
     this.form_62.basename_sub = obj.basename_sub;
 
 
-    if(!(obj.isWithChild)) {
-        this.form_62.isWithChild=false;
+    if (!(obj.isWithChild)) {
+        this.form_62.isWithChild = false;
         this.form_62.parentLayoutId = obj.parentLayoutId;
     }
 

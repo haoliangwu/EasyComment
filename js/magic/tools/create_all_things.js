@@ -190,7 +190,7 @@ function create_all_things_init() {
                                         basename: $('#pages_prefix').val(),
                                         number: $('#pages_number').val(),
                                         groupId: $('#pages_sites').val(),
-                                        isWithChild:false
+                                        isWithChild: false
                                     }
 
                                     for (var i = 1; i <= obj.number; i++) {
@@ -218,18 +218,18 @@ function create_all_things_init() {
                                         number: $('#pages_number').val(),
                                         number_sub: $('#pages_sub_number').val(),
                                         groupId: $('#pages_sites').val(),
-                                        isWithChild:true
+                                        isWithChild: true
                                     }
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var page = new Pages();
                                         obj.name = obj.basename + i;
                                         (function (a) {
-                                            page.createPublicPages(obj, function(result,payload) {
-                                                for(var j=1;j<=payload.number_sub;j++) {
+                                            page.createPublicPagesWithChild(obj, function (result, payload) {
+                                                for (var j = 1; j <= payload.number_sub; j++) {
                                                     var page = new Pages();
-                                                    payload.parentLayoutId=result.layoutId;
-                                                    payload.name = 'Sub'+payload.basename_sub + a+'_'+j;
+                                                    payload.parentLayoutId = result.layoutId;
+                                                    payload.name = 'Sub' + payload.basename_sub + a + '_' + j;
                                                     page.createPublicPages(payload)
                                                 }
                                             })
@@ -245,17 +245,36 @@ function create_all_things_init() {
                     break;
 
                 case 'Web Contents':
-                    panel_show_slow($('#organizations'));
+                    panel_show_slow($('#wc'));
 
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                    company.getCompanyIdByWebId('liferay.com', function (result) {
+                        var site = new Sites();
+                        site.getSitesByCompanyId(result.companyId, null, function (result) {
+                            appendOptionToSelection($('#wc_sites'), result, 'site');
+                        })
+                    });
+
+
+                    $('#wc_menu').click(function () {
+                        switch ($('#wc_menu option:selected').val()) {
                             case '1':
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
 
-                                });
+                                    var obj = {
+                                        basename: $('#wc_prefix').val(),
+                                        number: $('#wc_number').val(),
+                                        groupId: $('#wc_sites').val()
+                                    }
 
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var wc = new WebContent();
+                                        obj.name = obj.basename + i;
+
+                                        wc.createWebContent(obj);
+                                    }
+                                });
                                 break;
 
                             case '2':
@@ -263,6 +282,7 @@ function create_all_things_init() {
 
                         }
                     });
+                    $('#wc_menu').trigger('click');
                     break;
 
                 case 'Blogs':
