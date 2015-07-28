@@ -355,7 +355,7 @@ function create_all_things_init() {
                                         var dm = new Documents();
                                         obj.name = obj.basename + i;
 
-                                        dm.createDocument(obj,createDocumentWithDiffVersion);
+                                        dm.createDocument(obj, createDocumentWithDiffVersion);
                                     }
 
                                 })
@@ -368,45 +368,214 @@ function create_all_things_init() {
                     break;
 
                 case 'Message Board':
-                    panel_show_slow($('#organizations'));
+                    panel_show_slow($('#mb'));
 
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                    company.getCompanyIdByWebId('liferay.com', function (result) {
+                        var site = new Sites();
+                        site.getSitesByCompanyId(result.companyId, null, function (result) {
+                            appendOptionToSelection($('#mb_sites'), result, 'site');
+                        })
+                    });
+
+                    $('#mb_menu').click(function () {
+
+                        switch ($('#mb_menu option:selected').val()) {
                             case '1':
+                                hide_all_panels($('.mb_2, .mb_3'));
+
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#mb_prefix').val(),
+                                        number: $('#mb_number').val(),
+                                        groupId: $('#mb_sites').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var thread = new MBThread();
+                                        obj.name = obj.basename + i;
+
+                                        thread.createMBTreadOnRoot(obj);
+                                    }
 
                                 });
 
                                 break;
 
                             case '2':
-                                break;
+                                $('#mb_sites').click(function () {
+                                    var category = new MBCategory();
+                                    category.getCategoryBySiteId({groupId: $(this).val()}, function (result) {
+                                        appendOptionToSelection($('#mb_category'), result, 'category_mb');
+                                    });
+                                });
 
+                                $('#mb_sites').trigger('click');
+
+                                hide_all_panels($('.mb_3'))
+                                panel_show_slow($('.mb_2'));
+
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#mb_prefix').val(),
+                                        number: $('#mb_number').val(),
+                                        groupId: $('#mb_sites').val(),
+                                        categoryId: $('#mb_category').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var thread = new MBThread();
+                                        obj.name = obj.basename + i;
+
+                                        thread.createMBTreadOnCategory(obj);
+                                    }
+
+                                });
+
+                                break;
+                            case '3':
+                                hide_all_panels($('.mb_2, .mb_1'));
+                                panel_show_slow($('.mb_3'));
+
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    company.getCompanyIdByWebId('liferay.com', function (result) {
+                                        var user = new Users();
+                                        user.getUesrByScreenName({
+                                            companyId: result.companyId,
+                                            screenName: 'test'
+                                        }, function (user) {
+                                            var obj = {
+                                                userId:user.userId,
+                                                basename: $('#mb_prefix').val(),
+                                                c_basename: $('#mb_category_prefix').val(),
+                                                number: $('#mb_number').val(),
+                                                c_number: $('#mb_category_number').val(),
+                                                groupId: $('#mb_sites').val()
+                                            }
+
+                                            for (var i = 1; i <= obj.c_number; i++) {
+                                                var category = new MBCategory();
+                                                obj.name = obj.c_basename + i;
+                                                category.createCategory(obj, function (result, payload) {
+                                                    (function (a) {
+                                                        for (var j = 1; j <= payload.number; j++) {
+                                                            var thread = new MBThread();
+                                                            payload.name = payload.basename + a + j;
+                                                            payload.categoryId=result.categoryId;
+                                                            thread.createMBTreadOnCategory(payload);
+                                                        }
+
+                                                    })(i);
+                                                })
+                                            }
+                                        })
+                                    });
+                                });
+                                break;
                         }
                     });
+                    $('#mb_menu').trigger('click');
                     break;
 
                 case 'Wiki':
-                    panel_show_slow($('#organizations'));
+                    panel_show_slow($('#wiki'),function() {
+                        $('#wiki_menu').trigger('click');
+                    });
 
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                    company.getCompanyIdByWebId('liferay.com', function (result) {
+                        var site = new Sites();
+                        site.getSitesByCompanyId(result.companyId, null, function (result) {
+                            appendOptionToSelection($('#wiki_sites'), result, 'site');
+                        })
+                    });
+
+                    $('#wiki_menu').click(function () {
+                        switch ($('#wiki_menu option:selected').val()) {
                             case '1':
+                                hide_all_panels($('.wiki_2'));
+
+                                $('#wiki_sites').click(function() {
+                                    var wikiNode=new WikiNode();
+                                    wikiNode.getWikiNode({groupId: $(this).val()},function(result) {
+                                        appendOptionToSelection($('#wiki_nodes'), result, 'wiki');
+                                    });
+                                });
+
+                                $('#wiki_sites').trigger('click');
+
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#wiki_prefix').val(),
+                                        number: $('#wiki_number').val(),
+                                        groupId: $('#wiki_sites').val(),
+                                        nodeId:$('#wiki_nodes').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var wiki = new WikiPage();
+                                        obj.name = obj.basename + i;
+
+                                        wiki.createWikiPage(obj);
+                                    }
+
+                                });
+
+
+                                break;
+
+                            case '2':
+                                hide_all_panels($('.wiki_1'));
+                                panel_show_slow($('.wiki_2'));
+
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#wiki_prefix').val(),
+                                        n_basename: $('#wikinode_prefix').val(),
+                                        number: $('#wiki_number').val(),
+                                        n_number: $('#wikinode_number').val(),
+                                        groupId: $('#wiki_sites').val(),
+                                        nodeId:$('#wiki_nodes').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.n_number; i++) {
+                                        var wikiNode = new WikiNode();
+                                        obj.name = obj.n_basename + i;
+
+                                        wikiNode.createWikiNode(obj,function(result,payload) {
+                                            (function (a) {
+                                                for (var j = 1; j <= payload.number; j++) {
+                                                    var wikipage = new WikiPage();
+                                                    payload.name = payload.basename + a + j;
+                                                    payload.nodeId = result.nodeId;
+
+                                                    wikipage.createWikiPage(payload);
+                                                }
+
+                                            })(i);
+                                        });
+                                    }
 
                                 });
 
                                 break;
 
-                            case '2':
-                                break;
-
                         }
                     });
+
                     break;
 
                 case 'Tags & Categories':
@@ -473,8 +642,8 @@ function createDocumentWithDiffVersion(result, payload) {
 
     payload.version = result.version;
     payload.fileEntryId = result.fileEntryId;
-    payload.title=result.title;
-    payload.sourceFileName=result.title;
+    payload.title = result.title;
+    payload.sourceFileName = result.title;
 
     dm.updateDocument(payload, createDocumentWithDiffVersion);
 }
@@ -493,6 +662,10 @@ function appendOptionToSelection($select, obj, type) {
             case 'org':
                 var $option = $('<option value="' + obj[e].organizationId + '">' + obj[e].name + '</option>')
                 break;
+            case 'category_mb':
+                var $option = $('<option value="' + obj[e].categoryId + '">' + obj[e].name + '</option>')
+            case 'wiki':
+                var $option = $('<option value="' + obj[e].nodeId + '">' + obj[e].name + '</option>')
         }
 
         $select.append($option);
@@ -539,9 +712,9 @@ function hide_all_panels($e) {
     })
 }
 
-function panel_show_slow($e) {
+function panel_show_slow($e, callback) {
     $e.each(function () {
-        $(this).show('slow');
+        $(this).show('slow',callback);
     })
 }
 

@@ -765,84 +765,114 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div id="mb" style="display: none;">-->
-                        <!--<div class="row menulist">-->
-                        <!--<select id="mb_menu" class="form-control" >-->
-                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                        <!--<option>2</option>-->
-                        <!--<option>3</option>-->
-                        <!--<option>4</option>-->
-                        <!--<option>5</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="row">-->
-                        <!--<div class="col-xs-6" >-->
-                        <!--<h4><strong>Payload Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_firstName">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Role to Assign</label>-->
-                        <!--<label for="users_roleId">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Site to Assign</label>-->
+                        <div id="mb" style="display: none;">
+                            <div class="row menulist">
+                                <select id="mb_menu" class="form-control">
+                                    <option value="1">Post a Thread on root MB Category</option>
+                                    <option value="2">Post a Thread to specified MB Category</option>
+                                    <option value="3">Add Category with several Threads to Liferay.com</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4><strong>Payload Parameter</strong></h4>
 
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Organization to Assign</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-xs-6">-->
-                        <!--<h4><strong>Script Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_number">Number of Users</label>-->
-                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div id="wiki" style="display: none;">-->
-                        <!--<div class="row menulist">-->
-                        <!--<select id="wiki_menu" class="form-control" >-->
-                        <!--<option value="1">Add Multiple Basic Organizations to Default Liferay.com</option>-->
-                        <!--<option>2</option>-->
-                        <!--<option>3</option>-->
-                        <!--<option>4</option>-->
-                        <!--<option>5</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="row">-->
-                        <!--<div class="col-xs-6" >-->
-                        <!--<h4><strong>Payload Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_firstName">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_firstName" placeholder="The Prefix Of Name..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Role to Assign</label>-->
-                        <!--<label for="users_roleId">Name Prefix</label>-->
-                        <!--<input type="text" class="form-control" id="users_roleId" placeholder="The RoleId of Liferay.com..">-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Site to Assign</label>-->
+                                    <div class="form-group">
+                                        <label for="mb_prefix">Name Prefix</label>
+                                        <input type="text" class="form-control" id="mb_prefix"
+                                               placeholder="The Prefix Of Thread..">
+                                    </div>
 
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<label>Organization to Assign</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="col-xs-6">-->
-                        <!--<h4><strong>Script Parameter</strong></h4>-->
-                        <!--<div class="form-group">-->
-                        <!--<label for="users_number">Number of Users</label>-->
-                        <!--<input type="text" class="form-control" id="users_number" placeholder="Number of Users created..">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
+                                    <div class="form-group mb_3">
+                                        <label for="mb_category_prefix">Name Prefix</label>
+                                        <input type="text" class="form-control" id="mb_category_prefix"
+                                               placeholder="The Prefix Of Category..">
+                                    </div>
+
+                                    <div class="form-group mb_2" style="display: none;">
+                                        <label>Category to Assign</label>
+                                        <select id="mb_category" class="form-control">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb_1">
+                                        <label>Site to Assign</label>
+                                        <select id='mb_sites' class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4><strong>Script Parameter</strong></h4>
+
+                                    <div class="form-group">
+                                        <label for="mb_number">Number of Threads</label>
+                                        <input type="text" class="form-control" id="mb_number"
+                                               placeholder="Number of Thread created..">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mb_category_number">Number of Categories</label>
+                                        <input type="text" class="form-control" id="mb_category_number"
+                                               placeholder="Number of Category created..">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="wiki" style="display: none;">
+                            <div class="row menulist">
+                                <select id="wiki_menu" class="form-control">
+                                    <option value="1">Add Multiple Pages to specified Wiki</option>
+                                    <option value="2">Add Multiple Wiki with several Pages to Liferay.com</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h4><strong>Payload Parameter</strong></h4>
+
+                                    <div class="form-group">
+                                        <label for="wiki_prefix">Name Prefix</label>
+                                        <input type="text" class="form-control" id="wiki_prefix"
+                                               placeholder="The Prefix Of Wiki Page..">
+                                    </div>
+                                    <div class="form-group wiki_2">
+                                        <label for="wikinode_prefix">Name Prefix</label>
+                                        <input type="text" class="form-control" id="wikinode_prefix"
+                                               placeholder="The Prefix Of Wiki Node..">
+                                    </div>
+
+                                    <div class="form-group wiki_1" >
+                                        <label>Wiki to Assign</label>
+                                        <select id="wiki_nodes" class="form-control">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group wiki_1" >
+                                        <label>Site to Assign</label>
+                                        <select id="wiki_sites" class="form-control">
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4><strong>Script Parameter</strong></h4>
+
+                                    <div class="form-group">
+                                        <label for="wiki_number">Number of Pages</label>
+                                        <input type="text" class="form-control" id="wiki_number"
+                                               placeholder="Number of Wiki Page created..">
+                                    </div>
+                                    <div class="form-group wiki_2">
+                                        <label for="wikinode_number">Number of Nodes</label>
+                                        <input type="text" class="form-control" id="wikinode_number"
+                                               placeholder="Number of Wiki Node created..">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!--<div id="tag_category" style="display: none;">-->
                         <!--<div class="row menulist">-->
                         <!--<select id="tag_category_menu" class="form-control" >-->

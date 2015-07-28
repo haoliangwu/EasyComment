@@ -28,24 +28,38 @@ function Users() {
     };
 };
 
-Users.prototype.createBasicUser_62x = function (obj) {
-    var name=obj.name;
-    var roleId=obj.roleId;
-    var siteId=obj.siteId;
-    var orgId=obj.orgId;
+Users.prototype = {
+    createBasicUser_62x: function (obj) {
+        var name = obj.name;
+        var roleId = obj.roleId;
+        var siteId = obj.siteId;
+        var orgId = obj.orgId;
 
-    this.form_62x.screenName = name;
-    this.form_62x.emailAddress = name + '@liferay.com';
-    this.form_62x.firstName = name;
+        this.form_62x.screenName = name;
+        this.form_62x.emailAddress = name + '@liferay.com';
+        this.form_62x.firstName = name;
 
-    if (roleId != '' && roleId)
-        this.form_62x.roleIds = roleId;
+        if (roleId != '' && roleId)
+            this.form_62x.roleIds = roleId;
 
-    if (siteId != '' && siteId)
-        this.form_62x.groupIds = siteId;
+        if (siteId != '' && siteId)
+            this.form_62x.groupIds = siteId;
 
-    if (orgId != '' && orgId)
-        this.form_62x.organizationIds = orgId;
+        if (orgId != '' && orgId)
+            this.form_62x.organizationIds = orgId;
 
-    invoke('/user/add-user', this.form_62x, true);
-};
+        invoke('/user/add-user', this.form_62x, true);
+    },
+
+    getUesrByScreenName: function (obj, callback) {
+        var payload = {
+            companyId: obj.companyId,
+            screenName: obj.screenName
+        }
+
+        invoke('/user/get-user-by-screen-name', payload, false, callback)
+
+    }
+}
+
+
