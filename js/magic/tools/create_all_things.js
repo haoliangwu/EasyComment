@@ -453,7 +453,7 @@ function create_all_things_init() {
                                             screenName: 'test'
                                         }, function (user) {
                                             var obj = {
-                                                userId:user.userId,
+                                                userId: user.userId,
                                                 basename: $('#mb_prefix').val(),
                                                 c_basename: $('#mb_category_prefix').val(),
                                                 number: $('#mb_number').val(),
@@ -464,17 +464,17 @@ function create_all_things_init() {
                                             for (var i = 1; i <= obj.c_number; i++) {
                                                 var category = new MBCategory();
                                                 obj.name = obj.c_basename + i;
-                                                category.createCategory(obj, function (result, payload) {
-                                                    (function (a) {
+                                                (function (a) {
+
+                                                    category.createCategory(obj, function (result, payload) {
                                                         for (var j = 1; j <= payload.number; j++) {
                                                             var thread = new MBThread();
                                                             payload.name = payload.basename + a + j;
-                                                            payload.categoryId=result.categoryId;
+                                                            payload.categoryId = result.categoryId;
                                                             thread.createMBTreadOnCategory(payload);
                                                         }
-
-                                                    })(i);
-                                                })
+                                                    })
+                                                })(i);
                                             }
                                         })
                                     });
@@ -486,7 +486,7 @@ function create_all_things_init() {
                     break;
 
                 case 'Wiki':
-                    panel_show_slow($('#wiki'),function() {
+                    panel_show_slow($('#wiki'), function () {
                         $('#wiki_menu').trigger('click');
                     });
 
@@ -502,9 +502,9 @@ function create_all_things_init() {
                             case '1':
                                 hide_all_panels($('.wiki_2'));
 
-                                $('#wiki_sites').click(function() {
-                                    var wikiNode=new WikiNode();
-                                    wikiNode.getWikiNode({groupId: $(this).val()},function(result) {
+                                $('#wiki_sites').click(function () {
+                                    var wikiNode = new WikiNode();
+                                    wikiNode.getWikiNode({groupId: $(this).val()}, function (result) {
                                         appendOptionToSelection($('#wiki_nodes'), result, 'wiki');
                                     });
                                 });
@@ -519,7 +519,7 @@ function create_all_things_init() {
                                         basename: $('#wiki_prefix').val(),
                                         number: $('#wiki_number').val(),
                                         groupId: $('#wiki_sites').val(),
-                                        nodeId:$('#wiki_nodes').val()
+                                        nodeId: $('#wiki_nodes').val()
                                     }
 
                                     for (var i = 1; i <= obj.number; i++) {
@@ -548,15 +548,14 @@ function create_all_things_init() {
                                         number: $('#wiki_number').val(),
                                         n_number: $('#wikinode_number').val(),
                                         groupId: $('#wiki_sites').val(),
-                                        nodeId:$('#wiki_nodes').val()
+                                        nodeId: $('#wiki_nodes').val()
                                     }
 
                                     for (var i = 1; i <= obj.n_number; i++) {
                                         var wikiNode = new WikiNode();
                                         obj.name = obj.n_basename + i;
-
-                                        wikiNode.createWikiNode(obj,function(result,payload) {
-                                            (function (a) {
+                                        (function (a) {
+                                            wikiNode.createWikiNode(obj, function (result, payload) {
                                                 for (var j = 1; j <= payload.number; j++) {
                                                     var wikipage = new WikiPage();
                                                     payload.name = payload.basename + a + j;
@@ -564,9 +563,8 @@ function create_all_things_init() {
 
                                                     wikipage.createWikiPage(payload);
                                                 }
-
-                                            })(i);
-                                        });
+                                            });
+                                        })(i);
                                     }
 
                                 });
@@ -579,24 +577,71 @@ function create_all_things_init() {
                     break;
 
                 case 'Tags & Categories':
-                    panel_show_slow($('#organizations'));
+                    panel_show_slow($('#tag_category'));
 
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
+                    $('#tag_category_menu').click(function () {
+                        switch ($('#tag_category_menu option:selected').val()) {
                             case '1':
+                                panel_show_slow($('.tc_1'));
+                                hide_all_panels($('.tc_2'));
+
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
+
+                                    var obj = {
+                                        v_basename: $('#vocabulary_prefix').val(),
+                                        c_basename: $('#category_prefix').val(),
+                                        v_number: $('#vocabulary_number').val(),
+                                        c_number: $('#category_number').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.v_number; i++) {
+                                        var vocabulary = new Vocabulary();
+                                        obj.name = obj.v_basename + i;
+                                        (function (a) {
+                                            vocabulary.createVocabulary(obj, function (result, payload) {
+                                                for (var j = 1; j <= payload.c_number; j++) {
+                                                    payload.name = payload.c_basename + a + j;
+                                                    payload.vocabularyId = result.vocabularyId;
+                                                    var category = new Category();
+                                                    category.createCategory(payload);
+                                                }
+                                            })
+                                        })(i);
+
+                                    }
+
 
                                 });
 
                                 break;
 
                             case '2':
+                                panel_show_slow($('.tc_2'));
+                                hide_all_panels($('.tc_1'));
+
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        basename: $('#tag_prefix').val(),
+                                        number: $('#tag_number').val()
+                                    }
+
+                                    for (var i = 1; i <= obj.number; i++) {
+                                        var tag = new Tag();
+                                        obj.name = obj.basename + i;
+                                        tag.createTag(obj);
+                                    }
+                                });
+
                                 break;
 
                         }
                     });
+                    $('#tag_category_menu').trigger('click');
                     break;
 
                 case 'Dynamic Data Lists':
@@ -714,7 +759,7 @@ function hide_all_panels($e) {
 
 function panel_show_slow($e, callback) {
     $e.each(function () {
-        $(this).show('slow',callback);
+        $(this).show('slow', callback);
     })
 }
 
