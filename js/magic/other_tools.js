@@ -1,4 +1,5 @@
 function other_tools() {
+    $('#magic_submit, #ctrl_c').hide();
     $('#magic_other').show();
 
     //$('#sub_task_start').click(

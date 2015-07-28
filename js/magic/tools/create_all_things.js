@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    $('#magic_submit, #ctrl_c').hide();
     create_all_things_init();
 });
 
