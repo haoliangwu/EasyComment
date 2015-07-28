@@ -644,27 +644,6 @@ function create_all_things_init() {
                     $('#tag_category_menu').trigger('click');
                     break;
 
-                case 'Dynamic Data Lists':
-                    panel_show_slow($('#organizations'));
-
-                    $('#orgs_menu').click(function () {
-                        switch ($('#orgs_menu option:selected').val()) {
-                            case '1':
-                                $start.unbind('click');
-                                $start.click(function () {
-                                    $('#editor').val('');
-
-                                });
-
-                                break;
-
-                            case '2':
-                                break;
-
-                        }
-                    });
-                    break;
-
                 default :
                     break;
             }
