@@ -59,7 +59,29 @@ Users.prototype = {
 
         invoke('/user/get-user-by-screen-name', payload, false, callback)
 
+    },
+
+    getUsersByCompanyId: function(obj,callback) {
+        var payload={
+            companyId: obj.companyId,
+            start: -1,
+            end: -1
+        }
+
+        invoke('/user/get-company-users', payload, false, callback);
     }
 }
 
+function UsersGroups() {}
+
+UsersGroups.prototype = {
+    assignUsers: function (obj) {
+        var payload={
+            userGroupId: obj.userGroupId,
+            userIds: obj.userIds
+        }
+
+        invoke('/user/add-user-group-users', payload,true)
+    }
+}
 

@@ -20,7 +20,6 @@
 <script src="js/magic/tools/dependencies/Users.js"></script>
 <script src="js/magic/tools/dependencies/Organizations.js"></script>
 
-<script src="js/magic/tools/dependencies/DDL.js"></script>
 <script src="js/magic/tools/dependencies/TagsAndCategories.js"></script>
 <script src="js/magic/tools/dependencies/MessageBoard.js"></script>
 <script src="js/magic/tools/dependencies/Documents.js"></script>
@@ -518,7 +517,7 @@
                             <div class="row menulist">
                                 <select id="users_menu" class="form-control">
                                     <option value="1">Add Multiple Basic Users to Default Liferay.com</option>
-                                    <option>2</option>
+                                    <option value="2">Assign Multiple User to the UserGroup of Default Liferay.com</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
@@ -528,15 +527,20 @@
                                 <div class="col-xs-6">
                                     <h4><strong>Payload Parameter</strong></h4>
 
-                                    <div class="form-group">
+                                    <div class="form-group users_1">
                                         <label for="users_prefix">Name Prefix</label>
                                         <input type="text" class="form-control" id="users_prefix"
                                                placeholder="The Prefix Of User Name..">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group users_2">
+                                        <label for="users_group">User Group</label>
+                                        <input type="text" class="form-control" id="users_group"
+                                               placeholder="The Id Of User Group Assigned..">
+                                    </div>
+                                    <div class="form-group users_1">
                                         <label for="users_roleId">Role to Assign</label>
                                         <input type="text" class="form-control" id="users_roleId"
-                                               placeholder="The RoleId of Liferay.com..">
+                                               placeholder="The Id of Roles Assigned..">
                                     </div>
                                     <div class="form-group">
                                         <label for="users_sites">Site to Assign</label>
@@ -544,7 +548,7 @@
                                             <option value=""></option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group users_1">
                                         <label for="users_orgs">Organization to Assign</label>
                                         <select id="users_orgs" class="form-control">
                                             <option value=""></option>
@@ -554,7 +558,7 @@
                                 <div class="col-xs-6">
                                     <h4><strong>Script Parameter</strong></h4>
 
-                                    <div class="form-group">
+                                    <div class="form-group users_1">
                                         <label for="users_number">Number of Users</label>
                                         <input type="text" class="form-control" id="users_number"
                                                placeholder="Number of Users created..">
@@ -602,7 +606,7 @@
                         <div id="sites" style="display: none;">
                             <div class="row menulist">
                                 <select id="sites_menu" class="form-control">
-                                    <option value="1">Add Multiple Basic Sites to Default Liferay.com</option>
+                                    <option value="1">Add Multiple Basic Sites to Specified Site</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -621,7 +625,7 @@
                                     <div class="form-group">
                                         <label for="sites_parentId">Parent Site Id</label>
                                         <input type="text" class="form-control" id="sites_parentId"
-                                               placeholder="The Prefix Of Site Name..">
+                                               placeholder="The Id of Parent Site..">
                                     </div>
                                 </div>
                                 <div class="col-xs-6">

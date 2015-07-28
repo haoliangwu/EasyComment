@@ -56,6 +56,8 @@ function create_all_things_init() {
                     $('#users_menu').click(function () {
                         switch ($('#users_menu option:selected').val()) {
                             case '1':
+                                panel_show_slow($('.users_1'));
+                                hide_all_panels($('.users_2'));
                                 $start.unbind('click');
                                 $start.click(function () {
                                     $('#editor').val('');
@@ -92,6 +94,37 @@ function create_all_things_init() {
                                 break;
 
                             case '2':
+                                hide_all_panels($('.users_1'));
+                                panel_show_slow($('.users_2'));
+
+                                $start.unbind('click');
+                                $start.click(function () {
+                                    $('#editor').val('');
+
+                                    var obj = {
+                                        userGroupId:$('#users_group').val()
+                                    }
+
+                                    company.getCompanyIdByWebId('liferay.com', function (result) {
+                                        var user = new Users();
+                                        user.getUsersByCompanyId({companyId:result.companyId}, function(result) {
+                                            var userGroup = new UsersGroups();
+                                            var usersIdArray = [];
+                                            for(var e in result) {
+                                                usersIdArray.push(result[e].userId);
+                                            }
+
+                                            var payload={
+                                                userGroupId:obj.userGroupId,
+                                                userIds:usersIdArray.toString()
+                                            }
+
+                                            userGroup.assignUsers(payload);
+                                        })
+                                    });
+
+                                });
+
                                 break;
 
                         }
