@@ -67,18 +67,7 @@ function convert_selected_fixpack(dictionary) {
     }
     else {
         var $focused = $(":focus");
-        if (dictionary[sel.toString()])
             $focused.selection().replace(dictionary[sel.toString()], false);
-        else{
-            chrome.storage.local.get('custom_obj',function(result) {
-                var obj=result.custom_obj;
-                for(var e in obj){
-                    if(sel.toString()== obj[e].key) {
-                        $focused.selection().replace(obj[e].template, false);
-                    }
-                }
-            });
-        }
     }
 }
 
@@ -153,6 +142,23 @@ function commentTemplate(obj) {
             temp=temp.replace(/\$regression_env/ig, regression_env);
             template[obj[e].key]=temp;
         }
-        convert_selected_fixpack(template);
+
+        chrome.storage.local.get('custom_obj',function(result) {
+            var obj=result.custom_obj;
+            for(var e in obj) {
+                var temp=obj[e].template;
+                temp=temp.replace(/\$LPS/ig,LPS);
+                temp=temp.replace(/\$portal_branch/ig,portal_branch);
+                temp=temp.replace(/\$fix_pack_name/ig,fix_pack_name);
+                temp=temp.replace(/\$BPR/ig,BPR);
+                temp=temp.replace(/\$regression_env/ig, regression_env);
+                template[obj[e].key]=temp;
+            }
+
+            convert_selected_fixpack(template);
+        })
+
     });
+
+
 }
