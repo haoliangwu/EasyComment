@@ -76,6 +76,7 @@ function commentTemplate(obj) {
     var LPE = obj.LPE;
     var BPR = obj.BPR;
     var fix_pack_name = obj.fix_pack_name;
+    var fix_pack_name_without_branch=fix_pack_name.match(/portal-\d*/ig);
     var portal_branch = obj.portal_branch;
     var regression_env = obj.isRegressionStyle ? '+ {the depends on patches}.' : '.';
     var template = {};
@@ -137,6 +138,7 @@ function commentTemplate(obj) {
             var temp=obj[e].template;
             temp=temp.replace(/\$LPS/ig,LPS);
             temp=temp.replace(/\$portal_branch/ig,portal_branch);
+            temp=temp.replace(/\$fix_pack_name_without_branch/ig,fix_pack_name_without_branch);
             temp=temp.replace(/\$fix_pack_name/ig,fix_pack_name);
             temp=temp.replace(/\$BPR/ig,BPR);
             temp=temp.replace(/\$regression_env/ig, regression_env);
@@ -149,6 +151,7 @@ function commentTemplate(obj) {
                 var temp=obj[e].template;
                 temp=temp.replace(/\$LPS/ig,LPS);
                 temp=temp.replace(/\$portal_branch/ig,portal_branch);
+                temp=temp.replace(/\$fix_pack_name_without_branch/ig,fix_pack_name_without_branch);
                 temp=temp.replace(/\$fix_pack_name/ig,fix_pack_name);
                 temp=temp.replace(/\$BPR/ig,BPR);
                 temp=temp.replace(/\$regression_env/ig, regression_env);
