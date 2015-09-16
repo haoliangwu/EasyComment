@@ -1,5 +1,4 @@
-define(function (require, exports, module) {
-
+define(function (require, exports) {
     var $ = require('jquery');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
@@ -55,7 +54,7 @@ define(function (require, exports, module) {
         "mail": "Send email to developer for help.",
 
         "all": "All the tickets are passed for manual testing."
-    }
+    };
 
     // qa-r templates
     var rep = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: ***.\n" +
@@ -111,7 +110,7 @@ define(function (require, exports, module) {
         rep +
         "\n" +
         "Explanation.\n"
-    }
+    };
 
     //data exports
     exports.templates_fp = templates_fp;
@@ -126,73 +125,74 @@ define(function (require, exports, module) {
         var cc_obj = {};
 
         chromeUtil.getLocalStorage('custom_count', function (result) {
-            var count = result.custom_count;
+                var count = result.custom_count;
 
-            if (!obj) {
-                $input1.attr('id', count + "_key");
-                $input2.attr('id', count + "_d");
-                cc_obj = {
-                    "id": count,
-                    "key": $input1.val(),
-                    "des": $input2.val(),
-                    "template": ''
-                };
+                if (!obj) {
+                    $input1.attr('id', count + "_key");
+                    $input2.attr('id', count + "_d");
+                    cc_obj = {
+                        "id": count,
+                        "key": $input1.val(),
+                        "des": $input2.val(),
+                        "template": ''
+                    };
 
-                chromeUtil.setLocalStorage({'custom_count': ++count}, function () {
-                    console.log("Change custom count to %s successfully.", count);
-                });
-            }
-            else {
-                $input1.attr('id', obj.id + "_key");
-                $input1.val(obj.key);
-                $input2.attr('id', obj.id + "_d");
-                $input2.val(obj.des);
-                cc_obj = {
-                    "id": obj.id,
-                    "key": $input1.val(),
-                    "des": $input2.val(),
-                    "template": ''
-                };
-            }
+                    chromeUtil.setLocalStorage({'custom_count': ++count}, function () {
+                        console.log("Change custom count to %s successfully.", count);
+                    });
+                }
+                else {
+                    $input1.attr('id', obj.id + "_key");
+                    $input1.val(obj.key);
+                    $input2.attr('id', obj.id + "_d");
+                    $input2.val(obj.des);
+                    cc_obj = {
+                        "id": obj.id,
+                        "key": $input1.val(),
+                        "des": $input2.val(),
+                        "template": ''
+                    };
+                }
 
+                var $td1 = $('<td></td>').append($input1);
+                var $td2 = $('<td></td>').append($input2);
+                var $td3 = $('<td></td>').append($save, $more);
+                var $tr = $('<tr></tr>').append($td1, $td2, $td3);
+                $(selector).append($tr);
 
-            var $td1 = $('<td></td>').append($input1);
-            var $td2 = $('<td></td>').append($input2);
-            var $td3 = $('<td></td>').append($save, $more);
-            var $tr = $('<tr></tr>').append($td1, $td2, $td3);
-            var $table = $(selector).append($tr);
-
-
-            $save.click(function () {
-                chromeUtil.getLocalStorage('custom_obj', function (result) {
+                $save.click(function () {
                     if (!obj) {
-                        var custom_obj = result.custom_obj;
-                        custom_obj[count] = cc_obj;
+                        chromeUtil.getLocalStorage('custom_obj', function (result) {
 
-                        chromeUtil.setLocalStorage({'custom_obj': custom_obj}, function () {
-                            console.log("Change custom obj to %o successfully.", custom_obj);
+                            var custom_obj = result.custom_obj;
+                            custom_obj[count] = cc_obj;
+
+                            chromeUtil.setLocalStorage({'custom_obj': custom_obj}, function () {
+                                console.log("Change custom obj to %o successfully.", custom_obj);
+                            });
                         });
                     }
                     else {
-                        var custom_obj = result[team + '_obj'];
-                        cc_obj.template = custom_obj[obj.id].template;
-                        custom_obj[obj.id] = cc_obj;
+                        chromeUtil.getLocalStorage(team + '_obj', function (result) {
+                            var custom_obj = result[team + '_obj'];
+                            cc_obj.template = custom_obj[obj.id].template;
+                            custom_obj[obj.id] = cc_obj;
 
-                        var temp = {};
-                        temp[team + '_obj'] = custom_obj;
+                            var temp = {};
+                            temp[team + '_obj'] = custom_obj;
 
-                        chromeUtil.setLocalStorage(temp, function () {
-                            console.log("Change %s obj to %o successfully.", team, cc_obj);
+                            chromeUtil.setLocalStorage(temp, function () {
+                                console.log("Change %s obj to %o successfully.", team, cc_obj);
+                            });
                         });
                     }
                 });
-            });
 
-            $more.click(function () {
-                window.open("/options.html?id=" + count + "&team=" + team, window);
-            });
-        });
-
+                $more.click(function () {
+                    window.open("/options.html?id=" + count + "&team=" + team, window);
+                });
+            }
+        )
     };
 });
 
