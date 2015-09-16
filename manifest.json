@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Easy Comments",
-  "version": "1.0",
-  "description": "Smart key tool forcomments",
+  "version": "1.1",
+  "description": "Smart key tool for comments in Liferay workflow",
   "icons": {
     "128": "images/icon128.png"
   },
@@ -19,16 +19,16 @@
   ],
   "content_scripts": [
     {
-      "matches":["*://*/*"],
+      "matches":["*://issues.liferay.com/browse/*"],
       "js":["js/lib/jquery-2.1.4.min.js","js/lib/jquery-selection.js"]
     },
     {
       "matches": ["*://issues.liferay.com/browse/LRQA-*","*://issues.liferay.com/browse/BPR-*"],
-      "js": ["js/smart_key_LRQA.js"]
+      "js": ["js/content_scripts/smart_key_LRQA.js"]
     },
     {
       "matches":["*://issues.liferay.com/browse/LPS-*"],
-      "js":["js/smart_key_LPS.js"]
+      "js":["js/content_scripts/smart_key_LPS.js"]
     }
   ]
 

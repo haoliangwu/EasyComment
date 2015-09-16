@@ -1,10 +1,9 @@
 define(function (require, exports, module) {
     var $ = require('jquery');
-    $(document).ready(function () {
+    var comment = require('comment');
+    var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
-        //chrome.storage.local.get('fp_obj',function(result) {
-        //    console.log(result.fp_obj);
-        //});
+    $(document).ready(function () {
 
         init();
 
@@ -20,7 +19,7 @@ define(function (require, exports, module) {
                 $("#fixpack").show();
             }
 
-            chrome.storage.local.set({"team": value}, function () {
+            chromeUtil.setLocalStorage({"team": value}, function () {
                 console.log("Set team to %s", value);
             });
         });
@@ -31,7 +30,7 @@ define(function (require, exports, module) {
 
         init_magic();
 
-        chrome.storage.local.get('team', function (result) {
+        chromeUtil.getLocalStorage('team', function (result) {
 
             if (result.team) {
                 init_custom();
@@ -49,7 +48,7 @@ define(function (require, exports, module) {
                 }
             }
             else {
-                chrome.storage.local.set({"team": "fixpack"}, function () {
+                chromeUtil.setLocalStorage({"team": "fixpack"}, function () {
                     console.log("Init team to %s and Init setting", "fixpack");
                     init_custom();
                     init_qar();
@@ -63,62 +62,9 @@ define(function (require, exports, module) {
 
     function init_qar() {
 
-        var rep = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: ***.\n" +
-            "$server_62" + " + " + "$db" + ". " + "Portal ee-6.2.x EE GIT ID: ***.\n" +
-            "$server_61" + " + " + "$db" + ". " + "Portal ee-6.1.x EE GIT ID: ***.\n";
+        var template = comment.templates_qar;
 
-        var fix = "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: " + "$gitk_master" + ".\n" +
-            "$server_62" + " + " + "$db" + ". " + "Portal ee-6.2.x EE GIT ID: " + "$gitk_62x" + ".\n" +
-            "$server_61r" + " + " + "$db" + ". " + "Portal ee-6.1.x EE GIT ID: " + "$gitk_61x" + ".\n";
-
-        var content = "\n" +
-            "Reproduced on:\n" +
-            rep +
-            "\n" +
-            "Explanation.\n" +
-            "\n" +
-            "Fixed on:\n" +
-            fix +
-            "\n" +
-            "Explanation.\n";
-
-        var template = {
-            "pani": "PASSED Manual Testing using the following steps:\n" +
-            "\n" +
-            "# Step1\n# Step2\n# Step3\n" +
-            content,
-
-            "pai": "PASSED Manual Testing following the steps in the description.\n" +
-            content,
-
-            "nlni": "No Longer Reproducible through Manual Testing using the following steps:\n" +
-            "\n" +
-            "# Step1\n# Step2\n# Step3\n" +
-            content,
-
-            "nli": "No Longer Reproducible through Manual Testing following the steps in the description.\n" +
-            content,
-
-            "fani": "FAILED Manual Testing using the following steps:\n" +
-            "\n" +
-            "# Step1\n# Step2\n# Step3\n" +
-            content,
-
-            "fai": "FAILED Manual Testing following the steps in the description.\n" +
-            content,
-
-            "qavr": "Reproduced on:\n" +
-            rep +
-            "\n" +
-            "Explanation.\n",
-
-            "qavnl": "No Longer Reproducible on:\n" +
-            rep +
-            "\n" +
-            "Explanation.\n"
-        };
-
-        chrome.storage.local.get("qar_obj", function (result) {
+        chromeUtil.getLocalStorage("qar_obj", function (result) {
             if (!result.qar_obj) {
 
                 var obj = {};
@@ -131,7 +77,7 @@ define(function (require, exports, module) {
                     };
                 }
 
-                chrome.storage.local.set({'qar_obj': obj}, function () {
+                chromeUtil.setLocalStorage({'qar_obj': obj}, function () {
                     console.log("Initiate fixpack obj to %o successfully.", obj)
                 });
             } else {
@@ -144,7 +90,7 @@ define(function (require, exports, module) {
             }
         });
 
-        chrome.storage.local.get("parameter_qar", function (result) {
+        chromeUtil.getLocalStorage("parameter_qar", function (result) {
             if (result.parameter_qar) {
                 var obj = result.parameter_qar;
                 $('#server_master').val(obj.server_master);
@@ -157,7 +103,7 @@ define(function (require, exports, module) {
                     var id = $(this).attr('id');
                     var value = $(this).val();
                     obj[id] = value;
-                    chrome.storage.local.set({"parameter_qar": obj}, function () {
+                    chromeUtil.setLocalStorage({"parameter_qar": obj}, function () {
                         console.log("Change Parameter_qar obj to %o", obj)
                     })
                 });
@@ -170,7 +116,7 @@ define(function (require, exports, module) {
                     "x62": "",
                     "master": ""
                 }
-                chrome.storage.local.set({"parameter_qar": parameter_qar}, function () {
+                chromeUtil.setLocalStorage({"parameter_qar": parameter_qar}, function () {
                     console.log("Init Parameter_qar %o successfully", parameter_qar)
                 })
             }
@@ -179,60 +125,9 @@ define(function (require, exports, module) {
 
     function init_fixpack() {
 
-        var template = {
-            "pa": "PASSED Manual Testing for " + "$LPS" + ".\n" +
-            "\n" +
-            "Reproduced on:\n" +
-            "$portal_branch" + ".\n" +
-            "\n" +
-            "Passed on:\n" +
-            "$portal_branch" + " + " + "$fix_pack_name" + ".",
+        var template = comment.templates_fp;
 
-            "pacr": "PASSED Manual Testing for " + "$LPS" + ".\n" +
-            "\n" +
-            "Cannot be reproduced on:\n" +
-            "$portal_branch" + "$regression_env" + "\n" +
-            "Due to this issue is caused by " + "$LPS" + " and " + "$LPS" + " is also in the same patch, so I can't reproduced it.\n" +
-            "\n" +
-            "Passed on:\n" +
-            "$portal_branch" + " + " + "$fix_pack_name" + ".",
-
-            "fcr": "FAILED Manual Testing for " + "$LPS" + "(" + "$BPR" + ").\n" +
-            "\n" +
-            "Cannot be reproduced on:\n" +
-            "$portal_branch" + "$regression_env" + "\n",
-
-            "f": "FAILED Manual Testing for " + "$LPS" + "(" + "$BPR" + ").\n" +
-            "\n" +
-            "Reproduced on:\n" +
-            "$portal_branch" + "$regression_env" + "\n" +
-            "\n" +
-            "Failed on:\n" +
-            "$portal_branch" + " + " + "$fix_pack_name" + ".",
-
-            "ct": "This can't be tested by manual.\n" +
-            "{code:xml}\nHere is the proof. It can be the comment from the LPS, message from email or Skype.\n{code}",
-
-            "rm": "I'll close this sub-task as complete because it is removed from " + "$fix_pack_name" + ".",
-
-            "bprc": "Can't reproduce " + "$LPS" + " on " + "$portal_branch" + "$regression_env" + "\n" +
-            "[No/A] regression was found on " + "$portal_branch" + " + " + "$fix_pack_name" + " by using the steps in " + "$LPS" + ".\n" +
-            "{Give more information about the regression you have found}",
-
-            "bprf": "Fail to test " + "$LPS" + " on " + "$portal_branch" + " + " + "$fix_pack_name" + ".\n" +
-            "$LPS" + "[can/can't] be reproduced on Portal {portal-head-branch} GIT ID: {GITK}.\n" +
-            "NOTE: Additional information that you think is helpful. If there is a lot thing you need to add, feel free to add a new comment instead.",
-
-            "crv": "The " + "$LPS" + " can't be reproduced on " + "$portal_branch" + ", need another person to verify this again.",
-
-            "fv": "The " + "$LPS" + " is failed on " + "$portal_branch" + " + " + "$fix_pack_name" + ", need another person to verify this again.",
-
-            "mail": "Send email to developer for help.",
-
-            "all": "All the tickets are passed for manual testing."
-        }
-
-        chrome.storage.local.get("fp_obj", function (result) {
+        chromeUtil.getLocalStorage("fp_obj", function (result) {
             if (!result.fp_obj) {
 
                 var obj = {};
@@ -245,7 +140,7 @@ define(function (require, exports, module) {
                     };
                 }
 
-                chrome.storage.local.set({'fp_obj': obj}, function () {
+                chromeUtil.setLocalStorage({'fp_obj': obj}, function () {
                     console.log("Initiate fixpack obj to %o successfully.", obj)
                 });
             } else {
@@ -258,7 +153,7 @@ define(function (require, exports, module) {
             }
         });
 
-        chrome.storage.local.get("parameter_fp", function (result) {
+        chromeUtil.getLocalStorage("parameter_fp", function (result) {
             if (result.parameter_fp) {
                 var obj = result.parameter_fp;
                 $(".parameter_fixpack select").val(obj.portal_branch);
@@ -274,7 +169,7 @@ define(function (require, exports, module) {
                 $(".parameter_fixpack select").change(function () {
                     var value = $(this).val();
                     obj.portal_branch = value;
-                    chrome.storage.local.set({"parameter_fp": obj}, function () {
+                    chromeUtil.setLocalStorage({"parameter_fp": obj}, function () {
                         console.log("Change parameter_fp obj to %o", obj)
                     });
                 });
@@ -282,7 +177,7 @@ define(function (require, exports, module) {
                     var value = $('.parameter_fixpack input:radio:checked').val();
                     console.log(value);
                     obj.isRegressionStyle = (value == 'y') ? true : false;
-                    chrome.storage.local.set({"parameter_fp": obj}, function () {
+                    chromeUtil.setLocalStorage({"parameter_fp": obj}, function () {
                         console.log("Change parameter_fp obj to %o", obj)
                     });
                 });
@@ -292,7 +187,7 @@ define(function (require, exports, module) {
                     "portal_branch": "6.2.10 EE SP11",
                     "isRegressionStyle": false
                 }
-                chrome.storage.local.set({"parameter_fp": parameter_fp}, function () {
+                chromeUtil.setLocalStorage({"parameter_fp": parameter_fp}, function () {
                     console.log("Init parameter_fp %o successfully", parameter_fp)
                 })
             }
@@ -302,9 +197,9 @@ define(function (require, exports, module) {
     }
 
     function init_custom() {
-        chrome.storage.local.get('custom_obj', function (result) {
+        chromeUtil.getLocalStorage('custom_obj', function (result) {
             if (!result.custom_obj) {
-                chrome.storage.local.set({'custom_obj': {}}, function () {
+                chromeUtil.setLocalStorage({'custom_obj': {}}, function () {
                     console.log("Initiate custom obj to %o successfully.", {})
                 });
             } else {
@@ -315,9 +210,9 @@ define(function (require, exports, module) {
                 }
             }
         });
-        chrome.storage.local.get('custom_count', function (result) {
+        chromeUtil.getLocalStorage('custom_count', function (result) {
             if (!result.custom_count) {
-                chrome.storage.local.set({'custom_count': 1}, function () {
+                chromeUtil.setLocalStorage({'custom_count': 1}, function () {
                     console.log("Initiate custom count to 0 successfully.")
                 });
             }
@@ -342,7 +237,7 @@ define(function (require, exports, module) {
 
         if (!obj) {
 
-            chrome.storage.local.get('custom_count', function (result) {
+            chromeUtil.getLocalStorage('custom_count', function (result) {
                 var count = result.custom_count;
                 $input1.attr('id', count + "_key");
                 $input2.attr('id', count + "_d");
@@ -354,7 +249,7 @@ define(function (require, exports, module) {
                 //var $table = $('#custom_content table').append($tr);
                 var $table = $(selector).append($tr);
 
-                chrome.storage.local.set({'custom_count': ++count}, function () {
+                chromeUtil.setLocalStorage({'custom_count': ++count}, function () {
                     console.log("Change custom count to %s successfully.", count);
                 });
 
@@ -366,12 +261,12 @@ define(function (require, exports, module) {
                         "template": ''
                     };
 
-                    chrome.storage.local.get('custom_obj', function (result) {
+                    chromeUtil.getLocalStorage('custom_obj', function (result) {
 
                         var custom_obj = result.custom_obj;
                         custom_obj[count] = cc_obj;
 
-                        chrome.storage.local.set({'custom_obj': custom_obj}, function () {
+                        chromeUtil.setLocalStorage({'custom_obj': custom_obj}, function () {
                             console.log("Change custom obj to %o successfully.", custom_obj);
                             $more.click(function () {
                                 window.open("/options.html?id=" + obj.id + "&team=" + team, window);
@@ -383,7 +278,7 @@ define(function (require, exports, module) {
                 });
             });
         } else {
-            chrome.storage.local.get('custom_count', function (result) {
+            chromeUtil.getLocalStorage('custom_count', function (result) {
                 $input1.attr('id', obj.id + "_key");
                 $input1.val(obj.key);
                 $input2.attr('id', obj.id + "_d");
@@ -403,14 +298,14 @@ define(function (require, exports, module) {
                         "template": ''
                     };
 
-                    chrome.storage.local.get(team + '_obj', function (result) {
+                    chromeUtil.getLocalStorage(team + '_obj', function (result) {
                         var custom_obj = result[team + '_obj'];
                         cc_obj.template = custom_obj[obj.id].template;
                         custom_obj[obj.id] = cc_obj;
                         var temp = {};
                         temp[team + '_obj'] = custom_obj;
 
-                        chrome.storage.local.set(temp, function () {
+                        chromeUtil.setLocalStorage(temp, function () {
                             console.log("Change custom obj to %o successfully.", cc_obj);
                         });
 
