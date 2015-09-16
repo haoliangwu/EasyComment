@@ -4,7 +4,6 @@ define(function (require, exports, module) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     $(document).ready(function () {
-
         init();
 
         $(".team select").change(function () {
@@ -24,7 +23,7 @@ define(function (require, exports, module) {
             });
         });
 
-    })
+    });
 
     function init() {
 
@@ -85,7 +84,7 @@ define(function (require, exports, module) {
 
                 for (var e in result.qar_obj) {
                     //create element
-                    addNewSmartKey(result.qar_obj[e], '#qar_basic', 'qar');
+                    comment.initSmartKeyEntry(result.qar_obj[e], '#qar_basic', 'qar');
                 }
             }
         });
@@ -148,7 +147,7 @@ define(function (require, exports, module) {
 
                 for (var e in result.fp_obj) {
                     //create element
-                    addNewSmartKey(result.fp_obj[e], '#fp_basic', 'fp');
+                    comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
                 }
             }
         });
@@ -206,7 +205,7 @@ define(function (require, exports, module) {
                 //initiate UI
                 for (var e in result.custom_obj) {
                     //create element
-                    addNewSmartKey(result.custom_obj[e], '#custom_content table', 'custom');
+                    comment.initSmartKeyEntry(result.custom_obj[e], '#custom_content table', 'custom');
                 }
             }
         });
@@ -222,102 +221,10 @@ define(function (require, exports, module) {
             });
 
             $('#custom_new').click(function () {
-                addNewSmartKey(null, '#custom_content table', 'custom');
+                comment.initSmartKeyEntry(null,'#custom_content table', 'custom');
             });
         });
 
-
-    }
-
-    function addNewSmartKey(obj, selector, team) {
-        var $input1 = $('<input type="text" class="table_input one_input" placeholder="smartkey"/>');
-        var $input2 = $('<input type="text" class="table_input two_input" placeholder="description"/>');
-        var $save = $('<button type="button" value="save" class=" three_input btn btn-default btn-xs">Save</button>');
-        var $more = $('<button type="button" value="more" class=" three_input btn btn-info btn-xs">More</button>');
-
-        if (!obj) {
-
-            chromeUtil.getLocalStorage('custom_count', function (result) {
-                var count = result.custom_count;
-                $input1.attr('id', count + "_key");
-                $input2.attr('id', count + "_d");
-
-                var $td1 = $('<td></td>').append($input1);
-                var $td2 = $('<td></td>').append($input2);
-                var $td3 = $('<td></td>').append($save, $more);
-                var $tr = $('<tr></tr>').append($td1, $td2, $td3);
-                //var $table = $('#custom_content table').append($tr);
-                var $table = $(selector).append($tr);
-
-                chromeUtil.setLocalStorage({'custom_count': ++count}, function () {
-                    console.log("Change custom count to %s successfully.", count);
-                });
-
-                $save.click(function () {
-                    var cc_obj = {
-                        "id": count,
-                        "key": $input1.val(),
-                        "des": $input2.val(),
-                        "template": ''
-                    };
-
-                    chromeUtil.getLocalStorage('custom_obj', function (result) {
-
-                        var custom_obj = result.custom_obj;
-                        custom_obj[count] = cc_obj;
-
-                        chromeUtil.setLocalStorage({'custom_obj': custom_obj}, function () {
-                            console.log("Change custom obj to %o successfully.", custom_obj);
-                            $more.click(function () {
-                                window.open("/options.html?id=" + obj.id + "&team=" + team, window);
-                            });
-                        });
-
-
-                    });
-                });
-            });
-        } else {
-            chromeUtil.getLocalStorage('custom_count', function (result) {
-                $input1.attr('id', obj.id + "_key");
-                $input1.val(obj.key);
-                $input2.attr('id', obj.id + "_d");
-                $input2.val(obj.des);
-
-                var $td1 = $('<td></td>').append($input1);
-                var $td2 = $('<td></td>').append($input2);
-                var $td3 = $('<td></td>').append($save, $more);
-                var $tr = $('<tr></tr>').append($td1, $td2, $td3);
-                var $table = $(selector).append($tr);
-
-                $save.click(function () {
-                    var cc_obj = {
-                        "id": obj.id,
-                        "key": $input1.val(),
-                        "des": $input2.val(),
-                        "template": ''
-                    };
-
-                    chromeUtil.getLocalStorage(team + '_obj', function (result) {
-                        var custom_obj = result[team + '_obj'];
-                        cc_obj.template = custom_obj[obj.id].template;
-                        custom_obj[obj.id] = cc_obj;
-                        var temp = {};
-                        temp[team + '_obj'] = custom_obj;
-
-                        chromeUtil.setLocalStorage(temp, function () {
-                            console.log("Change custom obj to %o successfully.", cc_obj);
-                        });
-
-
-                    });
-                });
-
-                $more.click(function () {
-                    window.open("/options.html?id=" + obj.id + "&team=" + team, window);
-                });
-            });
-        }
 
     }
 
