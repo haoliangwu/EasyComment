@@ -386,7 +386,7 @@
         jquery_selection($);
     }
     else {
-        jquery_selection(JQuery)
+        jquery_selection(jQuery)
     }
 
 });
