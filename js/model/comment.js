@@ -130,12 +130,6 @@ define(function (require, exports) {
                 if (!obj) {
                     $input1.attr('id', count + "_key");
                     $input2.attr('id', count + "_d");
-                    cc_obj = {
-                        "id": count,
-                        "key": $input1.val(),
-                        "des": $input2.val(),
-                        "template": ''
-                    };
 
                     chromeUtil.setLocalStorage({'custom_count': ++count}, function () {
                         console.log("Change custom count to %s successfully.", count);
@@ -146,12 +140,6 @@ define(function (require, exports) {
                     $input1.val(obj.key);
                     $input2.attr('id', obj.id + "_d");
                     $input2.val(obj.des);
-                    cc_obj = {
-                        "id": obj.id,
-                        "key": obj.key,
-                        "des": obj.des,
-                        "template": obj.template
-                    };
                 }
 
                 var $td1 = $('<td></td>').append($input1);
@@ -163,24 +151,36 @@ define(function (require, exports) {
                 $save.click(function () {
                     if (!obj) {
                         chromeUtil.getLocalStorage('custom_obj', function (result) {
+                            cc_obj = {
+                                "id": count,
+                                "key": $input1.val(),
+                                "des": $input2.val(),
+                                "template": ''
+                            };
 
                             var custom_obj = result.custom_obj;
                             custom_obj[count] = cc_obj;
 
                             chromeUtil.setLocalStorage({'custom_obj': custom_obj}, function () {
-                                console.log("Change custom obj to %o successfully.", custom_obj);
+                                console.log("Change custom obj to %o successfully.", cc_obj);
                             });
                         });
                     }
                     else {
                         chromeUtil.getLocalStorage(team + '_obj', function (result) {
+                            cc_obj = {
+                                "id": obj.id,
+                                "key": $input1.val(),
+                                "des": $input2.val(),
+                                "template": ''
+                            };
+
                             var custom_obj = result[team + '_obj'];
                             cc_obj.template = custom_obj[obj.id].template;
                             custom_obj[obj.id] = cc_obj;
 
                             var temp = {};
                             temp[team + '_obj'] = custom_obj;
-
                             chromeUtil.setLocalStorage(temp, function () {
                                 console.log("Change %s obj to %o successfully.", team, cc_obj);
                             });
@@ -189,7 +189,7 @@ define(function (require, exports) {
                 });
 
                 $more.click(function () {
-                    window.open("/options.html?id=" + count + "&team=" + team, window);
+                    window.open("/options.html?id=" + obj.id + "&team=" + team, window);
                 });
             }
         )
