@@ -5,10 +5,13 @@
  * http://mrthink.net/text-field-jquery-extend/
  * http://madapaja.github.io/jquery.selection/
  */
-
-define(function (require, exports, module) {
-    var $=require('jquery')
-
+(function(factory) {
+    if(typeof define === 'function'){
+        define(factory);
+    }else{
+        factory();
+    }
+})(function(require){
     var jquery_selection = function ($) {
         "use strict";
 
@@ -376,6 +379,14 @@ define(function (require, exports, module) {
 
     };
 
-    jquery_selection($);
+
+
+    if(require){
+        var $=require('jquery')
+        jquery_selection($);
+    }
+    else {
+        jquery_selection(JQuery)
+    }
 
 });
