@@ -129,11 +129,23 @@ define(function (require, exports) {
 
     //function exports
     exports.initSmartKeyEntry = function (obj, selector, team) {
+        //Html elements
         var $input1 = $('<input type="text" class="table_input one_input" placeholder="smartkey"/>');
         var $input2 = $('<input type="text" class="table_input two_input" placeholder="description"/>');
         var $save = $('<button type="button" value="save" class=" three_input btn btn-default btn-xs">Save</button>');
         var $more = $('<button type="button" value="more" class=" three_input btn btn-info btn-xs">More</button>');
-        var cc_obj = {};
+        var $td1 = $('<td></td>').append($input1);
+        var $td2 = $('<td></td>').append($input2);
+        var $td3 = $('<td></td>').append($save, $more);
+        var $tr = $('<tr></tr>').append($td1, $td2, $td3);
+
+        //Custom Comment Object
+        var cc_obj = {
+            id:'',
+            key:'',
+            des:'',
+            template:''
+        };
 
         chromeUtil.getLocalStorage('custom_count', function (result) {
                 var count = result.custom_count;
@@ -153,21 +165,15 @@ define(function (require, exports) {
                     $input2.val(obj.des);
                 }
 
-                var $td1 = $('<td></td>').append($input1);
-                var $td2 = $('<td></td>').append($input2);
-                var $td3 = $('<td></td>').append($save, $more);
-                var $tr = $('<tr></tr>').append($td1, $td2, $td3);
                 $(selector).append($tr);
 
                 $save.click(function () {
+                    cc_obj.key=$input1.val();
+                    cc_obj.key=$input2.val();
+
                     if (!obj) {
                         chromeUtil.getLocalStorage('custom_obj', function (result) {
-                            cc_obj = {
-                                "id": count,
-                                "key": $input1.val(),
-                                "des": $input2.val(),
-                                "template": ''
-                            };
+                            cc_obj.id=count;
 
                             var custom_obj = result.custom_obj;
                             custom_obj[count] = cc_obj;
@@ -179,12 +185,7 @@ define(function (require, exports) {
                     }
                     else {
                         chromeUtil.getLocalStorage(team + '_obj', function (result) {
-                            cc_obj = {
-                                "id": obj.id,
-                                "key": $input1.val(),
-                                "des": $input2.val(),
-                                "template": ''
-                            };
+                            cc_obj.id=obj.id;
 
                             var custom_obj = result[team + '_obj'];
                             cc_obj.template = custom_obj[obj.id].template;

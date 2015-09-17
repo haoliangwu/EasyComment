@@ -220,7 +220,7 @@ define(function (require, exports, module) {
             });
 
             $('#custom_new').click(function () {
-                comment.initSmartKeyEntry(null,'#custom_content table', 'custom');
+                comment.initSmartKeyEntry(null,'#custom_content table');
             });
         });
 
