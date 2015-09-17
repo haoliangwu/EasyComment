@@ -7,6 +7,10 @@ seajs.config({
 
         //model
         'comment':'model/comment.js',
+        'custom':'model/custom.js',
+        'fixpack':'model/fixpack.js',
+        'qar':'model/qar.js',
+        'magic':'model/magic.js',
 
         //util
         'chromeUtil':'util/chromeUtil.js'
