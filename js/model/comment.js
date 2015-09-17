@@ -76,6 +76,17 @@ define(function (require, exports) {
         "\n" +
         "Explanation.\n";
 
+    var content_fail="\n" +
+        "Reproduced on:\n" +
+        rep +
+        "\n" +
+        "Explanation.\n" +
+        "\n" +
+        "Failed on:\n" +
+        fix +
+        "\n" +
+        "Explanation.\n";
+
     var templates_qar = {
         "pani": "PASSED Manual Testing using the following steps:\n" +
         "\n" +
@@ -96,10 +107,10 @@ define(function (require, exports) {
         "fani": "FAILED Manual Testing using the following steps:\n" +
         "\n" +
         "# Step1\n# Step2\n# Step3\n" +
-        content,
+        content_fail,
 
         "fai": "FAILED Manual Testing following the steps in the description.\n" +
-        content,
+        content_fail,
 
         "qavr": "Reproduced on:\n" +
         rep +
