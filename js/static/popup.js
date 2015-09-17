@@ -5,9 +5,6 @@ define(function (require, exports, module) {
 
     $(document).ready(function () {
         init();
-    });
-
-    function init() {
 
         $(".team select").change(function () {
             var value = $(this).val();
@@ -26,12 +23,15 @@ define(function (require, exports, module) {
             });
         });
 
+    });
+
+    function init() {
+
         init_magic();
 
         chromeUtil.getLocalStorage('team', function (result) {
 
             if (result.team) {
-                //already initiated team option
                 init_custom();
                 init_qar();
                 init_fixpack();
@@ -47,7 +47,6 @@ define(function (require, exports, module) {
                 }
             }
             else {
-                //if the first time to initiated, set team to fixpack as default option
                 chromeUtil.setLocalStorage({"team": "fixpack"}, function () {
                     console.log("Init team to %s and Init setting", "fixpack");
                     init_custom();
@@ -82,6 +81,7 @@ define(function (require, exports, module) {
                 });
             } else {
                 //initiate UI
+
                 for (var e in result.qar_obj) {
                     //create element
                     comment.initSmartKeyEntry(result.qar_obj[e], '#qar_basic', 'qar');
@@ -144,6 +144,7 @@ define(function (require, exports, module) {
                 });
             } else {
                 //initiate UI
+
                 for (var e in result.fp_obj) {
                     //create element
                     comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');

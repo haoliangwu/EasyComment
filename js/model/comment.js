@@ -148,9 +148,9 @@ define(function (require, exports) {
                     $input2.val(obj.des);
                     cc_obj = {
                         "id": obj.id,
-                        "key": obj.key,
-                        "des": obj.des,
-                        "template": obj.template
+                        "key": $input1.val(),
+                        "des": $input2.val(),
+                        "template": ''
                     };
                 }
 
