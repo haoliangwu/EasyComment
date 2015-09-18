@@ -1,4 +1,4 @@
-define(function (require, exports, module) {
+define(function (require) {
     var $ = require('jquery');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
@@ -25,16 +25,15 @@ define(function (require, exports, module) {
             });
         });
 
+        custom.init();
+        qar.init();
+        fixpack.init();
         magic.init();
 
         chromeUtil.getLocalStorage('team', function (result) {
 
             if (result.team) {
                 //already initiated team option
-                custom.init();
-                qar.init();
-                fixpack.init();
-
                 $(".team select").val(result.team);
                 if (result.team == 'qar') {
                     $("#fixpack").hide();
@@ -49,10 +48,6 @@ define(function (require, exports, module) {
                 //if the first time to initiated, set team to fixpack as default option
                 chromeUtil.setLocalStorage({"team": "fixpack"}, function () {
                     console.log("Init team to %s and Init setting", "fixpack");
-                    //custom.init();
-                    //qar.init();
-                    //fixpack.init();
-                    init();
                 });
             }
 

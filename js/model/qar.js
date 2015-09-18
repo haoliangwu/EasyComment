@@ -1,7 +1,15 @@
-define(function (require, exports, module) {
+define(function (require, exports) {
     var $ = require('jquery');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
+
+    var default_qar_obj = {
+        server: 'Tomcat 7.0.62',
+        db: 'MySql 5.5',
+        x61: '',
+        x62: '',
+        master: ''
+    };
 
     exports.init = function () {
         var template = comment.templates_qar;
@@ -14,10 +22,10 @@ define(function (require, exports, module) {
                 for (e in template) {
                     if (template.hasOwnProperty(e)) {
                         obj[e] = {
-                            'id': e,
-                            'key': e,
-                            'des': e,
-                            'template': template[e]
+                            id: e,
+                            key: e,
+                            des: e,
+                            template: template[e]
                         };
                     }
                 }
@@ -39,6 +47,8 @@ define(function (require, exports, module) {
         chromeUtil.getLocalStorage("parameter_qar", function (result) {
             if (result.parameter_qar) {
                 var obj = result.parameter_qar;
+
+                //initiate setting parameters mapping to local storage
                 $('#server_master').val(obj.server_master);
                 $('#server_61').val(obj.server_61);
                 $('#db').val(obj.db);
@@ -54,13 +64,7 @@ define(function (require, exports, module) {
                 });
             }
             else {
-                var parameter_qar = {
-                    "server": "",
-                    "db": "",
-                    "x61": "",
-                    "x62": "",
-                    "master": ""
-                };
+                var parameter_qar = default_qar_obj;
 
                 chromeUtil.setLocalStorage({"parameter_qar": parameter_qar}, function () {
                     console.log("Init Parameter_qar %o successfully", parameter_qar)

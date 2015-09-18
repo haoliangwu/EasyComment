@@ -3,6 +3,11 @@ define(function (require, exports) {
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
+    var default_fp_obj = {
+        portal_branch: '6.2.10 EE SP12',
+        isRegressionStyle: false
+    };
+
     exports.init = function () {
         var template = comment.templates_fp;
 
@@ -15,10 +20,10 @@ define(function (require, exports) {
                 for (e in template) {
                     if (template.hasOwnProperty(e)) {
                         obj[e] = {
-                            'id': e,
-                            'key': e,
-                            'des': e,
-                            'template': template[e]
+                            id: e,
+                            key: e,
+                            des: e,
+                            template: template[e]
                         };
                     }
                 }
@@ -72,10 +77,7 @@ define(function (require, exports) {
                 });
             }
             else {
-                var parameter_fp = {
-                    "portal_branch": "6.2.10 EE SP12",
-                    "isRegressionStyle": false
-                };
+                var parameter_fp = default_fp_obj;
 
                 chromeUtil.setLocalStorage({"parameter_fp": parameter_fp}, function () {
                     console.log("Init parameter_fp %o successfully", parameter_fp)

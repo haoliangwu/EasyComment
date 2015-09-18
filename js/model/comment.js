@@ -76,7 +76,7 @@ define(function (require, exports) {
         "\n" +
         "Explanation.\n";
 
-    var content_fail="\n" +
+    var content_fail = "\n" +
         "Reproduced on:\n" +
         rep +
         "\n" +
@@ -141,10 +141,10 @@ define(function (require, exports) {
 
         //Custom Comment Object
         var cc_obj = {
-            id:'',
-            key:'',
-            des:'',
-            template:''
+            id: '',
+            key: '',
+            des: '',
+            template: ''
         };
 
         chromeUtil.getLocalStorage('custom_count', function (result) {
@@ -168,12 +168,12 @@ define(function (require, exports) {
                 $(selector).append($tr);
 
                 $save.click(function () {
-                    cc_obj.key=$input1.val();
-                    cc_obj.key=$input2.val();
+                    cc_obj.key = $input1.val();
+                    cc_obj.key = $input2.val();
 
                     if (!obj) {
                         chromeUtil.getLocalStorage('custom_obj', function (result) {
-                            cc_obj.id=count;
+                            cc_obj.id = count;
 
                             var custom_obj = result.custom_obj;
                             custom_obj[count] = cc_obj;
@@ -185,7 +185,7 @@ define(function (require, exports) {
                     }
                     else {
                         chromeUtil.getLocalStorage(team + '_obj', function (result) {
-                            cc_obj.id=obj.id;
+                            cc_obj.id = obj.id;
 
                             var custom_obj = result[team + '_obj'];
                             cc_obj.template = custom_obj[obj.id].template;
