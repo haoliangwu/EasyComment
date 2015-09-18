@@ -7,16 +7,19 @@ define(function (require, exports, module) {
         var template = comment.templates_qar;
 
         chromeUtil.getLocalStorage("qar_obj", function (result) {
+            var e;
             if (!result.qar_obj) {
 
                 var obj = {};
-                for (var e in template) {
-                    obj[e] = {
-                        'id': e,
-                        'key': e,
-                        'des': e,
-                        'template': template[e]
-                    };
+                for (e in template) {
+                    if (template.hasOwnProperty(e)) {
+                        obj[e] = {
+                            'id': e,
+                            'key': e,
+                            'des': e,
+                            'template': template[e]
+                        };
+                    }
                 }
 
                 chromeUtil.setLocalStorage({'qar_obj': obj}, function () {
@@ -24,9 +27,11 @@ define(function (require, exports, module) {
                 });
             } else {
                 //initiate UI
-                for (var e in result.qar_obj) {
+                for (e in result.qar_obj) {
                     //create element
-                    comment.initSmartKeyEntry(result.qar_obj[e], '#qar_basic', 'qar');
+                    if (result.qar_obj.hasOwnProperty(e)) {
+                        comment.initSmartKeyEntry(result.qar_obj[e], '#qar_basic', 'qar');
+                    }
                 }
             }
         });
@@ -40,10 +45,9 @@ define(function (require, exports, module) {
                 $('#x61').val(obj.x61);
                 $('#x62').val(obj.x62);
                 $('#master').val(obj.master);
-                $("#qa-r input").keyup(function () {
+                $("input #qa-r").keyup(function () {
                     var id = $(this).attr('id');
-                    var value = $(this).val();
-                    obj[id] = value;
+                    obj[id] = $(this).val();
                     chromeUtil.setLocalStorage({"parameter_qar": obj}, function () {
                         console.log("Change Parameter_qar obj to %o", obj)
                     })
@@ -56,7 +60,8 @@ define(function (require, exports, module) {
                     "x61": "",
                     "x62": "",
                     "master": ""
-                }
+                };
+
                 chromeUtil.setLocalStorage({"parameter_qar": parameter_qar}, function () {
                     console.log("Init Parameter_qar %o successfully", parameter_qar)
                 })

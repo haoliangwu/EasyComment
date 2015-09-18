@@ -14,7 +14,7 @@ define(function (require, exports) {
                 //initiate UI
                 for (var e in result.custom_obj) {
                     //initiate custom object which has key property
-                    if (result.custom_obj[e].hasOwnProperty('key'))
+                    if (result.custom_obj.hasOwnProperty(e))
                         comment.initSmartKeyEntry(result.custom_obj[e], '#custom_content table', 'custom');
                 }
             }
