@@ -31,7 +31,7 @@ define(function (require, exports) {
                         obj[e] = {
                             id: e,
                             key: e,
-                            des: e,
+                            des: comment.descriptions_qar[e],
                             template: template[e]
                         };
                     }

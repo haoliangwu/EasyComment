@@ -2,7 +2,32 @@ define(function (require, exports) {
     var $ = require('jquery');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
-    //fix pack templates
+    //fix pack templates metadata
+    var descriptions_fp = {
+        pa: 'The sub task is passed due to it can be passed',
+        pacr: 'The sub task is passed due to developer\'s reply',
+        fcr: 'The sub task is failed due to cannot reproduced',
+        f: 'The sub task is failed due to wrong fix',
+        ct: 'The sub task cannot be tested by manual.',
+        rm: 'Sub task is removed from the Fix Pack.',
+        bprc: 'Cannot reproduced comment on BPR tickets.',
+        bprf: 'Failed comment on BPR tickets.',
+        crv: 'Need others to verify because it cannot be reproduced',
+        fv: 'Need others to verify because it is failed.',
+        mail: 'Try to mail developers for help.',
+        all: 'All the sub tasks are completed.'
+    }
+
+    var descriptions_qar = {
+        "pani": 'The LPS is passed without instructions.',
+        "pai": 'The LPS is passed with instructions.',
+        "nlni": 'The LPS is no longer reproduced without instructions.',
+        "nli": 'The LPS is no longer reproduced with instructions.',
+        "fani": 'The LPS is failed without instructions.',
+        "fai": 'The LPS is failed with instructions.',
+        "qavr": 'The QA-V LPS could be reproduced.'
+    }
+
     var templates_fp = {
         "pa": "PASSED Manual Testing for " + "$LPS" + ".\n" +
         "\n" +
@@ -125,7 +150,9 @@ define(function (require, exports) {
 
     //data exports
     exports.templates_fp = templates_fp;
+    exports.descriptions_fp = descriptions_fp
     exports.templates_qar = templates_qar;
+    exports.descriptions_qar = descriptions_qar;
 
     //function exports
     exports.initSmartKeyEntry = function (obj, selector, team) {

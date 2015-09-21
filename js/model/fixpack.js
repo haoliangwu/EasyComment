@@ -29,7 +29,7 @@ define(function (require, exports) {
                         obj[e] = {
                             id: e,
                             key: e,
-                            des: e,
+                            des: comment.descriptions_fp[e],
                             template: template[e]
                         };
                     }
