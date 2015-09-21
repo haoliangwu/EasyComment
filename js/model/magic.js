@@ -17,6 +17,10 @@ define(function (require, exports) {
         $('#de_c').click(function () {
             window.open("/options.html?magic=" + 'de', window);
         });
+
+        $('#export_import').click(function() {
+            window.open("/options.html?magic=" + 'ei', window);
+        });
     };
 });
 

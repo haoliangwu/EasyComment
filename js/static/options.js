@@ -6,6 +6,7 @@ define(function (require, exports, module) {
     var custom_table=require('../magic/custom_tables');
     var multiple_browser=require('../magic/multiple_browsers');
     var other_tools=require('../magic/other_tools');
+    var import_export=require('../model/setting');
 
     (function ($) {
         $.getUrlParam = function (name) {
@@ -15,11 +16,6 @@ define(function (require, exports, module) {
             return null;
         }
     })($);
-
-
-    function test() {
-        $('.editor, .variate_qar, .variate_fixpack').show();
-    }
 
     $(document).ready(function () {
 
@@ -69,6 +65,9 @@ define(function (require, exports, module) {
                 $('#magic').show();
                 description.description();
                 break;
+            case 'ei':
+                $('#magic').show();
+                import_export.init();
             default :
                 break;
         }

@@ -8,32 +8,9 @@
 
 <script src="js/lib/sea.js"></script>
 <script src="js/index/index_options.js"></script>
-
-<!--<script src="js/lib/jquery-2.1.4.min.js"></script>-->
-<!--<script src="js/lib/jquery-selection.js"></script>-->
-<!--<script src="js/lib/bootstrap.min.js"></script>-->
-
-<!--<script src="js/magic/multiple_browsers.js"></script>-->
-<!--<script src="js/magic/custom_tables.js"></script>-->
-<!--<script src="js/magic/descriptions.js"></script>-->
-
-<!--<script src="js/magic/tools/dependencies/Company.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/Sites.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/Pages.js"></script>-->
-
-<!--<script src="js/magic/tools/dependencies/Users.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/Organizations.js"></script>-->
-
-<!--<script src="js/magic/tools/dependencies/TagsAndCategories.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/MessageBoard.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/Documents.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/WebContent.js"></script>-->
-<!--<script src="js/magic/tools/dependencies/Wiki.js"></script>-->
-<!--<script src="js/magic/tools/create_all_things.js"></script>-->
 <script src="js/magic/other_tools.js"></script>
-<!--<script src="js/options.js"></script>-->
-<body>
 
+<body>
 <div class="container-fluid">
     <div class="row">
         <div id="setting_toolbar" class="setting" style="display: none;">
@@ -519,7 +496,8 @@
                             <div class="row menulist">
                                 <select id="users_menu" class="form-control">
                                     <option value="1">Add Multiple Basic Users to Default Liferay.com</option>
-                                    <option value="2">Assign Multiple User to the UserGroup of Default Liferay.com</option>
+                                    <option value="2">Assign Multiple User to the UserGroup of Default Liferay.com
+                                    </option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
@@ -850,13 +828,13 @@
                                                placeholder="The Prefix Of Wiki Node..">
                                     </div>
 
-                                    <div class="form-group wiki_1" >
+                                    <div class="form-group wiki_1">
                                         <label>Wiki to Assign</label>
                                         <select id="wiki_nodes" class="form-control">
                                         </select>
                                     </div>
 
-                                    <div class="form-group wiki_1" >
+                                    <div class="form-group wiki_1">
                                         <label>Site to Assign</label>
                                         <select id="wiki_sites" class="form-control">
                                         </select>
@@ -903,7 +881,7 @@
                                         <input type="text" class="form-control" id="tag_prefix"
                                                placeholder="The Prefix Of Tag Name..">
                                     </div>
-                                    <div class="form-group tc_1" >
+                                    <div class="form-group tc_1">
                                         <label for="vocabulary_prefix">Name Prefix</label>
                                         <input type="text" class="form-control" id="vocabulary_prefix"
                                                placeholder="The Prefix Of Vocabulary Name..">
@@ -939,6 +917,14 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="row" id="import_export" style="display:none;">
+                <div class="col-xs-6">
+                    <button id="setting_export" class="btn btn-block btn-default">Export</button>
+                </div>
+                <div class="col-xs-6">
+                    <button id="setting_import" class="btn btn-block btn-default">Import</button>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
