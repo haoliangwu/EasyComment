@@ -8,6 +8,13 @@ define(function (require, exports) {
         isRegressionStyle: false
     };
 
+    var properties = {
+        id: 'fixpack',
+        table_selector: '#fixpack'
+    };
+
+    exports.properties = properties;
+
     exports.init = function () {
         var template = comment.templates_fp;
 
@@ -84,5 +91,17 @@ define(function (require, exports) {
                 })
             }
         });
+    };
+
+    /*The Api of FixPack Module
+     */
+
+    //UI DOM
+    exports.showPanel = function (speed) {
+        $(properties.table_selector).show(speed);
+    };
+
+    exports.hidePanel = function (speed) {
+        $(properties.table_selector).hide(speed);
     };
 });

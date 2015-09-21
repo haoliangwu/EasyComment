@@ -14,22 +14,31 @@
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
-  "permissions":[
-    "storage","tabs" ,"http://*/", "https://*/"
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"
   ],
   "content_scripts": [
     {
-      "matches":["*://issues.liferay.com/browse/*"],
-      "js":["js/lib/jquery-2.1.4.min.js","js/lib/jquery-selection.js"]
+      "matches": ["*://issues.liferay.com/browse/*"],
+      "js": [
+        "js/lib/jquery-2.1.4.min.js",
+        "js/lib/jquery-selection.js",
+        "js/content_scripts/common.js"
+      ]
     },
     {
-      "matches": ["*://issues.liferay.com/browse/LRQA-*","*://issues.liferay.com/browse/BPR-*"],
+      "matches": [
+        "*://issues.liferay.com/browse/LRQA-*",
+        "*://issues.liferay.com/browse/BPR-*"
+      ],
       "js": ["js/content_scripts/smart_key_LRQA.js"]
     },
     {
-      "matches":["*://issues.liferay.com/browse/LPS-*"],
-      "js":["js/content_scripts/smart_key_LPS.js"]
+      "matches": ["*://issues.liferay.com/browse/LPS-*"],
+      "js": ["js/content_scripts/smart_key_LPS.js"]
     }
   ]
-
 }

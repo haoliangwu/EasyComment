@@ -11,14 +11,21 @@ define(function (require, exports) {
         master: ''
     };
 
+    var properties = {
+        id: 'qar',
+        table_selector:'#qa-r'
+    };
+
+    exports.properties = properties;
+
     exports.init = function () {
         var template = comment.templates_qar;
 
         chromeUtil.getLocalStorage("qar_obj", function (result) {
             var e;
             if (!result.qar_obj) {
-
                 var obj = {};
+
                 for (e in template) {
                     if (template.hasOwnProperty(e)) {
                         obj[e] = {
@@ -71,5 +78,17 @@ define(function (require, exports) {
                 })
             }
         });
+    };
+
+    /*The Api of FixPack Module
+     */
+
+    //UI DOM
+    exports.showPanel = function (speed) {
+        $(properties.table_selector).show(speed);
+    };
+
+    exports.hidePanel = function (speed) {
+        $(properties.table_selector).hide(speed);
     };
 });

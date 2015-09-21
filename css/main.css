@@ -20,6 +20,7 @@ th{
 
 td, th{
     border:2px solid #e0e0e0;
+    padding: 5px;
 }
 
 div[class="team"] {

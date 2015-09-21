@@ -11,18 +11,17 @@ define(function (require) {
         $(".team select").change(function () {
             var value = $(this).val();
 
-            if (value == 'qar') {
-                $("#fixpack").hide();
-                $("#qa-r").show();
+            if (value == qar.properties.id) {
+                qar.showPanel();
+                fixpack.hidePanel();
             }
-            else {
-                $("#qa-r").hide();
-                $("#fixpack").show();
+            else if(value == fixpack.properties.id){
+                qar.hidePanel();
+                fixpack.showPanel();
             }
-
-            chromeUtil.setLocalStorage({"team": value}, function () {
-                console.log("Set team to %s", value);
-            });
+            else{
+                alert('Error Team Initiate !!')
+            }
         });
 
         custom.init();
@@ -31,18 +30,9 @@ define(function (require) {
         magic.init();
 
         chromeUtil.getLocalStorage('team', function (result) {
-
             if (result.team) {
                 //already initiated team option
                 $(".team select").val(result.team);
-                if (result.team == 'qar') {
-                    $("#fixpack").hide();
-                    $("#qa-r").show();
-                }
-                else {
-                    $("#qa-r").hide();
-                    $("#fixpack").show();
-                }
             }
             else {
                 //if the first time to initiated, set team to fixpack as default option
@@ -50,7 +40,6 @@ define(function (require) {
                     console.log("Init team to %s and Init setting", "fixpack");
                 });
             }
-
         });
     });
 });
