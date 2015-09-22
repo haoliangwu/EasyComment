@@ -4,16 +4,17 @@ define(function (require, exports) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var default_qar_obj = {
-        server: 'Tomcat 7.0.62',
-        db: 'MySql 5.5',
+        server_master: '',
+        server_61:'',
+        db: '',
         x61: '',
         x62: '',
-        master: ''
+        master:''
     };
 
     var properties = {
         id: 'qar',
-        table_selector:'#qa-r'
+        table_selector: '#qa-r'
     };
 
     exports.properties = properties;

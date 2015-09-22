@@ -25,7 +25,8 @@ define(function (require, exports) {
         "nli": 'The LPS is no longer reproduced with instructions.',
         "fani": 'The LPS is failed without instructions.',
         "fai": 'The LPS is failed with instructions.',
-        "qavr": 'The QA-V LPS could be reproduced.'
+        "qavr": 'The QA-V LPS could be reproduced.',
+        "qavnl": 'The QA-V LPS no longer reproduced.'
     }
 
     var templates_fp = {

@@ -34,9 +34,9 @@ define(function (require, exports, module) {
         $(".setting").show();
         $("#reset").click(function () {
             var flag = confirm("Are you sure to clean all setting?");
-            if (flag) {
 
-                chrome.storage.local.clear(function () {
+            if (flag) {
+                chromeUtil.removeLocalStroageAll(function () {
                     console.log("Clear Local Storage and reset all setting.");
                 })
             }

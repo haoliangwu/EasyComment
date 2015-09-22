@@ -3,50 +3,86 @@ define(function (require, exports) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var promise = require('promise');
 
-    //promise demo
-    //function asyncfoo() {
-    //
-    //    setTimeout(function () {
-    //        p.done(null, "O hai!");
-    //        /* (3) resolve it when ready */
-    //    }, 1000);
-    //
-    //    return p;
-    //    /* (2) return it */
-    //}
-    //
-    //p = asyncfoo();
-    //
-    //p.then(function (error, result) {
-    //    if (error) return;
-    //    alert(result);
-    //});
+    function setting_export() {
+        var export_obj = {
+            fixpack: {},
+            qar: {},
+            custom: {}
+        };
+
+        promise.chain([
+            function () {
+                return chromeUtil.getLocalStorageSync('fp_obj');
+            },
+            function (err, result) {
+                export_obj.fixpack.fp_obj = result;
+                return chromeUtil.getLocalStorageSync('parameter_fp');
+            },
+            function (err, result) {
+                export_obj.fixpack.parameter_fp = result;
+                return chromeUtil.getLocalStorageSync('qar_obj');
+
+            },
+            function (err, result) {
+                export_obj.qar.qar_obj = result;
+                return chromeUtil.getLocalStorageSync('parameter_qar');
+            },
+            function (err, result) {
+                export_obj.qar.parameter_qar = result;
+                return chromeUtil.getLocalStorageSync('custom_obj');
+            },
+            function (err, result) {
+                export_obj.custom.custom_obj = result;
+                return chromeUtil.getLocalStorageSync('custom_count');
+            }
+        ]).then(
+            function (err, result) {
+                export_obj.custom.custom_count = result;
+                $('#editor').val(JSON.stringify(export_obj));
+            }
+        );
+    }
+
+    function setting_import() {
+        var import_obj = JSON.parse($('#editor').val());
+
+        promise.chain([
+            function () {
+                return chromeUtil.removeLocalStroageAllSync();
+            },
+            function () {
+                return chromeUtil.setLocalStorageSync({'fp_obj': import_obj.fixpack.fp_obj});
+            },
+            function () {
+                return chromeUtil.setLocalStorageSync({'parameter_fp': import_obj.fixpack.parameter_fp});
+            },
+            function () {
+                return chromeUtil.setLocalStorageSync({'qar_obj': import_obj.qar.qar_obj});
+            },
+            function () {
+                return chromeUtil.setLocalStorageSync({'parameter_qar': import_obj.qar.parameter_qar});
+            },
+            function () {
+                return chromeUtil.setLocalStorageSync({'custom_obj': import_obj.custom.custom_obj});
+            },
+            function () {
+                return chromeUtil.setLocalStorageSync({'custom_count': import_obj.custom.custom_count});
+            }
+        ]).then(function () {
+            console.log('All setting objects have been imported.')
+        });
+    }
 
     exports.init = function () {
-        $('#import_export').show()
+        $('#import_export').show();
         $('#setting_export').click(function () {
             setting_export();
         });
 
         $('#setting_import').click(function () {
+            setting_import();
         });
     };
-
-    function setting_export() {
-        chromeUtil.getLocalStoragePromise('fp_obj').then(
-            function (err, result) {
-                console.log('1,%o',result);
-                return chromeUtil.getLocalStoragePromise('qar_obj')
-            }).then(
-            function (err, result) {
-                console.log('2,%o',result);
-            }
-        )
-    }
-
-    function setting_import() {
-
-    }
 
     exports.export = function () {
 

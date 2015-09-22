@@ -4,6 +4,7 @@ seajs.config({
         //library
         'jquery': 'lib/jquery-2.1.4.min.js',
         'bootstrap':'lib/bootstrap.min.js',
+        'promise':'lib/promise.min.js',
 
         //model
         'comment':'model/comment.js',
