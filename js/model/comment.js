@@ -185,6 +185,8 @@ define(function (require, exports) {
                     chromeUtil.setLocalStorage({'custom_count': ++count}, function () {
                         console.log("Change custom count to %s successfully.", count);
                     });
+
+                    $more.hide();
                 }
                 else {
                     $input1.attr('id', obj.id + "_key");
@@ -197,7 +199,7 @@ define(function (require, exports) {
 
                 $save.click(function () {
                     cc_obj.key = $input1.val();
-                    cc_obj.key = $input2.val();
+                    cc_obj.des = $input2.val();
 
                     if (!obj) {
                         chromeUtil.getLocalStorage('custom_obj', function (result) {
@@ -210,6 +212,8 @@ define(function (require, exports) {
                                 console.log("Change custom obj to %o successfully.", cc_obj);
                             });
                         });
+
+                        $more.show();
                     }
                     else {
                         chromeUtil.getLocalStorage(team + '_obj', function (result) {
@@ -229,7 +233,7 @@ define(function (require, exports) {
                 });
 
                 $more.click(function () {
-                    window.open("/options.html?id=" + obj.id + "&team=" + team, window);
+                        window.open("/options.html?id=" + obj.id + "&team=" + team, 'window');
                 });
             }
         )

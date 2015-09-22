@@ -33,7 +33,7 @@ define(function (require, exports) {
             });
 
             $('#custom_new').click(function () {
-                comment.initSmartKeyEntry(null, '#custom_content table');
+                comment.initSmartKeyEntry(null, '#custom_content table','custom');
             });
         });
     };

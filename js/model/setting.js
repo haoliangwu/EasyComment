@@ -12,6 +12,10 @@ define(function (require, exports) {
 
         promise.chain([
             function () {
+                return chromeUtil.getLocalStorageSync('team');
+            },
+            function (err, result) {
+                export_obj.team = result;
                 return chromeUtil.getLocalStorageSync('fp_obj');
             },
             function (err, result) {
@@ -21,7 +25,6 @@ define(function (require, exports) {
             function (err, result) {
                 export_obj.fixpack.parameter_fp = result;
                 return chromeUtil.getLocalStorageSync('qar_obj');
-
             },
             function (err, result) {
                 export_obj.qar.qar_obj = result;
@@ -49,6 +52,9 @@ define(function (require, exports) {
         promise.chain([
             function () {
                 return chromeUtil.removeLocalStroageAllSync();
+            },
+            function() {
+                return chromeUtil.setLocalStorageSync({'team':import_obj.team});
             },
             function () {
                 return chromeUtil.setLocalStorageSync({'fp_obj': import_obj.fixpack.fp_obj});

@@ -1,5 +1,6 @@
 define(function (require, exports, module) {
     var $ = require('jquery');
+    var promise = require('promise');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var description = require('../magic/descriptions');
@@ -74,11 +75,32 @@ define(function (require, exports, module) {
     }
 
     function init_team(team) {
+        var id_comment = $.getUrlParam('id');
+
+        $('#delete').click(function() {
+            var flag = confirm("Are you sure to clean comment of key "+id_comment+" ?");
+
+            if (flag) {
+                promise.chain([
+                    function () {
+                        return chromeUtil.getLocalStorageSync('custom_obj');
+                    },
+                    function (err, result) {
+                        result[id_comment] = undefined;
+                        return chromeUtil.setLocalStorageSync({'custom_obj': result});
+                    }
+                ]).then(function(){
+                    window.location.href='/options.html'
+                    console.log('The comment of key %s has been removed.', id_comment);
+                });
+
+            }
+        });
+
         switch (team) {
             case 'custom':
                 $('.editor').show();
                 chrome.storage.local.get('custom_obj', function (result) {
-                    var id_comment = $.getUrlParam('id');
                     var custom_obj = result.custom_obj;
                     var obj = result.custom_obj[id_comment];
 
@@ -102,7 +124,6 @@ define(function (require, exports, module) {
             case 'fp':
                 $('.editor, .variate_fixpack').show();
                 chrome.storage.local.get('fp_obj', function (result) {
-                    var id_comment = $.getUrlParam('id');
                     var fp_obj = result.fp_obj;
                     var obj = result.fp_obj[id_comment];
 
@@ -127,7 +148,6 @@ define(function (require, exports, module) {
                 $('.editor, .variate_qar').show();
 
                 chrome.storage.local.get('qar_obj', function (result) {
-                    var id_comment = $.getUrlParam('id');
                     var qar_obj = result.qar_obj;
                     var obj = result.qar_obj[id_comment];
 
