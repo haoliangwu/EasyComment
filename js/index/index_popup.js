@@ -1,5 +1,5 @@
 seajs.config({
-    path:'./js',
+    base:'/js',
     alias: {
         //library
         'jquery': 'lib/jquery-2.1.4.min.js',
@@ -8,18 +8,16 @@ seajs.config({
         'react':'lib/react.min.js',
 
         //model
-        'comment':'model/comment.js',
-        'custom':'model/custom.js',
-        'fixpack':'model/fixpack.js',
-        'qar':'model/qar.js',
-        'magic':'model/magic.js',
+        'comment':'build/model/comment.js',
+        'custom':'build/model/custom.js',
+        'fixpack':'build/model/fixpack.js',
+        'qar':'build/model/qar.js',
+        'magic':'build/model/magic.js',
 
         //util
-        'chromeUtil':'util/chromeUtil.js'
-    },
-
-    base:'./js'
+        'chromeUtil':'build/util/chromeUtil.js'
+    }
 });
 
-seajs.use('static/popup');
+seajs.use('build/static/popup');
 
