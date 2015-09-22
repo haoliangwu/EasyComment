@@ -1,5 +1,5 @@
 define(function (require) {
-    var $ = require('jquery');
+    var $ = require('jquery')
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var custom = require('custom');
