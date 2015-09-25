@@ -1,6 +1,7 @@
 define(function (require) {
     var $ = require('jquery')
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
+    var React = require('react');
 
     var custom = require('custom');
     var fixpack = require('fixpack');
@@ -42,4 +43,18 @@ define(function (require) {
             }
         });
     });
+
+    var PopupBox=React.createClass({displayName: "PopupBox",
+        render:function() {
+            return (
+                React.createElement("div", {id: "popupBox", className: "container-fluid"}, 
+                    magic.MagicBox
+                )
+            )
+        }
+    })
+
+    React.render(
+        React.createElement(PopupBox, null), document.getElementById('_main')
+    );
 });
