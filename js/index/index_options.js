@@ -1,5 +1,5 @@
 seajs.config({
-    path: './js',
+    base: './js',
     alias: {
         //library
         'jquery': 'lib/jquery-2.1.4.min.js',
@@ -7,17 +7,16 @@ seajs.config({
         'promise':'lib/promise.min.js',
 
         //model
-        'comment': 'model/comment.js',
+        'comment': 'build/model/comment.js',
 
         //util
-        'chromeUtil': 'util/chromeUtil.js'
-    },
+        'chromeUtil': 'build/util/chromeUtil.js'
+    }
 
-    base: './js'
 });
 
-var main = ['lib/jquery-selection', 'static/options', 'magic/other_tools']
-var plugins = ['magic/custom_tables.js', 'magic/descriptions.js', 'magic/multiple_browsers.js', 'magic/other_tools.js']
+var main = ['lib/jquery-selection', 'build/static/options', 'build/magic/other_tools'];
+var plugins = ['build/magic/custom_tables.js', 'build/magic/descriptions.js', 'build/magic/multiple_browsers.js', 'build/magic/other_tools.js'];
 
 seajs.use(plugins, function () {
     seajs.use(main);

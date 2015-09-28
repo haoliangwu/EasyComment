@@ -54,7 +54,7 @@ define(function (require) {
         }
     })
 
-    React.render(
-        <PopupBox />, document.getElementById('_main')
-    );
+    //React.render(
+    //    <PopupBox />, document.getElementById('_main')
+    //);
 });
