@@ -1,8 +1,10 @@
+'use strict';
+
 define(function (require, exports, module) {
 
     var $ = require('jquery');
 
-    exports.custom_table=function () {
+    exports.custom_table = function () {
         var tableName = '';
 
         $('#magic_ct').show();
@@ -15,34 +17,33 @@ define(function (require, exports, module) {
                     size = {
                         'x': 3,
                         'y': 3
-                    }
+                    };
                     break;
                 case 'ms':
                     size = {
                         'x': 5,
                         'y': 5
-                    }
+                    };
                     break;
                 case 'ls':
                     size = {
                         'x': 7,
                         'y': 7
-                    }
+                    };
                     break;
                 case 'cs':
                     size = {
                         'x': $('.line').val(),
                         'y': $('.col').val()
-                    }
+                    };
                     break;
-                default :
+                default:
                     break;
             }
 
             var rootTableElement = $('#preview_ct');
             var template = magic_template_ct(size, rootTableElement, tableName);
             $('#magic textarea').val(template);
-
         });
 
         $('#shortcut_ct button').each(function () {
@@ -50,7 +51,7 @@ define(function (require, exports, module) {
                 var e = $.Event('click');
                 switch ($(this).attr('id')) {
                     case 'fixpack_performance':
-                        tableName = 'Pass performance testing.\n'
+                        tableName = 'Pass performance testing.\n';
 
                         $('#custom_size_title input').trigger(e);
                         $('.col').val(7);
@@ -91,7 +92,7 @@ define(function (require, exports, module) {
 
                                     $th4_input.eq(a).val(r1 + "%");
                                     $th6_input.eq(a).val(r2 + "%");
-                                })
+                                });
 
                                 $th3_input.eq(a).keyup(function () {
                                     var e2 = parseInt($th2_input.eq(a).val());
@@ -102,7 +103,7 @@ define(function (require, exports, module) {
 
                                     $th4_input.eq(a).val(r1 + "%");
                                     $th6_input.eq(a).val(r2 + "%");
-                                })
+                                });
 
                                 $th5_input.eq(a).keyup(function () {
                                     var e2 = parseInt($th2_input.eq(a).val());
@@ -113,15 +114,15 @@ define(function (require, exports, module) {
 
                                     $th4_input.eq(a).val(r1 + "%");
                                     $th6_input.eq(a).val(r2 + "%");
-                                })
+                                });
                             })(i);
                         }
 
                         break;
-                    default :
+                    default:
                         break;
                 }
-            })
+            });
         });
 
         $('#custom_table_size input:radio').each(function () {
@@ -134,9 +135,9 @@ define(function (require, exports, module) {
                         var size = {
                             'x': 3,
                             'y': 3
-                        }
+                        };
                         generate_table(size, rootTableElement);
-                    })
+                    });
                     break;
                 case 'ms':
                     $(this).change(function () {
@@ -144,10 +145,9 @@ define(function (require, exports, module) {
                         var size = {
                             'x': 5,
                             'y': 5
-                        }
+                        };
                         generate_table(size, rootTableElement);
-
-                    })
+                    });
                     break;
                 case 'ls':
                     $(this).change(function () {
@@ -155,9 +155,9 @@ define(function (require, exports, module) {
                         var size = {
                             'x': 7,
                             'y': 7
-                        }
+                        };
                         generate_table(size, rootTableElement);
-                    })
+                    });
                     break;
                 case 'cs':
                     $(this).change(function () {
@@ -166,21 +166,21 @@ define(function (require, exports, module) {
                             var size = {
                                 'x': $('.line').val(),
                                 'y': $('.col').val()
-                            }
+                            };
                             generate_table(size, rootTableElement);
-                        })
-                    })
+                        });
+                    });
                     break;
-                default :
+                default:
                     break;
             }
         });
-    }
+    };
 
-//size{
-//    x: line;
-//    y: col;
-//}
+    //size{
+    //    x: line;
+    //    y: col;
+    //}
     function generate_table(size, rootTableElement) {
         var line = size.x;
         var col = size.y;
@@ -191,7 +191,7 @@ define(function (require, exports, module) {
             var $tr = $('<tr></tr>');
             if (i == 0) {
                 for (var j = 0; j < col; j++) {
-                    var $input = $('<input type="text" maxlength="50"/>')
+                    var $input = $('<input type="text" maxlength="50"/>');
                     var $th = $('<th></th>');
 
                     $th.append($input);
@@ -199,7 +199,7 @@ define(function (require, exports, module) {
                 }
             } else {
                 for (var j = 0; j < col; j++) {
-                    var $input = $('<input type="text"/> maxlength="50"')
+                    var $input = $('<input type="text"/> maxlength="50"');
                     var $td = $('<td></td>');
 
                     $td.append($input);
@@ -226,8 +226,7 @@ define(function (require, exports, module) {
                     table_head += text;
                 }
                 body += table_head + '\n';
-            }
-            else {
+            } else {
                 var table_tr = '| ';
                 for (var j = 0; j < col; j++) {
                     var $td = rootTableElement.find('tr').eq(i).find('td').eq(j);
@@ -238,8 +237,7 @@ define(function (require, exports, module) {
             }
         }
 
-        if (tableName != undefined)
-            body = (tableName += body);
+        if (tableName != undefined) body = tableName += body;
 
         return body;
     }

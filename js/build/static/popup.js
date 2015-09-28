@@ -1,5 +1,7 @@
+'use strict';
+
 define(function (require) {
-    var $ = require('jquery')
+    var $ = require('jquery');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var React = require('react');
 
@@ -15,13 +17,11 @@ define(function (require) {
             if (value == qar.properties.id) {
                 qar.showPanel();
                 fixpack.hidePanel();
-            }
-            else if(value == fixpack.properties.id){
+            } else if (value == fixpack.properties.id) {
                 qar.hidePanel();
                 fixpack.showPanel();
-            }
-            else{
-                alert('Error Team Initiate !!')
+            } else {
+                alert('Error Team Initiate !!');
             }
         });
 
@@ -34,27 +34,26 @@ define(function (require) {
             if (result.team) {
                 //already initiated team option
                 $(".team select").val(result.team);
-            }
-            else {
+            } else {
                 //if the first time to initiated, set team to fixpack as default option
-                chromeUtil.setLocalStorage({"team": "fixpack"}, function () {
+                chromeUtil.setLocalStorage({ "team": "fixpack" }, function () {
                     console.log("Init team to %s and Init setting", "fixpack");
                 });
             }
         });
     });
 
-    var PopupBox=React.createClass({displayName: "PopupBox",
-        render:function() {
-            return (
-                React.createElement("div", {id: "popupBox", className: "container-fluid"}, 
-                    magic.MagicBox
-                )
-            )
-        }
-    })
+    var PopupBox = React.createClass({
+        displayName: 'PopupBox',
 
-    React.render(
-        React.createElement(PopupBox, null), document.getElementById('_main')
-    );
+        render: function render() {
+            return React.createElement(
+                'div',
+                { id: 'popupBox', className: 'container-fluid' },
+                magic.MagicBox
+            );
+        }
+    });
+
+    React.render(React.createElement(PopupBox, null), document.getElementById('_main'));
 });

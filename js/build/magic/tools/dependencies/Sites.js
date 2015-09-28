@@ -1,3 +1,5 @@
+'use strict';
+
 function Sites() {
     this.form_62x = {
         parentGroupId: 0,
@@ -10,31 +12,26 @@ function Sites() {
         friendlyURL: '',
         site: true,
         active: true
-    }
+    };
 }
 
 Sites.prototype = {
-    createBasicSites: function (obj) {
+    createBasicSites: function createBasicSites(obj) {
         var name = obj.name;
         var parentGroupId = obj.parentId;
 
         this.form_62x.name = name;
 
-        if (parentGroupId != '' && parentGroupId)
-            this.form_62x.parentGroupId = parentGroupId;
+        if (parentGroupId != '' && parentGroupId) this.form_62x.parentGroupId = parentGroupId;
 
         invoke('/group/add-group', this.form_62x, true);
-
     },
 
-    getSitesByCompanyId: function (companyId, parentGroupId, callback) {
+    getSitesByCompanyId: function getSitesByCompanyId(companyId, parentGroupId, callback) {
         invoke('/group/get-groups', {
-                companyId: companyId,
-                parentGroupId: parentGroupId ? parentGroupId : 0,
-                site: true
-            }, false, callback
-        );
+            companyId: companyId,
+            parentGroupId: parentGroupId ? parentGroupId : 0,
+            site: true
+        }, false, callback);
     }
-}
-
-
+};

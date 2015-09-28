@@ -1,8 +1,10 @@
+'use strict';
+
 define(function (require, exports, module) {
 
     var $ = require('jquery');
 
-    exports.other_tools=function () {
+    exports.other_tools = function () {
         $('#magic_submit, #ctrl_c').hide();
         $('#magic_other').show();
 
@@ -27,9 +29,7 @@ define(function (require, exports, module) {
         //
         //    }
         //);
-
-
-    }
+    };
 
     function sub_task_builder() {
         var tab1 = {
@@ -52,11 +52,10 @@ define(function (require, exports, module) {
             file: 'js/magic/tools/lpe.js',
             allFrames: false,
             runAt: 'document_end'
-        }
+        };
 
         var LPEs = [];
         var LPSs = [];
-
 
         chrome.tabs.create(tab1, function (tab) {
             var mainTab = tab;
@@ -80,10 +79,8 @@ define(function (require, exports, module) {
                                 LPSs.push(result[0]);
                                 chrome.tabs.remove(id);
                             });
-
                         });
                     }
-
                 }
             });
 
@@ -92,20 +89,17 @@ define(function (require, exports, module) {
                 //for(var e in LPEs, LPSs) {
                 //
                 //}
-                var code = ''
+                var code = '';
                 var code_obj = {
                     //code: code,
                     file: 'js/magic/tools/build.js',
                     allFrames: false,
                     runAt: 'document_end'
-                }
+                };
                 chrome.tabs.executeScript(mainTabId, code_obj, function (result) {
-                    console.log('finish')
+                    console.log('finish');
                 });
-
             }, 10000);
-
         });
     }
-
 });

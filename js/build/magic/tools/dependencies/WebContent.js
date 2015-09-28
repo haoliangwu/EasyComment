@@ -1,3 +1,5 @@
+"use strict";
+
 function WebContent() {
     //content: '<?xml version="1.0"?><root available-locales="en_US" default-locale="en_US"><static-content language-id="en_US"><![CDATA[<p>Test WC</p> <p>&nbsp;</p>]]></static-content></root>',
     this.form_62x = {
@@ -33,12 +35,11 @@ function WebContent() {
         neverReview: true,
         indexable: true,
         articleURL: 'ArticleURL'
-    }
-
+    };
 }
 
 WebContent.prototype = {
-    createWebContent: function (obj, callback) {
+    createWebContent: function createWebContent(obj, callback) {
 
         var name = obj.name;
         var groupId = obj.groupId;
@@ -46,28 +47,23 @@ WebContent.prototype = {
         this.form_62x.titleMap = "{\"en_US\":\"" + name + "\"}";
         this.form_62x.groupId = groupId;
 
-        if(callback)
-        this.form_62x.version_number=obj.version_number;
+        if (callback) this.form_62x.version_number = obj.version_number;
 
         invoke('/journalarticle/add-article', this.form_62x, true, callback);
     },
 
-    updateWebContent: function (obj, callback) {
+    updateWebContent: function updateWebContent(obj, callback) {
 
-        var update_obj={
-            version:obj.version,
-            version_number:obj.version_number,
+        var update_obj = {
+            version: obj.version,
+            version_number: obj.version_number,
 
-            articleId:obj.articleId,
-            folderId:0,
-            groupId:obj.groupId,
-            content:this.form_62x.content
-        }
+            articleId: obj.articleId,
+            folderId: 0,
+            groupId: obj.groupId,
+            content: this.form_62x.content
+        };
 
-        if (obj.version_number != update_obj.version)
-            invoke('/journalarticle/update-article', update_obj, true, callback);
-        else
-            return 0;
-
+        if (obj.version_number != update_obj.version) invoke('/journalarticle/update-article', update_obj, true, callback);else return 0;
     }
-}
+};

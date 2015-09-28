@@ -1,3 +1,5 @@
+'use strict';
+
 function Pages() {
     this.form_62 = {
         groupId: 20182,
@@ -9,12 +11,11 @@ function Pages() {
         type: 'portlet',
         hidden: false,
         friendlyURL: ''
-    }
+    };
 }
 
-
-Pages.prototype={
-    createPublicPages:function (obj) {
+Pages.prototype = {
+    createPublicPages: function createPublicPages(obj) {
         var name = obj.name;
         var friendlyURL = '/' + name;
         var groupId = obj.groupId;
@@ -26,7 +27,7 @@ Pages.prototype={
         invoke('/layout/add-layout', this.form_62, true);
     },
 
-    createPublicPagesWithChild:function (obj, callback) {
+    createPublicPagesWithChild: function createPublicPagesWithChild(obj, callback) {
         var name = obj.name;
         var friendlyURL = '/' + name;
         var groupId = obj.groupId;
@@ -37,13 +38,11 @@ Pages.prototype={
         this.form_62.number_sub = obj.number_sub;
         this.form_62.basename_sub = obj.basename_sub;
 
-
-        if (!(obj.isWithChild)) {
+        if (!obj.isWithChild) {
             this.form_62.isWithChild = false;
             this.form_62.parentLayoutId = obj.parentLayoutId;
         }
 
         invoke('/layout/add-layout', this.form_62, true, callback);
     }
-}
-
+};

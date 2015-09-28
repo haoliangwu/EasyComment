@@ -1,12 +1,14 @@
+'use strict';
+
 define(function (require, exports, module) {
     var $ = require('jquery');
 
-    exports.multiple_browser=function () {
+    exports.multiple_browser = function () {
         $('#magic_mb').show();
         $('#browser_detail input:checkbox').change(function () {
             $('#' + $(this).attr('id') + '_detail').toggle('middle');
             $('#' + $(this).attr('id') + '_tb').toggle('middle');
-        })
+        });
 
         $('#magic_submit').click(function () {
             var browsers = browser_init_obj();
@@ -37,83 +39,78 @@ define(function (require, exports, module) {
                         $chrome.trigger(e);
                         $chrome_detail.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'all_ff':
                         $('#shortcut_reset').trigger(e);
                         $ff.trigger(e);
                         $ff_detail.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'all_ie':
                         $('#shortcut_reset').trigger(e);
                         $ie.trigger(e);
                         $ie_detail.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'all_portal':
                         $('#shortcut_reset').trigger(e);
                         $released_version.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         $ee_version.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'release_portal':
                         $('#shortcut_reset').trigger(e);
                         $released_version.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'ee_portal':
                         $('#shortcut_reset').trigger(e);
                         $ee_version.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'fixpack':
                         $('#shortcut_reset').trigger(e);
                         $chrome.trigger(e);
                         $chrome_detail.each(function () {
-                            if ($(this).attr('id') == 'chrome_stable')
-                                $(this).trigger(e);
-                        })
+                            if ($(this).attr('id') == 'chrome_stable') $(this).trigger(e);
+                        });
                         $ff.trigger(e);
                         $ff_detail.each(function () {
-                            if ($(this).attr('id') != 'ff_latest')
-                                $(this).trigger(e);
-                        })
+                            if ($(this).attr('id') != 'ff_latest') $(this).trigger(e);
+                        });
                         $ie.trigger(e);
                         $ie_detail.each(function () {
-                            if ($(this).attr('id') == 'ie_11')
-                                $(this).trigger(e);
-                        })
+                            if ($(this).attr('id') == 'ie_11') $(this).trigger(e);
+                        });
                         $released_version.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'qar':
                         $('#shortcut_reset').trigger(e);
                         $chrome.trigger(e);
                         $chrome_detail.each(function () {
-                            if ($(this).attr('id') != 'chrome_stable')
-                                $(this).trigger(e);
-                        })
+                            if ($(this).attr('id') != 'chrome_stable') $(this).trigger(e);
+                        });
                         $ff.trigger(e);
                         $ff_detail.each(function () {
-                            if ($(this).attr('id') == 'ff_latest')
-                                $(this).trigger(e);
-                        })
+                            if ($(this).attr('id') == 'ff_latest') $(this).trigger(e);
+                        });
                         $ie.trigger(e);
                         $ie_detail.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         $ee_version.each(function () {
                             $(this).trigger(e);
-                        })
+                        });
                         break;
                     case 'shortcut_reset':
                         $('#magic_mb textarea').val('');
@@ -127,28 +124,28 @@ define(function (require, exports, module) {
                         $chrome.attr('checked', false);
                         $chrome_detail.each(function () {
                             $(this).attr('checked', false);
-                        })
+                        });
                         $ff.attr('checked', false);
                         $ff_detail.each(function () {
                             $(this).attr('checked', false);
-                        })
+                        });
                         $ie.attr('checked', false);
                         $ie_detail.each(function () {
                             $(this).attr('checked', false);
-                        })
+                        });
                         $released_version.each(function () {
                             $(this).attr('checked', false);
-                        })
+                        });
                         $ee_version.each(function () {
                             $(this).attr('checked', false);
-                        })
+                        });
                         break;
-                    default :
+                    default:
                         break;
                 }
-            })
+            });
         });
-    }
+    };
 
     function magic_template(browsers, portal_branch) {
         var table_head_base = '|| Portal Version || Reproduced Result || Verified Result ||\n';
@@ -186,7 +183,6 @@ define(function (require, exports, module) {
         return content;
     }
 
-
     function portal_branch_init_obj() {
         var obj = {};
 
@@ -196,10 +192,8 @@ define(function (require, exports, module) {
         var ee_versions = util_each($ee_version);
         var released_versions = util_each($released_version);
 
-        if (ee_versions.length != 0)
-            obj.ee_version = ee_versions;
-        if (released_versions.length != 0)
-            obj.released_version = released_versions;
+        if (ee_versions.length != 0) obj.ee_version = ee_versions;
+        if (released_versions.length != 0) obj.released_version = released_versions;
 
         return obj;
     }
@@ -244,10 +238,7 @@ define(function (require, exports, module) {
         var temp = [];
         JqueryObj.each(function () {
             temp.push($(this).val());
-        })
+        });
         return temp;
     }
 });
-
-
-

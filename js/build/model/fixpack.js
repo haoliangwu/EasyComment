@@ -1,10 +1,12 @@
+'use strict';
+
 define(function (require, exports) {
     var $ = require('jquery');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var default_fp_obj = {
-        portal_branch: '6.2.10 EE SP12',
+        portal_branch: '6.2.10 EE SP13',
         isRegressionStyle: false
     };
 
@@ -35,15 +37,14 @@ define(function (require, exports) {
                     }
                 }
 
-                chromeUtil.setLocalStorage({'fp_obj': obj}, function () {
-                    console.log("Initiate fixpack obj to %o successfully.", obj)
+                chromeUtil.setLocalStorage({ 'fp_obj': obj }, function () {
+                    console.log("Initiate fixpack obj to %o successfully.", obj);
                 });
             } else {
                 //initiate UI
                 for (e in result.fp_obj) {
                     //create element
-                    if (result.fp_obj.hasOwnProperty(e))
-                        comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
+                    if (result.fp_obj.hasOwnProperty(e)) comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
                 }
             }
         });
@@ -62,33 +63,31 @@ define(function (require, exports) {
                 if (obj.isRegressionStyle) {
                     $regression_style_enable.attr('checked', true);
                     $regression_style_disable.attr('checked', false);
-                }
-                else {
+                } else {
                     $regression_style_enable.attr('checked', false);
                     $regression_style_disable.attr('checked', true);
                 }
 
                 $portal_branch.change(function () {
                     obj.portal_branch = $(this).val();
-                    chromeUtil.setLocalStorage({"parameter_fp": obj}, function () {
-                        console.log("Change parameter_fp obj to %o", obj)
+                    chromeUtil.setLocalStorage({ "parameter_fp": obj }, function () {
+                        console.log("Change parameter_fp obj to %o", obj);
                     });
                 });
                 $(".parameter_fixpack input:radio").change(function () {
                     var value = $('.parameter_fixpack input:radio:checked').val();
                     console.log(value);
-                    obj.isRegressionStyle = (value == 'y');
-                    chromeUtil.setLocalStorage({"parameter_fp": obj}, function () {
-                        console.log("Change parameter_fp obj to %o", obj)
+                    obj.isRegressionStyle = value == 'y';
+                    chromeUtil.setLocalStorage({ "parameter_fp": obj }, function () {
+                        console.log("Change parameter_fp obj to %o", obj);
                     });
                 });
-            }
-            else {
+            } else {
                 var parameter_fp = default_fp_obj;
 
-                chromeUtil.setLocalStorage({"parameter_fp": parameter_fp}, function () {
-                    console.log("Init parameter_fp %o successfully", parameter_fp)
-                })
+                chromeUtil.setLocalStorage({ "parameter_fp": parameter_fp }, function () {
+                    console.log("Init parameter_fp %o successfully", parameter_fp);
+                });
             }
         });
     };

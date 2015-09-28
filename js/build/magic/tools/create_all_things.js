@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function () {
     create_all_things_init();
 });
@@ -11,7 +13,7 @@ function create_all_things_init() {
             $('#portal_port').val(obj.portal_port);
             $('#portal_auth').val(obj.portal_auth);
         }
-    })
+    });
 
     $('#sub_task_start').hide();
 
@@ -21,15 +23,15 @@ function create_all_things_init() {
             portal_host: '',
             portal_port: '',
             portal_auth: ''
-        }
+        };
 
         basic_obj.portal_host = $('#portal_host').val();
         basic_obj.portal_port = $('#portal_port').val();
         basic_obj.portal_auth = $('#portal_auth').val();
 
-        chrome.storage.local.set({'basic_obj': basic_obj}, function () {
+        chrome.storage.local.set({ 'basic_obj': basic_obj }, function () {
             console.log('Save Basic Setting Obj to %o', basic_obj);
-        })
+        });
     });
 
     $('.toolbar li').each(function () {
@@ -68,8 +70,7 @@ function create_all_things_init() {
                                         roleId: $('#users_roleId').val(),
                                         siteId: $('#users_sites').val(),
                                         orgId: $('#users_orgs').val()
-                                    }
-
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var user = new Users();
@@ -83,12 +84,12 @@ function create_all_things_init() {
                                     var site = new Sites();
                                     site.getSitesByCompanyId(result.companyId, null, function (result) {
                                         appendOptionToSelection($('#users_sites'), result, 'site');
-                                    })
+                                    });
 
                                     var organization = new Organizations();
                                     organization.getOrgsByCompanyId(result.companyId, null, function (result) {
                                         appendOptionToSelection($('#users_orgs'), result, 'org');
-                                    })
+                                    });
                                 });
 
                                 break;
@@ -102,27 +103,26 @@ function create_all_things_init() {
                                     $('#editor').val('');
 
                                     var obj = {
-                                        userGroupId:$('#users_group').val()
-                                    }
+                                        userGroupId: $('#users_group').val()
+                                    };
 
                                     company.getCompanyIdByWebId('liferay.com', function (result) {
                                         var user = new Users();
-                                        user.getUsersByCompanyId({companyId:result.companyId}, function(result) {
+                                        user.getUsersByCompanyId({ companyId: result.companyId }, function (result) {
                                             var userGroup = new UsersGroups();
                                             var usersIdArray = [];
-                                            for(var e in result) {
+                                            for (var e in result) {
                                                 usersIdArray.push(result[e].userId);
                                             }
 
-                                            var payload={
-                                                userGroupId:obj.userGroupId,
-                                                userIds:usersIdArray.toString()
-                                            }
+                                            var payload = {
+                                                userGroupId: obj.userGroupId,
+                                                userIds: usersIdArray.toString()
+                                            };
 
                                             userGroup.assignUsers(payload);
-                                        })
+                                        });
                                     });
-
                                 });
 
                                 break;
@@ -146,7 +146,7 @@ function create_all_things_init() {
                                         basename: $('#orgs_prefix').val(),
                                         number: $('#orgs_number').val(),
                                         parentId: $('#orgs_prarentId').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var org = new Organizations();
@@ -154,7 +154,6 @@ function create_all_things_init() {
 
                                         org.createBasicOrgs(obj);
                                     }
-
                                 });
 
                                 break;
@@ -181,7 +180,7 @@ function create_all_things_init() {
                                         basename: $('#sites_prefix').val(),
                                         number: $('#sites_number').val(),
                                         parentId: $('#sites_parentId').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var site = new Sites();
@@ -209,7 +208,7 @@ function create_all_things_init() {
                             var site = new Sites();
                             site.getSitesByCompanyId(result.companyId, null, function (result) {
                                 appendOptionToSelection($('#pages_sites'), result, 'site');
-                            })
+                            });
                         });
 
                         switch ($('#pages_menu option:selected').val()) {
@@ -224,7 +223,7 @@ function create_all_things_init() {
                                         number: $('#pages_number').val(),
                                         groupId: $('#pages_sites').val(),
                                         isWithChild: false
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var page = new Pages();
@@ -232,7 +231,6 @@ function create_all_things_init() {
 
                                         page.createPublicPages(obj);
                                     }
-
                                 });
                                 break;
 
@@ -250,7 +248,7 @@ function create_all_things_init() {
                                         number_sub: $('#pages_sub_number').val(),
                                         groupId: $('#pages_sites').val(),
                                         isWithChild: true
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var page = new Pages();
@@ -261,13 +259,11 @@ function create_all_things_init() {
                                                     var page = new Pages();
                                                     payload.parentLayoutId = result.layoutId;
                                                     payload.name = 'Sub' + payload.basename_sub + a + '_' + j;
-                                                    page.createPublicPages(payload)
+                                                    page.createPublicPages(payload);
                                                 }
-                                            })
+                                            });
                                         })(i);
-
                                     }
-
                                 });
                                 break;
                         }
@@ -282,9 +278,8 @@ function create_all_things_init() {
                         var site = new Sites();
                         site.getSitesByCompanyId(result.companyId, null, function (result) {
                             appendOptionToSelection($('#wc_sites'), result, 'site');
-                        })
+                        });
                     });
-
 
                     $('#wc_menu').click(function () {
                         switch ($('#wc_menu option:selected').val()) {
@@ -298,7 +293,7 @@ function create_all_things_init() {
                                         basename: $('#wc_prefix').val(),
                                         number: $('#wc_number').val(),
                                         groupId: $('#wc_sites').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var wc = new WebContent();
@@ -320,7 +315,7 @@ function create_all_things_init() {
                                         number: $('#wc_number').val(),
                                         groupId: $('#wc_sites').val(),
                                         version_number: $('#wc_versions').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var wc = new WebContent();
@@ -328,8 +323,7 @@ function create_all_things_init() {
 
                                         wc.createWebContent(obj, createWebContentWithDiffVersion);
                                     }
-
-                                })
+                                });
 
                                 break;
 
@@ -345,7 +339,7 @@ function create_all_things_init() {
                         var site = new Sites();
                         site.getSitesByCompanyId(result.companyId, null, function (result) {
                             appendOptionToSelection($('#document_sites'), result, 'site');
-                        })
+                        });
                     });
 
                     $('#document_menu').click(function () {
@@ -359,7 +353,7 @@ function create_all_things_init() {
                                         basename: $('#document_prefix').val(),
                                         number: $('#documents_number').val(),
                                         groupId: $('#document_sites').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var dm = new Documents();
@@ -382,7 +376,7 @@ function create_all_things_init() {
                                         number: $('#documents_number').val(),
                                         groupId: $('#document_sites').val(),
                                         version_number: $('#dm_versions').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var dm = new Documents();
@@ -390,8 +384,7 @@ function create_all_things_init() {
 
                                         dm.createDocument(obj, createDocumentWithDiffVersion);
                                     }
-
-                                })
+                                });
 
                                 break;
 
@@ -407,7 +400,7 @@ function create_all_things_init() {
                         var site = new Sites();
                         site.getSitesByCompanyId(result.companyId, null, function (result) {
                             appendOptionToSelection($('#mb_sites'), result, 'site');
-                        })
+                        });
                     });
 
                     $('#mb_menu').click(function () {
@@ -424,7 +417,7 @@ function create_all_things_init() {
                                         basename: $('#mb_prefix').val(),
                                         number: $('#mb_number').val(),
                                         groupId: $('#mb_sites').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var thread = new MBThread();
@@ -432,7 +425,6 @@ function create_all_things_init() {
 
                                         thread.createMBTreadOnRoot(obj);
                                     }
-
                                 });
 
                                 break;
@@ -440,14 +432,14 @@ function create_all_things_init() {
                             case '2':
                                 $('#mb_sites').click(function () {
                                     var category = new MBCategory();
-                                    category.getCategoryBySiteId({groupId: $(this).val()}, function (result) {
+                                    category.getCategoryBySiteId({ groupId: $(this).val() }, function (result) {
                                         appendOptionToSelection($('#mb_category'), result, 'category_mb');
                                     });
                                 });
 
                                 $('#mb_sites').trigger('click');
 
-                                hide_all_panels($('.mb_3'))
+                                hide_all_panels($('.mb_3'));
                                 panel_show_slow($('.mb_2'));
 
                                 $start.unbind('click');
@@ -459,7 +451,7 @@ function create_all_things_init() {
                                         number: $('#mb_number').val(),
                                         groupId: $('#mb_sites').val(),
                                         categoryId: $('#mb_category').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var thread = new MBThread();
@@ -467,7 +459,6 @@ function create_all_things_init() {
 
                                         thread.createMBTreadOnCategory(obj);
                                     }
-
                                 });
 
                                 break;
@@ -492,7 +483,7 @@ function create_all_things_init() {
                                                 number: $('#mb_number').val(),
                                                 c_number: $('#mb_category_number').val(),
                                                 groupId: $('#mb_sites').val()
-                                            }
+                                            };
 
                                             for (var i = 1; i <= obj.c_number; i++) {
                                                 var category = new MBCategory();
@@ -506,10 +497,10 @@ function create_all_things_init() {
                                                             payload.categoryId = result.categoryId;
                                                             thread.createMBTreadOnCategory(payload);
                                                         }
-                                                    })
+                                                    });
                                                 })(i);
                                             }
-                                        })
+                                        });
                                     });
                                 });
                                 break;
@@ -527,7 +518,7 @@ function create_all_things_init() {
                         var site = new Sites();
                         site.getSitesByCompanyId(result.companyId, null, function (result) {
                             appendOptionToSelection($('#wiki_sites'), result, 'site');
-                        })
+                        });
                     });
 
                     $('#wiki_menu').click(function () {
@@ -537,7 +528,7 @@ function create_all_things_init() {
 
                                 $('#wiki_sites').click(function () {
                                     var wikiNode = new WikiNode();
-                                    wikiNode.getWikiNode({groupId: $(this).val()}, function (result) {
+                                    wikiNode.getWikiNode({ groupId: $(this).val() }, function (result) {
                                         appendOptionToSelection($('#wiki_nodes'), result, 'wiki');
                                     });
                                 });
@@ -553,7 +544,7 @@ function create_all_things_init() {
                                         number: $('#wiki_number').val(),
                                         groupId: $('#wiki_sites').val(),
                                         nodeId: $('#wiki_nodes').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var wiki = new WikiPage();
@@ -561,9 +552,7 @@ function create_all_things_init() {
 
                                         wiki.createWikiPage(obj);
                                     }
-
                                 });
-
 
                                 break;
 
@@ -582,7 +571,7 @@ function create_all_things_init() {
                                         n_number: $('#wikinode_number').val(),
                                         groupId: $('#wiki_sites').val(),
                                         nodeId: $('#wiki_nodes').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.n_number; i++) {
                                         var wikiNode = new WikiNode();
@@ -599,7 +588,6 @@ function create_all_things_init() {
                                             });
                                         })(i);
                                     }
-
                                 });
 
                                 break;
@@ -627,7 +615,7 @@ function create_all_things_init() {
                                         c_basename: $('#category_prefix').val(),
                                         v_number: $('#vocabulary_number').val(),
                                         c_number: $('#category_number').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.v_number; i++) {
                                         var vocabulary = new Vocabulary();
@@ -640,12 +628,9 @@ function create_all_things_init() {
                                                     var category = new Category();
                                                     category.createCategory(payload);
                                                 }
-                                            })
+                                            });
                                         })(i);
-
                                     }
-
-
                                 });
 
                                 break;
@@ -661,7 +646,7 @@ function create_all_things_init() {
                                     var obj = {
                                         basename: $('#tag_prefix').val(),
                                         number: $('#tag_number').val()
-                                    }
+                                    };
 
                                     for (var i = 1; i <= obj.number; i++) {
                                         var tag = new Tag();
@@ -677,11 +662,11 @@ function create_all_things_init() {
                     $('#tag_category_menu').trigger('click');
                     break;
 
-                default :
+                default:
                     break;
             }
         });
-    })
+    });
 }
 
 function createWebContentWithDiffVersion(result, payload) {
@@ -708,21 +693,20 @@ function createDocumentWithDiffVersion(result, payload) {
 function appendOptionToSelection($select, obj, type) {
     $select.empty();
 
-    if (!obj)
-        return 0;
+    if (!obj) return 0;
 
     for (var e in obj) {
         switch (type) {
             case 'site':
-                var $option = $('<option value="' + obj[e].groupId + '">' + obj[e].friendlyURL + '</option>')
+                var $option = $('<option value="' + obj[e].groupId + '">' + obj[e].friendlyURL + '</option>');
                 break;
             case 'org':
-                var $option = $('<option value="' + obj[e].organizationId + '">' + obj[e].name + '</option>')
+                var $option = $('<option value="' + obj[e].organizationId + '">' + obj[e].name + '</option>');
                 break;
             case 'category_mb':
-                var $option = $('<option value="' + obj[e].categoryId + '">' + obj[e].name + '</option>')
+                var $option = $('<option value="' + obj[e].categoryId + '">' + obj[e].name + '</option>');
             case 'wiki':
-                var $option = $('<option value="' + obj[e].nodeId + '">' + obj[e].name + '</option>')
+                var $option = $('<option value="' + obj[e].nodeId + '">' + obj[e].name + '</option>');
         }
 
         $select.append($option);
@@ -749,31 +733,25 @@ function invoke(method, payload, log, callback) {
                 $('#editor').val(temp + JSON.stringify(result, null, 4));
             }
 
-            if (callback)
-                callback(result, payload);
+            if (callback) callback(result, payload);
         });
-    })
-
-
+    });
 }
 
 function inactive_all_field($e) {
     $e.each(function () {
-        $(this).removeClass('active')
+        $(this).removeClass('active');
     });
 }
 
 function hide_all_panels($e) {
     $e.each(function () {
         $(this).hide();
-    })
+    });
 }
 
 function panel_show_slow($e, callback) {
     $e.each(function () {
         $(this).show('slow', callback);
-    })
+    });
 }
-
-
-

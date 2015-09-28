@@ -1,3 +1,5 @@
+'use strict';
+
 define(function (require, exports) {
     var $ = require('jquery');
     var comment = require('comment');
@@ -5,11 +7,11 @@ define(function (require, exports) {
 
     var default_qar_obj = {
         server_master: '',
-        server_61:'',
+        server_61: '',
         db: '',
         x61: '',
         x62: '',
-        master:''
+        master: ''
     };
 
     var properties = {
@@ -38,8 +40,8 @@ define(function (require, exports) {
                     }
                 }
 
-                chromeUtil.setLocalStorage({'qar_obj': obj}, function () {
-                    console.log("Initiate fixpack obj to %o successfully.", obj)
+                chromeUtil.setLocalStorage({ 'qar_obj': obj }, function () {
+                    console.log("Initiate fixpack obj to %o successfully.", obj);
                 });
             } else {
                 //initiate UI
@@ -66,17 +68,16 @@ define(function (require, exports) {
                 $("input #qa-r").keyup(function () {
                     var id = $(this).attr('id');
                     obj[id] = $(this).val();
-                    chromeUtil.setLocalStorage({"parameter_qar": obj}, function () {
-                        console.log("Change Parameter_qar obj to %o", obj)
-                    })
+                    chromeUtil.setLocalStorage({ "parameter_qar": obj }, function () {
+                        console.log("Change Parameter_qar obj to %o", obj);
+                    });
                 });
-            }
-            else {
+            } else {
                 var parameter_qar = default_qar_obj;
 
-                chromeUtil.setLocalStorage({"parameter_qar": parameter_qar}, function () {
-                    console.log("Init Parameter_qar %o successfully", parameter_qar)
-                })
+                chromeUtil.setLocalStorage({ "parameter_qar": parameter_qar }, function () {
+                    console.log("Init Parameter_qar %o successfully", parameter_qar);
+                });
             }
         });
     };

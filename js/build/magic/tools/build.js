@@ -1,4 +1,6 @@
-var span=$('.issueaction-create-subtask span:eq(0)');
+'use strict';
+
+var span = $('.issueaction-create-subtask span:eq(0)');
 span.click();
 
 setTimeout(function () {

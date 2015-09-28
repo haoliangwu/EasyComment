@@ -1,3 +1,5 @@
+'use strict';
+
 define(function (require, exports) {
     var $ = require('jquery');
     var React = require('react');
@@ -24,11 +26,17 @@ define(function (require, exports) {
         });
     };
 
-    var MagicButton = React.createClass({displayName: "MagicButton",
-        render: function () {
-            return (
-                React.createElement("div", {class: "col-xs-3"}, 
-                    React.createElement("button", {id: "mb_c", className: "btn btn-default"}, "Multiple Browsers")
+    var MagicButton = React.createClass({
+        displayName: 'MagicButton',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                { 'class': 'col-xs-3' },
+                React.createElement(
+                    'button',
+                    { id: 'mb_c', className: 'btn btn-default' },
+                    'Multiple Browsers'
                 )
             );
         }
@@ -45,8 +53,13 @@ define(function (require, exports) {
     //    }
     //});
 
-    exports.MagicBox = (React.createElement("div", {class: "col-xs-3"}, 
-        React.createElement("button", {id: "mb_c", className: "btn btn-default"}, "Multiple Browsers")
-    ))
+    exports.MagicBox = React.createElement(
+        'div',
+        { 'class': 'col-xs-3' },
+        React.createElement(
+            'button',
+            { id: 'mb_c', className: 'btn btn-default' },
+            'Multiple Browsers'
+        )
+    );
 });
-

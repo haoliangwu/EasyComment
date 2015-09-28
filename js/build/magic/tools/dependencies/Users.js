@@ -1,3 +1,5 @@
+'use strict';
+
 function Users() {
     this.form_62x = {
         companyId: '20155',
@@ -29,7 +31,7 @@ function Users() {
 };
 
 Users.prototype = {
-    createBasicUser_62x: function (obj) {
+    createBasicUser_62x: function createBasicUser_62x(obj) {
         var name = obj.name;
         var roleId = obj.roleId;
         var siteId = obj.siteId;
@@ -39,49 +41,44 @@ Users.prototype = {
         this.form_62x.emailAddress = name + '@liferay.com';
         this.form_62x.firstName = name;
 
-        if (roleId != '' && roleId)
-            this.form_62x.roleIds = roleId;
+        if (roleId != '' && roleId) this.form_62x.roleIds = roleId;
 
-        if (siteId != '' && siteId)
-            this.form_62x.groupIds = siteId;
+        if (siteId != '' && siteId) this.form_62x.groupIds = siteId;
 
-        if (orgId != '' && orgId)
-            this.form_62x.organizationIds = orgId;
+        if (orgId != '' && orgId) this.form_62x.organizationIds = orgId;
 
         invoke('/user/add-user', this.form_62x, true);
     },
 
-    getUesrByScreenName: function (obj, callback) {
+    getUesrByScreenName: function getUesrByScreenName(obj, callback) {
         var payload = {
             companyId: obj.companyId,
             screenName: obj.screenName
-        }
+        };
 
-        invoke('/user/get-user-by-screen-name', payload, false, callback)
-
+        invoke('/user/get-user-by-screen-name', payload, false, callback);
     },
 
-    getUsersByCompanyId: function(obj,callback) {
-        var payload={
+    getUsersByCompanyId: function getUsersByCompanyId(obj, callback) {
+        var payload = {
             companyId: obj.companyId,
             start: -1,
             end: -1
-        }
+        };
 
         invoke('/user/get-company-users', payload, false, callback);
     }
-}
+};
 
 function UsersGroups() {}
 
 UsersGroups.prototype = {
-    assignUsers: function (obj) {
-        var payload={
+    assignUsers: function assignUsers(obj) {
+        var payload = {
             userGroupId: obj.userGroupId,
             userIds: obj.userIds
-        }
+        };
 
-        invoke('/user/add-user-group-users', payload,true)
+        invoke('/user/add-user-group-users', payload, true);
     }
-}
-
+};

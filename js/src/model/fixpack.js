@@ -4,7 +4,7 @@ define(function (require, exports) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var default_fp_obj = {
-        portal_branch: '6.2.10 EE SP12',
+        portal_branch: '6.2.10 EE SP13',
         isRegressionStyle: false
     };
 

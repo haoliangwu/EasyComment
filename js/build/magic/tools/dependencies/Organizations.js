@@ -1,3 +1,5 @@
+'use strict';
+
 function Organizations() {
     this.form_62x = {
         parentOrganizationId: 0,
@@ -9,26 +11,24 @@ function Organizations() {
         statusId: 12017,
         comments: '',
         site: false
-    }
+    };
 }
 
 Organizations.prototype.createBasicOrgs = function (obj) {
-    var name=obj.name;
-    var parentId=obj.parentId;
+    var name = obj.name;
+    var parentId = obj.parentId;
 
     this.form_62x.name = name;
 
-    if (parentId != '' && parentId)
-        this.form_62x.parentOrganizationId = parentId;
+    if (parentId != '' && parentId) this.form_62x.parentOrganizationId = parentId;
 
     invoke('/organization/add-organization', this.form_62x, true);
 };
 
 Organizations.prototype.getOrgsByCompanyId = function (companyId, parentOrganizationId, callback) {
     invoke('/organization/get-organizations', {
-            companyId: companyId,
-            parentOrganizationId: parentOrganizationId ? parentOrganizationId : 0,
-            site: true
-        }, false, callback
-    );
+        companyId: companyId,
+        parentOrganizationId: parentOrganizationId ? parentOrganizationId : 0,
+        site: true
+    }, false, callback);
 };

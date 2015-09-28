@@ -1,10 +1,12 @@
+'use strict';
+
 define(function (require, exports, module) {
 
     var $ = require('jquery');
 
     var count = 1;
 
-    exports.description=function() {
+    exports.description = function () {
         var steps = {
             'part1': '',
             'part2': '',
@@ -14,12 +16,12 @@ define(function (require, exports, module) {
         var results = {
             'actual': '',
             'expected': ''
-        }
+        };
 
         var notes = {
             'note': '',
             'log': ''
-        }
+        };
 
         $('#magic_de').show();
         $('#magic_submit').click(function () {
@@ -30,7 +32,6 @@ define(function (require, exports, module) {
 
             var template = magic_template_de(steps, results, notes);
             $('#editor').val(template);
-
         });
 
         $('#steps_macro button').each(function () {
@@ -40,27 +41,21 @@ define(function (require, exports, module) {
                 var button_html = $(this).text();
 
                 if (count > 3) {
-                    alert('The max number initial parts is 3.')
-                }
-                else {
+                    alert('The max number initial parts is 3.');
+                } else {
                     $('#init_part' + count).show();
                     $('#init_part' + count).append('<span class="text-warning">' + count + '. ' + button_html + '</span>');
                     switch ($(this).attr('id')) {
                         case 'init_1':
-                            steps['part' + count] = '# Start up portal with no errors.\n' +
-                                '# Login by default admin User Test.\n';
+                            steps['part' + count] = '# Start up portal with no errors.\n' + '# Login by default admin User Test.\n';
                             count++;
                             break;
                         case 'init_2':
-                            steps['part' + count] = '# Go to Admin > Control Panel > Sites.\n' +
-                                '# Click Add > Blank Site and add a site named \'Site1\'\n' +
-                                '# Go to Site1 Admin Page and add a public page named \'page1\'\n';
+                            steps['part' + count] = '# Go to Admin > Control Panel > Sites.\n' + '# Click Add > Blank Site and add a site named \'Site1\'\n' + '# Go to Site1 Admin Page and add a public page named \'page1\'\n';
                             count++;
                             break;
                         case 'init_3':
-                            steps['part' + count] = '# Go to Admin > Control panel > Users and Organizations.\n' +
-                                '# Add User named \'Test1\'' +
-                                '# Click User Test1 and Assign it to liferay.com.\n';
+                            steps['part' + count] = '# Go to Admin > Control panel > Users and Organizations.\n' + '# Add User named \'Test1\'' + '# Click User Test1 and Assign it to liferay.com.\n';
                             count++;
                             break;
                         case 'init_4':
@@ -87,13 +82,11 @@ define(function (require, exports, module) {
                             count == 1;
                             reconstructSteps(steps);
                             break;
-                        default :
+                        default:
                             break;
                     }
                 }
-
             });
-
         });
 
         $('#init_others').change(function () {
@@ -101,9 +94,8 @@ define(function (require, exports, module) {
             var button_html = $('#init_others').find('option:selected').text();
 
             if (count > 3) {
-                alert('The max number initial parts is 3.')
-            }
-            else {
+                alert('The max number initial parts is 3.');
+            } else {
                 var type = $(this).val();
 
                 $('#init_part' + count).show();
@@ -117,14 +109,12 @@ define(function (require, exports, module) {
                         steps['part' + count] = '';
                         count++;
                         break;
-                    default :
+                    default:
                         break;
                 }
             }
-
-        })
-
-    }
+        });
+    };
 
     function magic_template_de(steps, results, notes) {
         var steps_title = '*Steps to reproduce:*\n\n';
@@ -141,16 +131,14 @@ define(function (require, exports, module) {
 
         expected_title += results.expected + '\n';
 
-
         if (notes.note != '') {
             note_title += notes.note + '\n';
-            expected_title += ('\n' + note_title);
-            actual_title += ('\n' + expected_title);
-            steps_title += ('\n' + actual_title);
-
+            expected_title += '\n' + note_title;
+            actual_title += '\n' + expected_title;
+            steps_title += '\n' + actual_title;
         } else {
-            actual_title += ('\n' + expected_title);
-            steps_title += ('\n' + actual_title);
+            actual_title += '\n' + expected_title;
+            steps_title += '\n' + actual_title;
         }
 
         return steps_title;
@@ -159,12 +147,10 @@ define(function (require, exports, module) {
     function reconstructSteps(steps) {
         $('#steps_init div[class="col-xs-4"]').each(function () {
             $(this).empty();
-        })
+        });
 
         steps.part1 = '';
         steps.part2 = '';
         steps.part3 = '';
-
-
     }
-})
+});
