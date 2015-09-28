@@ -28,7 +28,6 @@ define(function (require) {
         custom.init();
         qar.init();
         fixpack.init();
-        magic.init();
 
         chromeUtil.getLocalStorage('team', function (result) {
             if (result.team) {
@@ -54,7 +53,7 @@ define(function (require) {
         }
     })
 
-    //React.render(
-    //    <PopupBox />, document.getElementById('_main')
-    //);
+    React.render(
+        <PopupBox />, document.getElementById('_main')
+    );
 });

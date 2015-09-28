@@ -1,52 +1,71 @@
 define(function (require, exports) {
-    var $ = require('jquery');
     var React = require('react');
 
-    exports.init = function () {
-        $('#mb_c').click(function () {
-            window.open("/options.html?magic=" + 'mb', window);
-        });
+    //UI module
+    var buttons = [
+        {
+            id: 'mb',
+            name: 'Multiple Browsers',
+            rows: 3
+        },
+        {
+            id: 'ct',
+            name: 'Custom Tables',
+            rows: 3
+        },
+        {
+            id: 'de',
+            name: 'Descriptions',
+            rows: 2
+        },
+        {
+            id: 'other',
+            name: 'Other Tools',
+            rows: 2
+        },
+        {
+            id: 'ei',
+            name: 'Export/Import',
+            rows: 2
+        }
+    ];
 
-        $('#other_c').click(function () {
-            window.open("/options.html?magic=" + 'other', window);
-        });
 
-        $('#ct_c').click(function () {
-            window.open("/options.html?magic=" + 'ct', window);
-        });
-
-        $('#de_c').click(function () {
-            window.open("/options.html?magic=" + 'de', window);
-        });
-
-        $('#export_import').click(function () {
-            window.open("/options.html?magic=" + 'ei', window);
-        });
-    };
-
+    //React Components
     var MagicButton = React.createClass({
+        buttonRedirect: function () {
+            var redirectURL = '/options.html?magic=';
+
+            window.open(redirectURL+this.props.magic.id);
+        },
+
         render: function () {
             return (
-                <div class="col-xs-3">
-                    <button id="mb_c" className="btn btn-default">Multiple Browsers</button>
+                <div className={'col-xs-'+this.props.magic.rows}>
+                    <button id={this.props.magic.id} className="btn btn-default"
+                            onClick={this.buttonRedirect}>{this.props.magic.name}</button>
                 </div>
             );
         }
     });
 
-    //exports.MagicBox = React.createClass({
-    //    render: function () {
-    //        return (
-    //            <div className="row">
-    //                <p>Magic</p>
-    //                <MagicButton />
-    //            </div>
-    //        );
-    //    }
-    //});
+    var MagicButtonBox = React.createClass({
+        render: function () {
+            var temp = [];
 
-    exports.MagicBox = (<div class="col-xs-3">
-        <button id="mb_c" className="btn btn-default">Multiple Browsers</button>
-    </div>)
+            Array.prototype.forEach.call(this.props.buttons, function (c) {
+                temp.push(<MagicButton magic={c} key={c.id}/>)
+            });
+
+            return (
+                <div className="row">
+                    <p>Magic</p>
+                    {temp}
+                </div>
+            );
+        }
+    });
+
+    exports.MagicBox = <MagicButtonBox buttons={buttons}/>;
 });
 

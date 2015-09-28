@@ -28,7 +28,6 @@ define(function (require) {
         custom.init();
         qar.init();
         fixpack.init();
-        magic.init();
 
         chromeUtil.getLocalStorage('team', function (result) {
             if (result.team) {
