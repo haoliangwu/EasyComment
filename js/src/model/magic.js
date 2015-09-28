@@ -30,13 +30,12 @@ define(function (require, exports) {
         }
     ];
 
-
     //React Components
     var MagicButton = React.createClass({
         buttonRedirect: function () {
             var redirectURL = '/options.html?magic=';
 
-            window.open(redirectURL+this.props.magic.id);
+            window.open(redirectURL + this.props.magic.id);
         },
 
         render: function () {
@@ -58,14 +57,19 @@ define(function (require, exports) {
             });
 
             return (
-                <div className="row">
-                    <p>Magic</p>
+                <div>
                     {temp}
                 </div>
             );
+
         }
     });
 
-    exports.MagicBox = <MagicButtonBox buttons={buttons}/>;
+    exports.MagicBox = (
+        <div className="row">
+            <p>Magic</p>
+            <MagicButtonBox buttons={buttons}/>
+        </div>
+    );
 });
 

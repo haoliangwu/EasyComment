@@ -62,16 +62,20 @@ define(function (require, exports) {
 
             return React.createElement(
                 'div',
-                { className: 'row' },
-                React.createElement(
-                    'p',
-                    null,
-                    'Magic'
-                ),
+                null,
                 temp
             );
         }
     });
 
-    exports.MagicBox = React.createElement(MagicButtonBox, { buttons: buttons });
+    exports.MagicBox = React.createElement(
+        'div',
+        { className: 'row' },
+        React.createElement(
+            'p',
+            null,
+            'Magic'
+        ),
+        React.createElement(MagicButtonBox, { buttons: buttons })
+    );
 });

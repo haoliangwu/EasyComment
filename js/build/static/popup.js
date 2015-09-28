@@ -42,6 +42,96 @@ define(function (require) {
         });
     });
 
+    var TeamBox = React.createClass({
+        displayName: 'TeamBox',
+
+        handleSwitch: function handleSwitch(e) {
+            var element = e.target;
+            var fixpack = React.findDOMNode(this.refs.fixpack);
+            var qar = React.findDOMNode(this.refs.qar);
+
+            if ($(element).text() == 'Fix Pack') {
+                $(fixpack).addClass('active');
+                $(qar).removeClass('active');
+            } else {
+                $(qar).addClass('active');
+                $(fixpack).removeClass('active');
+            }
+        },
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    null,
+                    'Team Setting'
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'row' },
+                    React.createElement(
+                        'div',
+                        { className: 'col-xs-3 col-xs-offset-3' },
+                        React.createElement(
+                            'button',
+                            { className: 'btn btn-default btn-block active', ref: 'fixpack', onClick: this.handleSwitch },
+                            'Fix Pack'
+                        )
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'col-xs-3' },
+                        React.createElement(
+                            'button',
+                            { className: 'btn btn-default btn-block', ref: 'qar', onClick: this.handleSwitch },
+                            'QA-R'
+                        )
+                    )
+                )
+            );
+        }
+    });
+
+    var BasicCommentBox = React.createClass({
+        displayName: 'BasicCommentBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(TeamBox, null),
+                React.createElement(
+                    'div',
+                    null,
+                    'this is basic'
+                )
+            );
+        }
+    });
+
+    var CustomCommentBox = React.createClass({
+        displayName: 'CustomCommentBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    null,
+                    'Custom Comment List'
+                ),
+                React.createElement(
+                    'div',
+                    null,
+                    'this is custom'
+                )
+            );
+        }
+    });
+
     var PopupBox = React.createClass({
         displayName: 'PopupBox',
 
@@ -49,7 +139,9 @@ define(function (require) {
             return React.createElement(
                 'div',
                 { id: 'popupBox', className: 'container-fluid' },
-                magic.MagicBox
+                magic.MagicBox,
+                React.createElement(BasicCommentBox, null),
+                React.createElement(CustomCommentBox, null)
             );
         }
     });

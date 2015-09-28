@@ -2,6 +2,7 @@ define(function (require, exports) {
     var $ = require('jquery');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
+    var React = require('react');
 
     var default_fp_obj = {
         portal_branch: '6.2.10 EE SP13',
@@ -104,4 +105,45 @@ define(function (require, exports) {
     exports.hidePanel = function (speed) {
         $(properties.table_selector).hide(speed);
     };
+
+    //React Components
+    var IsRregression = React.createClass({
+        render: function () {
+            return (
+                <div>test</div>
+            );
+        }
+    });
+
+    var PortalVersion = React.createClass({
+        render: function () {
+            return (
+                <div>test</div>
+            );
+        }
+    });
+
+    var ParametersBox = React.createClass({
+        render: function () {
+            return (
+                <div>test</div>
+            );
+        }
+    });
+
+    var CommentListBox = React.createClass({
+        render: function () {
+            return (
+                <div>test</div>
+            );
+        }
+    });
+
+    exports.FixPackBox = (
+        <div className="row">
+            <p>Basic Comment List</p>
+            <ParametersBox />
+            <CommentListBox />
+        </div>
+    );
 });
