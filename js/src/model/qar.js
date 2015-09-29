@@ -6,11 +6,11 @@ define(function (require, exports) {
 
     var default_qar_obj = {
         server_master: '',
-        server_61:'',
+        server_61: '',
         db: '',
         x61: '',
         x62: '',
-        master:''
+        master: ''
     };
 
     var properties = {
@@ -103,10 +103,62 @@ define(function (require, exports) {
         }
     });
 
-    var CommentListBox = React.createClass({
+    var QARCommentListBox = React.createClass({
+        getInitialState: function () {
+            return {rows: []};
+        },
+
+        componentWillMount: function () {
+            var template = comment.templates_qar;
+
+            chromeUtil.getLocalStorageSync("qar_obj")
+                .then(function (err, result) {
+                    var e;
+                    var rows = [];
+
+                    if (!result) {
+                        var obj = {};
+
+                        for (e in template) {
+                            if (template.hasOwnProperty(e)) {
+                                obj[e] = {
+                                    id: e,
+                                    key: e,
+                                    des: comment.descriptions_qar[e],
+                                    template: template[e]
+                                };
+                            }
+                        }
+
+                        chromeUtil.setLocalStorage({'qar_obj': obj}, function () {
+                            console.log("Initiate qa-r obj to %o successfully.", obj)
+                        });
+                    } else {
+                        for (e in result) {
+                            if (result.hasOwnProperty(e)) {
+                                rows.push(result[e])
+                            }
+                        }
+
+                        this.setState({rows: rows});
+                    }
+                }.bind(this));
+        },
+
         render: function () {
             return (
-                <div>This is QA-R List Box</div>
+                <div className="smartkey">
+                    <table id="qar_basic" className="table table-striped table-condensed">
+                        <tbody>
+                        <tr>
+                            <th className="one">Smart Key</th>
+                            <th className="two">Description</th>
+                            <th className="three">To Do</th>
+                        </tr>
+                        {comment.CommentRowBox(this.state.rows, 'qar')}
+                        </tbody>
+                    </table>
+                </div>
             );
         }
     });
@@ -115,7 +167,7 @@ define(function (require, exports) {
         <div className="row">
             <p>QA-R Comment List</p>
             <ParametersBox />
-            <CommentListBox team='qar'/>
+            <QARCommentListBox />
         </div>
     );
 });

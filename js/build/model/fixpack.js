@@ -178,15 +178,16 @@ define(function (require, exports) {
             return { rows: [] };
         },
 
-        getRows: function getRows() {
+        componentWillMount: function componentWillMount() {
             var template = comment.templates_fp;
 
-            chromeUtil.getLocalStorage("fp_obj", (function (result) {
+            chromeUtil.getLocalStorageSync("fp_obj").then((function (err, result) {
                 var e;
                 var rows = [];
 
-                if (!result.fp_obj) {
+                if (!result) {
                     var obj = {};
+
                     for (e in template) {
                         if (template.hasOwnProperty(e)) {
                             obj[e] = {
@@ -202,10 +203,8 @@ define(function (require, exports) {
                         console.log("Initiate fixpack obj to %o successfully.", obj);
                     });
                 } else {
-                    //initiate UI
-                    for (e in result.fp_obj) {
-                        //create element
-                        if (result.fp_obj.hasOwnProperty(e)) rows.push(result.fp_obj[e]);
+                    for (e in result) {
+                        if (result.hasOwnProperty(e)) rows.push(result[e]);
                     }
 
                     this.setState({ rows: rows });
@@ -214,7 +213,6 @@ define(function (require, exports) {
         },
 
         render: function render() {
-            chromeUtil.getLocalStorage("fp_obj", this.getRows);
             return React.createElement(
                 'div',
                 { className: 'smartkey' },

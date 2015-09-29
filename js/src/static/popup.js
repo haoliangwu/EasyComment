@@ -74,7 +74,7 @@ define(function (require) {
             }
         },
 
-        componentDidMount: function () {
+        componentWillMount: function () {
             chromeUtil.getLocalStorage('team', function (result) {
                 if (result.team) {
                     if (result.team == 'fp') {

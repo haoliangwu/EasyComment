@@ -21,3 +21,10 @@ seajs.config({
 
 seajs.use('build/static/popup');
 
+var warn = console.warn;
+console.warn = function(warning) {
+    if (/(setState)/.test(warning)) {
+        throw new Error(warning);
+    }
+    warn.apply(console, arguments);
+};

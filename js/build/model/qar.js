@@ -108,14 +108,81 @@ define(function (require, exports) {
         }
     });
 
-    var CommentListBox = React.createClass({
-        displayName: 'CommentListBox',
+    var QARCommentListBox = React.createClass({
+        displayName: 'QARCommentListBox',
+
+        getInitialState: function getInitialState() {
+            return { rows: [] };
+        },
+
+        componentWillMount: function componentWillMount() {
+            var template = comment.templates_qar;
+
+            chromeUtil.getLocalStorageSync("qar_obj").then((function (err, result) {
+                var e;
+                var rows = [];
+
+                if (!result) {
+                    var obj = {};
+
+                    for (e in template) {
+                        if (template.hasOwnProperty(e)) {
+                            obj[e] = {
+                                id: e,
+                                key: e,
+                                des: comment.descriptions_qar[e],
+                                template: template[e]
+                            };
+                        }
+                    }
+
+                    chromeUtil.setLocalStorage({ 'qar_obj': obj }, function () {
+                        console.log("Initiate qa-r obj to %o successfully.", obj);
+                    });
+                } else {
+                    for (e in result) {
+                        if (result.hasOwnProperty(e)) {
+                            rows.push(result[e]);
+                        }
+                    }
+
+                    this.setState({ rows: rows });
+                }
+            }).bind(this));
+        },
 
         render: function render() {
             return React.createElement(
                 'div',
-                null,
-                'This is QA-R List Box'
+                { className: 'smartkey' },
+                React.createElement(
+                    'table',
+                    { id: 'qar_basic', className: 'table table-striped table-condensed' },
+                    React.createElement(
+                        'tbody',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'th',
+                                { className: 'one' },
+                                'Smart Key'
+                            ),
+                            React.createElement(
+                                'th',
+                                { className: 'two' },
+                                'Description'
+                            ),
+                            React.createElement(
+                                'th',
+                                { className: 'three' },
+                                'To Do'
+                            )
+                        ),
+                        comment.CommentRowBox(this.state.rows, 'qar')
+                    )
+                )
             );
         }
     });
@@ -129,6 +196,6 @@ define(function (require, exports) {
             'QA-R Comment List'
         ),
         React.createElement(ParametersBox, null),
-        React.createElement(CommentListBox, { team: 'qar' })
+        React.createElement(QARCommentListBox, null)
     );
 });

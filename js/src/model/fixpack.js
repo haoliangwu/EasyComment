@@ -153,47 +153,46 @@ define(function (require, exports) {
 
     var FixPackCommentListBox = React.createClass({
         getInitialState: function () {
-            return {rows: []}
+            return {rows: []};
         },
 
-        getRows: function () {
+        componentWillMount: function () {
             var template = comment.templates_fp;
 
-            chromeUtil.getLocalStorage("fp_obj", function (result) {
-                var e;
-                var rows = [];
+            chromeUtil.getLocalStorageSync("fp_obj")
+                .then(function (err, result) {
+                    var e;
+                    var rows = [];
 
-                if (!result.fp_obj) {
-                    var obj = {};
-                    for (e in template) {
-                        if (template.hasOwnProperty(e)) {
-                            obj[e] = {
-                                id: e,
-                                key: e,
-                                des: comment.descriptions_fp[e],
-                                template: template[e]
-                            };
+                    if (!result) {
+                        var obj = {};
+
+                        for (e in template) {
+                            if (template.hasOwnProperty(e)) {
+                                obj[e] = {
+                                    id: e,
+                                    key: e,
+                                    des: comment.descriptions_fp[e],
+                                    template: template[e]
+                                };
+                            }
                         }
-                    }
 
-                    chromeUtil.setLocalStorage({'fp_obj': obj}, function () {
-                        console.log("Initiate fixpack obj to %o successfully.", obj)
-                    });
-                } else {
-                    //initiate UI
-                    for (e in result.fp_obj) {
-                        //create element
-                        if (result.fp_obj.hasOwnProperty(e))
-                            rows.push(result.fp_obj[e])
-                    }
+                        chromeUtil.setLocalStorage({'fp_obj': obj}, function () {
+                            console.log("Initiate fixpack obj to %o successfully.", obj)
+                        });
+                    } else {
+                        for (e in result) {
+                            if (result.hasOwnProperty(e))
+                                rows.push(result[e])
+                        }
 
-                    this.setState({rows: rows});
-                }
-            }.bind(this));
+                        this.setState({rows: rows});
+                    }
+                }.bind(this));
         },
 
         render: function () {
-            chromeUtil.getLocalStorage("fp_obj", this.getRows);
             return (
                 <div className="smartkey">
                     <table id="fp_basic" className="table table-striped table-condensed">
