@@ -218,13 +218,13 @@ define(function (require, exports) {
                     'td',
                     null,
                     React.createElement('input', { id: this.props.rows.id + '_key', type: 'text', className: 'table_input one_input',
-                        placeholder: 'smartkey', ref: 'smartkey', value: this.props.rows.key })
+                        placeholder: 'smartkey', ref: 'smartkey', defaultValue: this.props.rows.key })
                 ),
                 React.createElement(
                     'td',
                     null,
                     React.createElement('input', { id: this.props.rows.id + '_d', type: 'text', className: 'table_input two_input',
-                        placeholder: 'description', ref: 'description', value: this.props.rows.des })
+                        placeholder: 'description', ref: 'description', defaultValue: this.props.rows.des })
                 ),
                 React.createElement(
                     'td',

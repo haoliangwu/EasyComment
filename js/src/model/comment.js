@@ -281,11 +281,11 @@ define(function (require, exports) {
                 <tr>
                     <td>
                         <input id={this.props.rows.id+'_key'} type="text" className="table_input one_input"
-                               placeholder="smartkey" ref='smartkey' value={this.props.rows.key}/>
+                               placeholder="smartkey" ref='smartkey' defaultValue={this.props.rows.key}/>
                     </td>
                     <td>
                         <input id={this.props.rows.id+'_d'} type="text" className="table_input two_input"
-                               placeholder="description" ref='description' value={this.props.rows.des}/>
+                               placeholder="description" ref='description' defaultValue={this.props.rows.des}/>
                     </td>
                     <td>
                         <button type="button" value="save" className=" three_input btn btn-default btn-xs" onClick={this.handleSave}>Save</button>

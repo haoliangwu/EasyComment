@@ -1,7 +1,7 @@
 $(document).ready(function () {
     bindToComment('#comment', function (result) {
         if (!result.team) {
-            setLocalStorage({'team': 'fixpack'}, function () {
+            setLocalStorage({'team': 'fp'}, function () {
                 console.log("Easy Comment initialize team to %s successfully.", 'fixpack');
             });
         }
@@ -9,7 +9,7 @@ $(document).ready(function () {
             if (result.team == 'qar') {
                 alert("Your team setting is QA-R,but the current page is Fix Pack sub-task page, please set team to Fix Pack.")
             }
-            else if (result.team == 'fixpack') {
+            else if (result.team == 'fp') {
 
                 getLocalStorage("parameter_fp", function (result) {
                     var obj = result.parameter_fp;

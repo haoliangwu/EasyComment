@@ -6,7 +6,7 @@ $(document).ready(function () {
             });
         }
         else {
-            if (result.team == 'fixpack') {
+            if (result.team == 'fp') {
                 alert("Your team setting is fixpack,but the current page is qa-r LPS page, please set team to qa-r.");
             }
             else if (result.team == 'qar') {
