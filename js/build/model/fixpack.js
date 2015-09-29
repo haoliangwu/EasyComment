@@ -137,7 +137,7 @@ define(function (require, exports) {
             return React.createElement(
                 'div',
                 null,
-                'test'
+                'Fix Pack ParameterBox'
             );
         }
     });
@@ -149,20 +149,20 @@ define(function (require, exports) {
             return React.createElement(
                 'div',
                 null,
-                'test'
+                'This is FixPack List Box'
             );
         }
     });
 
-    exports.FixPackBox = React.createElement(
+    exports.FixPackCommentListBox = React.createElement(
         'div',
         { className: 'row' },
         React.createElement(
             'p',
             null,
-            'Basic Comment List'
+            'Fix Pack Comment List'
         ),
         React.createElement(ParametersBox, null),
-        React.createElement(CommentListBox, null)
+        React.createElement(CommentListBox, { team: 'fixpack' })
     );
 });

@@ -1,5 +1,6 @@
 define(function (require, exports) {
     var $ = require('jquery');
+    var React = require('react');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
@@ -92,4 +93,29 @@ define(function (require, exports) {
     exports.hidePanel = function (speed) {
         $(properties.table_selector).hide(speed);
     };
+
+    //UI Module
+    var ParametersBox = React.createClass({
+        render: function () {
+            return (
+                <div>QA-R ParameterBox</div>
+            );
+        }
+    });
+
+    var CommentListBox = React.createClass({
+        render: function () {
+            return (
+                <div>This is QA-R List Box</div>
+            );
+        }
+    });
+
+    exports.QARCommentListBox = (
+        <div className="row">
+            <p>QA-R Comment List</p>
+            <ParametersBox />
+            <CommentListBox team='qar'/>
+        </div>
+    );
 });

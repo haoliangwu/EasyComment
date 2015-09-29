@@ -2,6 +2,10 @@
 
 define(function (require, exports) {
     var $ = require('jquery');
+    var React = require('react');
+    var custom = require('custom');
+    var fixpack = require('fixpack');
+    var qar = require('qar');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     //fix pack templates metadata
@@ -169,5 +173,18 @@ define(function (require, exports) {
                 window.open("/options.html?id=" + obj.id + "&team=" + team, 'window');
             });
         });
+    };
+
+    //UI Module
+    var CommentListBox = React.createClass({
+        displayName: 'CommentListBox',
+
+        render: function render() {
+            if (this.props.team == 'fixpack') return fixpack.FixPackCommentListBox;else if (this.props.team == 'qar') return qar.QARCommentListBox;else return custom.CustomCommentListBox;
+        }
+    });
+
+    exports.CommentBox = function (team) {
+        return React.createElement(CommentListBox, { team: team });
     };
 });

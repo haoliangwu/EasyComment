@@ -126,7 +126,7 @@ define(function (require, exports) {
     var ParametersBox = React.createClass({
         render: function () {
             return (
-                <div>test</div>
+                <div>Fix Pack ParameterBox</div>
             );
         }
     });
@@ -134,16 +134,16 @@ define(function (require, exports) {
     var CommentListBox = React.createClass({
         render: function () {
             return (
-                <div>test</div>
+                <div>This is FixPack List Box</div>
             );
         }
     });
 
-    exports.FixPackBox = (
+    exports.FixPackCommentListBox = (
         <div className="row">
-            <p>Basic Comment List</p>
+            <p>Fix Pack Comment List</p>
             <ParametersBox />
-            <CommentListBox />
+            <CommentListBox team='fixpack'/>
         </div>
     );
 });

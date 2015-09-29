@@ -1,5 +1,6 @@
 define(function (require, exports) {
     var $ = require('jquery');
+    var React = require('react');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
@@ -37,4 +38,29 @@ define(function (require, exports) {
             });
         });
     };
+
+    //UI Module
+    var ParametersBox = React.createClass({
+        render: function () {
+            return (
+                <div>Custom ParameterBox</div>
+            );
+        }
+    });
+
+    var CommentListBox = React.createClass({
+        render: function () {
+            return (
+                <div>This is custom List Box</div>
+            );
+        }
+    });
+
+    exports.CustomCommentListBox = (
+        <div className="row">
+            <p>Custom Comment List</p>
+            <ParametersBox />
+            <CommentListBox team='custom'/>
+        </div>
+    );
 });

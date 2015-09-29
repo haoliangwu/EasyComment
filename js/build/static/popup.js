@@ -5,6 +5,7 @@ define(function (require) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var React = require('react');
 
+    var comment = require('comment');
     var custom = require('custom');
     var fixpack = require('fixpack');
     var qar = require('qar');
@@ -51,9 +52,11 @@ define(function (require) {
             var qar = React.findDOMNode(this.refs.qar);
 
             if ($(element).text() == 'Fix Pack') {
+                this.props.switchTeam({ team: 'fixpack' });
                 $(fixpack).addClass('active');
                 $(qar).removeClass('active');
             } else {
+                this.props.switchTeam({ team: 'qar' });
                 $(qar).addClass('active');
                 $(fixpack).removeClass('active');
             }
@@ -76,7 +79,8 @@ define(function (require) {
                         { className: 'col-xs-3 col-xs-offset-3' },
                         React.createElement(
                             'button',
-                            { className: 'btn btn-default btn-block active', ref: 'fixpack', onClick: this.handleSwitch },
+                            { className: 'btn btn-default btn-block active', ref: 'fixpack',
+                                onClick: this.handleSwitch },
                             'Fix Pack'
                         )
                     ),
@@ -97,16 +101,22 @@ define(function (require) {
     var BasicCommentBox = React.createClass({
         displayName: 'BasicCommentBox',
 
+        getInitialState: function getInitialState() {
+            return {
+                team: 'fixpack'
+            };
+        },
+
+        switchTeam: function switchTeam(state) {
+            this.setState(state);
+        },
+
         render: function render() {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(TeamBox, null),
-                React.createElement(
-                    'div',
-                    null,
-                    'this is basic'
-                )
+                React.createElement(TeamBox, { switchTeam: this.switchTeam, team: this.state.team }),
+                comment.CommentBox(this.state.team)
             );
         }
     });
@@ -118,16 +128,7 @@ define(function (require) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Custom Comment List'
-                ),
-                React.createElement(
-                    'div',
-                    null,
-                    'this is custom'
-                )
+                comment.CommentBox('custom')
             );
         }
     });

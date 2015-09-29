@@ -2,6 +2,7 @@
 
 define(function (require, exports) {
     var $ = require('jquery');
+    var React = require('react');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
@@ -93,4 +94,41 @@ define(function (require, exports) {
     exports.hidePanel = function (speed) {
         $(properties.table_selector).hide(speed);
     };
+
+    //UI Module
+    var ParametersBox = React.createClass({
+        displayName: 'ParametersBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'QA-R ParameterBox'
+            );
+        }
+    });
+
+    var CommentListBox = React.createClass({
+        displayName: 'CommentListBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'This is QA-R List Box'
+            );
+        }
+    });
+
+    exports.QARCommentListBox = React.createElement(
+        'div',
+        { className: 'row' },
+        React.createElement(
+            'p',
+            null,
+            'QA-R Comment List'
+        ),
+        React.createElement(ParametersBox, null),
+        React.createElement(CommentListBox, { team: 'qar' })
+    );
 });

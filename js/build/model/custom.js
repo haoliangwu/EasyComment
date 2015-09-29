@@ -2,6 +2,7 @@
 
 define(function (require, exports) {
     var $ = require('jquery');
+    var React = require('react');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
@@ -38,4 +39,41 @@ define(function (require, exports) {
             });
         });
     };
+
+    //UI Module
+    var ParametersBox = React.createClass({
+        displayName: 'ParametersBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'Custom ParameterBox'
+            );
+        }
+    });
+
+    var CommentListBox = React.createClass({
+        displayName: 'CommentListBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                null,
+                'This is custom List Box'
+            );
+        }
+    });
+
+    exports.CustomCommentListBox = React.createElement(
+        'div',
+        { className: 'row' },
+        React.createElement(
+            'p',
+            null,
+            'Custom Comment List'
+        ),
+        React.createElement(ParametersBox, null),
+        React.createElement(CommentListBox, { team: 'custom' })
+    );
 });

@@ -3,6 +3,7 @@ define(function (require) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var React = require('react');
 
+    var comment = require('comment');
     var custom = require('custom');
     var fixpack = require('fixpack');
     var qar = require('qar');
@@ -50,10 +51,12 @@ define(function (require) {
             var qar = React.findDOMNode(this.refs.qar);
 
             if ($(element).text() == 'Fix Pack') {
+                this.props.switchTeam({team: 'fixpack'});
                 $(fixpack).addClass('active');
                 $(qar).removeClass('active');
             }
             else {
+                this.props.switchTeam({team: 'qar'});
                 $(qar).addClass('active');
                 $(fixpack).removeClass('active');
             }
@@ -66,7 +69,8 @@ define(function (require) {
 
                     <div className="row">
                         <div className="col-xs-3 col-xs-offset-3">
-                            <button className="btn btn-default btn-block active" ref='fixpack' onClick={this.handleSwitch}>Fix
+                            <button className="btn btn-default btn-block active" ref='fixpack'
+                                    onClick={this.handleSwitch}>Fix
                                 Pack
                             </button>
                         </div>
@@ -80,13 +84,24 @@ define(function (require) {
         }
     });
 
+
+
     var BasicCommentBox = React.createClass({
+        getInitialState: function () {
+            return {
+                team: 'fixpack'
+            }
+        },
+
+        switchTeam: function (state) {
+            this.setState(state)
+        },
+
         render: function () {
             return (
                 <div>
-                    <TeamBox/>
-
-                    <div>this is basic</div>
+                    <TeamBox switchTeam={this.switchTeam} team={this.state.team}/>
+                    {comment.CommentBox(this.state.team)}
                 </div>
             );
         }
@@ -96,9 +111,7 @@ define(function (require) {
         render: function () {
             return (
                 <div>
-                    <p>Custom Comment List</p>
-
-                    <div>this is custom</div>
+                    {comment.CommentBox('custom')}
                 </div>
             );
         }
