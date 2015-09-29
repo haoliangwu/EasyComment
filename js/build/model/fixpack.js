@@ -4,6 +4,7 @@ define(function (require, exports) {
     var $ = require('jquery');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
+    var promise = require('promise');
     var React = require('react');
 
     var default_fp_obj = {
@@ -45,7 +46,8 @@ define(function (require, exports) {
                 //initiate UI
                 for (e in result.fp_obj) {
                     //create element
-                    if (result.fp_obj.hasOwnProperty(e)) comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
+                    //if (result.fp_obj.hasOwnProperty(e))
+                    //    comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
                 }
             }
         });
@@ -112,8 +114,20 @@ define(function (require, exports) {
         render: function render() {
             return React.createElement(
                 'div',
-                null,
-                'test'
+                { className: 'col-sm-4' },
+                'Regression Style:',
+                React.createElement(
+                    'strong',
+                    null,
+                    'YES'
+                ),
+                React.createElement('input', { type: 'radio', name: 'regression', value: 'y' }),
+                React.createElement(
+                    'strong',
+                    null,
+                    'NO'
+                ),
+                React.createElement('input', { type: 'radio', name: 'regression', value: 'n' })
             );
         }
     });
@@ -124,8 +138,22 @@ define(function (require, exports) {
         render: function render() {
             return React.createElement(
                 'div',
-                null,
-                'test'
+                { className: 'col-sm-5 col-sm-offset-3' },
+                'Portal Version:',
+                React.createElement(
+                    'select',
+                    null,
+                    React.createElement(
+                        'option',
+                        { value: '6.2.10 EE SP13' },
+                        '6.2.10 EE SP13'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: '6.1.30 EE GA3 SP4' },
+                        '6.1.30 EE GA3 SP4'
+                    )
+                )
             );
         }
     });
@@ -136,33 +164,101 @@ define(function (require, exports) {
         render: function render() {
             return React.createElement(
                 'div',
-                null,
-                'Fix Pack ParameterBox'
+                { className: 'row' },
+                React.createElement(IsRregression, null),
+                React.createElement(PortalVersion, null)
             );
         }
     });
 
-    var CommentListBox = React.createClass({
-        displayName: 'CommentListBox',
+    var FixPackCommentListBox = React.createClass({
+        displayName: 'FixPackCommentListBox',
+
+        getInitialState: function getInitialState() {
+            return { rows: [] };
+        },
+
+        getRows: function getRows() {
+            var template = comment.templates_fp;
+
+            chromeUtil.getLocalStorage("fp_obj", (function (result) {
+                var e;
+                var rows = [];
+
+                if (!result.fp_obj) {
+                    var obj = {};
+                    for (e in template) {
+                        if (template.hasOwnProperty(e)) {
+                            obj[e] = {
+                                id: e,
+                                key: e,
+                                des: comment.descriptions_fp[e],
+                                template: template[e]
+                            };
+                        }
+                    }
+
+                    chromeUtil.setLocalStorage({ 'fp_obj': obj }, function () {
+                        console.log("Initiate fixpack obj to %o successfully.", obj);
+                    });
+                } else {
+                    //initiate UI
+                    for (e in result.fp_obj) {
+                        //create element
+                        if (result.fp_obj.hasOwnProperty(e)) rows.push(result.fp_obj[e]);
+                    }
+
+                    this.setState({ rows: rows });
+                }
+            }).bind(this));
+        },
 
         render: function render() {
+            chromeUtil.getLocalStorage("fp_obj", this.getRows);
             return React.createElement(
                 'div',
-                null,
-                'This is FixPack List Box'
+                { className: 'smartkey' },
+                React.createElement(
+                    'table',
+                    { id: 'fp_basic', className: 'table table-striped table-condensed' },
+                    React.createElement(
+                        'tbody',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'th',
+                                { className: 'one' },
+                                'Smart Key'
+                            ),
+                            React.createElement(
+                                'th',
+                                { className: 'two' },
+                                'Description'
+                            ),
+                            React.createElement(
+                                'th',
+                                { className: 'three' },
+                                'To Do'
+                            )
+                        ),
+                        comment.CommentRowBox(this.state.rows, 'fp')
+                    )
+                )
             );
         }
     });
 
     exports.FixPackCommentListBox = React.createElement(
         'div',
-        { className: 'row' },
+        { id: 'fixpack', className: 'row' },
         React.createElement(
             'p',
             null,
             'Fix Pack Comment List'
         ),
         React.createElement(ParametersBox, null),
-        React.createElement(CommentListBox, { team: 'fixpack' })
+        React.createElement(FixPackCommentListBox, null)
     );
 });

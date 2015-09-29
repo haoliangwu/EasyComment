@@ -2,6 +2,7 @@ define(function (require, exports) {
     var $ = require('jquery');
     var comment = require('comment');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
+    var promise = require('promise');
     var React = require('react');
 
     var default_fp_obj = {
@@ -43,8 +44,8 @@ define(function (require, exports) {
                 //initiate UI
                 for (e in result.fp_obj) {
                     //create element
-                    if (result.fp_obj.hasOwnProperty(e))
-                        comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
+                    //if (result.fp_obj.hasOwnProperty(e))
+                    //    comment.initSmartKeyEntry(result.fp_obj[e], '#fp_basic', 'fp');
                 }
             }
         });
@@ -110,7 +111,13 @@ define(function (require, exports) {
     var IsRregression = React.createClass({
         render: function () {
             return (
-                <div>test</div>
+                <div className="col-sm-4">
+                    Regression Style:
+                    <strong>YES</strong>
+                    <input type="radio" name="regression" value="y"/>
+                    <strong>NO</strong>
+                    <input type="radio" name="regression" value="n"/>
+                </div>
             );
         }
     });
@@ -118,7 +125,17 @@ define(function (require, exports) {
     var PortalVersion = React.createClass({
         render: function () {
             return (
-                <div>test</div>
+                <div className="col-sm-5 col-sm-offset-3">
+                    Portal Version:
+                    <select>
+                        <option value="6.2.10 EE SP13">
+                            6.2.10 EE SP13
+                        </option>
+                        <option value="6.1.30 EE GA3 SP4">
+                            6.1.30 EE GA3 SP4
+                        </option>
+                    </select>
+                </div>
             );
         }
     });
@@ -126,24 +143,79 @@ define(function (require, exports) {
     var ParametersBox = React.createClass({
         render: function () {
             return (
-                <div>Fix Pack ParameterBox</div>
+                <div className='row'>
+                    <IsRregression/>
+                    <PortalVersion/>
+                </div>
             );
         }
     });
 
-    var CommentListBox = React.createClass({
+    var FixPackCommentListBox = React.createClass({
+        getInitialState: function () {
+            return {rows: []}
+        },
+
+        getRows: function () {
+            var template = comment.templates_fp;
+
+            chromeUtil.getLocalStorage("fp_obj", function (result) {
+                var e;
+                var rows = [];
+
+                if (!result.fp_obj) {
+                    var obj = {};
+                    for (e in template) {
+                        if (template.hasOwnProperty(e)) {
+                            obj[e] = {
+                                id: e,
+                                key: e,
+                                des: comment.descriptions_fp[e],
+                                template: template[e]
+                            };
+                        }
+                    }
+
+                    chromeUtil.setLocalStorage({'fp_obj': obj}, function () {
+                        console.log("Initiate fixpack obj to %o successfully.", obj)
+                    });
+                } else {
+                    //initiate UI
+                    for (e in result.fp_obj) {
+                        //create element
+                        if (result.fp_obj.hasOwnProperty(e))
+                            rows.push(result.fp_obj[e])
+                    }
+
+                    this.setState({rows: rows});
+                }
+            }.bind(this));
+        },
+
         render: function () {
+            chromeUtil.getLocalStorage("fp_obj", this.getRows);
             return (
-                <div>This is FixPack List Box</div>
+                <div className="smartkey">
+                    <table id="fp_basic" className="table table-striped table-condensed">
+                        <tbody>
+                        <tr>
+                            <th className="one">Smart Key</th>
+                            <th className="two">Description</th>
+                            <th className="three">To Do</th>
+                        </tr>
+                        {comment.CommentRowBox(this.state.rows, 'fp')}
+                        </tbody>
+                    </table>
+                </div>
             );
         }
     });
 
     exports.FixPackCommentListBox = (
-        <div className="row">
+        <div id='fixpack' className="row">
             <p>Fix Pack Comment List</p>
             <ParametersBox />
-            <CommentListBox team='fixpack'/>
+            <FixPackCommentListBox />
         </div>
     );
 });

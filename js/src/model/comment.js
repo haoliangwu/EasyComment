@@ -244,11 +244,63 @@ define(function (require, exports) {
     };
 
     //UI Module
+    var CommentRowBox = React.createClass({
+        handleSave:function() {
+            var team=this.props.team;
+            var id=this.props.rows.id;
+
+            var smartkey=React.findDOMNode(this.refs.smartkey);
+            var description = React.findDOMNode(this.refs.description);
+            var cc_obj = {
+                id: id,
+                key: $(smartkey).val(),
+                des: $(description).val(),
+                template: ''
+            };
+
+            chromeUtil.getLocalStorage(team + '_obj', function (result) {
+                var custom_obj = result[team + '_obj'];
+                cc_obj.template = custom_obj[id].template;
+                custom_obj[id] = cc_obj;
+
+                var temp = {};
+                temp[team + '_obj'] = custom_obj;
+
+                chromeUtil.setLocalStorage(temp, function () {
+                    console.log("Change %s obj to %o successfully.", team, cc_obj);
+                });
+            });
+        },
+
+        handleMore:function() {
+            window.open("/options.html?id=" + this.props.rows.id + "&team=" + this.props.team);
+        },
+
+        render: function () {
+            return (
+                <tr>
+                    <td>
+                        <input id={this.props.rows.id+'_key'} type="text" className="table_input one_input"
+                               placeholder="smartkey" ref='smartkey' value={this.props.rows.key}/>
+                    </td>
+                    <td>
+                        <input id={this.props.rows.id+'_d'} type="text" className="table_input two_input"
+                               placeholder="description" ref='description' value={this.props.rows.des}/>
+                    </td>
+                    <td>
+                        <button type="button" value="save" className=" three_input btn btn-default btn-xs" onClick={this.handleSave}>Save</button>
+                        <button type="button" value="more" className=" three_input btn btn-info btn-xs" onClick={this.handleMore}>More</button>
+                    </td>
+                </tr>
+            )
+        }
+    });
+
     var CommentListBox = React.createClass({
         render: function () {
-            if (this.props.team == 'fixpack')
+            if (this.props.team == 'fp')
                 return (fixpack.FixPackCommentListBox);
-            else if(this.props.team == 'qar')
+            else if (this.props.team == 'qar')
                 return (qar.QARCommentListBox);
             else
                 return (custom.CustomCommentListBox);
@@ -257,6 +309,16 @@ define(function (require, exports) {
 
     exports.CommentBox = function (team) {
         return (<CommentListBox team={team}/>)
-    }
+    };
+
+    exports.CommentRowBox = function (rows, team) {
+        var temp = [];
+
+        rows.forEach(function (c,i) {
+            temp.push(<CommentRowBox key={i} rows={c} team={team}/>);
+        });
+
+        return temp;
+    };
 });
 

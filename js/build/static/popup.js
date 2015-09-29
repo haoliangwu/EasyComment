@@ -4,7 +4,7 @@ define(function (require) {
     var $ = require('jquery');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var React = require('react');
-
+    var promise = require('promise');
     var comment = require('comment');
     var custom = require('custom');
     var fixpack = require('fixpack');
@@ -26,9 +26,9 @@ define(function (require) {
             }
         });
 
-        custom.init();
-        qar.init();
-        fixpack.init();
+        //custom.init();
+        //qar.init();
+        //fixpack.init();
 
         chromeUtil.getLocalStorage('team', function (result) {
             if (result.team) {
@@ -36,7 +36,7 @@ define(function (require) {
                 $(".team select").val(result.team);
             } else {
                 //if the first time to initiated, set team to fixpack as default option
-                chromeUtil.setLocalStorage({ "team": "fixpack" }, function () {
+                chromeUtil.setLocalStorage({ "team": "fp" }, function () {
                     console.log("Init team to %s and Init setting", "fixpack");
                 });
             }
@@ -46,20 +46,48 @@ define(function (require) {
     var TeamBox = React.createClass({
         displayName: 'TeamBox',
 
-        handleSwitch: function handleSwitch(e) {
-            var element = e.target;
+        showFixPack: function showFixPack() {
             var fixpack = React.findDOMNode(this.refs.fixpack);
             var qar = React.findDOMNode(this.refs.qar);
 
+            this.props.switchTeam({ team: 'fp' });
+            $(fixpack).addClass('active');
+            $(qar).removeClass('active');
+        },
+
+        showQAR: function showQAR() {
+            var fixpack = React.findDOMNode(this.refs.fixpack);
+            var qar = React.findDOMNode(this.refs.qar);
+
+            this.props.switchTeam({ team: 'qar' });
+            $(qar).addClass('active');
+            $(fixpack).removeClass('active');
+        },
+
+        handleSwitch: function handleSwitch(e) {
+            var element = e.target;
+
             if ($(element).text() == 'Fix Pack') {
-                this.props.switchTeam({ team: 'fixpack' });
-                $(fixpack).addClass('active');
-                $(qar).removeClass('active');
+                this.showFixPack();
             } else {
-                this.props.switchTeam({ team: 'qar' });
-                $(qar).addClass('active');
-                $(fixpack).removeClass('active');
+                this.showQAR();
             }
+        },
+
+        componentDidMount: function componentDidMount() {
+            chromeUtil.getLocalStorage('team', (function (result) {
+                if (result.team) {
+                    if (result.team == 'fp') {
+                        this.showFixPack();
+                    } else {
+                        this.showQAR();
+                    }
+                } else {
+                    chromeUtil.setLocalStorage({ "team": "fp" }, function () {
+                        console.log("Init team to %s and Init setting", "fp");
+                    });
+                }
+            }).bind(this));
         },
 
         render: function render() {
@@ -69,7 +97,9 @@ define(function (require) {
                 React.createElement(
                     'p',
                     null,
-                    'Team Setting'
+                    'Team Setting(Current is ',
+                    this.props.team == 'fp' ? 'Fix Pack' : 'QA-R',
+                    ')'
                 ),
                 React.createElement(
                     'div',
@@ -98,17 +128,26 @@ define(function (require) {
         }
     });
 
+    var MagicBox = React.createClass({
+        displayName: 'MagicBox',
+
+        render: function render() {
+            return magic.MagicBox;
+        }
+    });
+
     var BasicCommentBox = React.createClass({
         displayName: 'BasicCommentBox',
 
-        getInitialState: function getInitialState() {
-            return {
-                team: 'fixpack'
-            };
-        },
-
         switchTeam: function switchTeam(state) {
             this.setState(state);
+            chromeUtil.setLocalStorage(state, function () {
+                console.log("Change team to %o.", state);
+            });
+        },
+
+        getInitialState: function getInitialState() {
+            return { team: 'fp' };
         },
 
         render: function render() {
@@ -140,7 +179,7 @@ define(function (require) {
             return React.createElement(
                 'div',
                 { id: 'popupBox', className: 'container-fluid' },
-                magic.MagicBox,
+                React.createElement(MagicBox, null),
                 React.createElement(BasicCommentBox, null),
                 React.createElement(CustomCommentBox, null)
             );

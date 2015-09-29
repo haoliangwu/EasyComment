@@ -176,15 +176,93 @@ define(function (require, exports) {
     };
 
     //UI Module
+    var CommentRowBox = React.createClass({
+        displayName: 'CommentRowBox',
+
+        handleSave: function handleSave() {
+            var team = this.props.team;
+            var id = this.props.rows.id;
+
+            var smartkey = React.findDOMNode(this.refs.smartkey);
+            var description = React.findDOMNode(this.refs.description);
+            var cc_obj = {
+                id: id,
+                key: $(smartkey).val(),
+                des: $(description).val(),
+                template: ''
+            };
+
+            chromeUtil.getLocalStorage(team + '_obj', function (result) {
+                var custom_obj = result[team + '_obj'];
+                cc_obj.template = custom_obj[id].template;
+                custom_obj[id] = cc_obj;
+
+                var temp = {};
+                temp[team + '_obj'] = custom_obj;
+
+                chromeUtil.setLocalStorage(temp, function () {
+                    console.log("Change %s obj to %o successfully.", team, cc_obj);
+                });
+            });
+        },
+
+        handleMore: function handleMore() {
+            window.open("/options.html?id=" + this.props.rows.id + "&team=" + this.props.team);
+        },
+
+        render: function render() {
+            return React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement('input', { id: this.props.rows.id + '_key', type: 'text', className: 'table_input one_input',
+                        placeholder: 'smartkey', ref: 'smartkey', value: this.props.rows.key })
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement('input', { id: this.props.rows.id + '_d', type: 'text', className: 'table_input two_input',
+                        placeholder: 'description', ref: 'description', value: this.props.rows.des })
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement(
+                        'button',
+                        { type: 'button', value: 'save', className: ' three_input btn btn-default btn-xs', onClick: this.handleSave },
+                        'Save'
+                    ),
+                    React.createElement(
+                        'button',
+                        { type: 'button', value: 'more', className: ' three_input btn btn-info btn-xs', onClick: this.handleMore },
+                        'More'
+                    )
+                )
+            );
+        }
+    });
+
     var CommentListBox = React.createClass({
         displayName: 'CommentListBox',
 
         render: function render() {
-            if (this.props.team == 'fixpack') return fixpack.FixPackCommentListBox;else if (this.props.team == 'qar') return qar.QARCommentListBox;else return custom.CustomCommentListBox;
+            if (this.props.team == 'fp') return fixpack.FixPackCommentListBox;else if (this.props.team == 'qar') return qar.QARCommentListBox;else return custom.CustomCommentListBox;
         }
     });
 
     exports.CommentBox = function (team) {
         return React.createElement(CommentListBox, { team: team });
+    };
+
+    exports.CommentRowBox = function (rows, team) {
+        var temp = [];
+
+        rows.forEach(function (c, i) {
+            temp.push(React.createElement(CommentRowBox, { key: i, rows: c, team: team }));
+        });
+
+        return temp;
     };
 });
