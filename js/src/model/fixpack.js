@@ -113,10 +113,10 @@ define(function (require, exports) {
             return (
                 <div className="col-sm-4">
                     Regression Style:
-                    <strong>YES</strong>
-                    <input type="radio" name="regression" value="y"/>
-                    <strong>NO</strong>
-                    <input type="radio" name="regression" value="n"/>
+                    <input type="radio" id="sex_0" value="y" name="is_regression"
+                           defaultChecked={this.props.isRegression}/> YES
+                    <input type="radio" id="sex_1" value="n" name="is_regression"
+                           defaultChecked={!this.props.isRegression}/> NO
                 </div>
             );
         }
@@ -127,7 +127,7 @@ define(function (require, exports) {
             return (
                 <div className="col-sm-5 col-sm-offset-3">
                     Portal Version:
-                    <select>
+                    <select ref='portal_version'>
                         <option value="6.2.10 EE SP13">
                             6.2.10 EE SP13
                         </option>
@@ -137,15 +137,23 @@ define(function (require, exports) {
                     </select>
                 </div>
             );
+        },
+
+        componentDidMount: function () {
+            var portal_version = React.findDOMNode(this.refs.portal_version);
+            console.log(this.props.portal_version)
+            $(portal_version).val(this.props.portal_version);
         }
     });
 
     var ParametersBox = React.createClass({
         render: function () {
+            var parameter = this.props.parameter;
+
             return (
                 <div className='row'>
-                    <IsRregression/>
-                    <PortalVersion/>
+                    <IsRregression isRegression={parameter.isRegressionStyle}/>
+                    <PortalVersion portal_version={parameter.portal_branch}/>
                 </div>
             );
         }
@@ -153,11 +161,16 @@ define(function (require, exports) {
 
     var FixPackCommentListBox = React.createClass({
         getInitialState: function () {
-            return {rows: []};
+            return {
+                rows: [],
+                isRegressionStyle: false,
+                portal_branch: '6.2.10 EE SP13'
+            };
         },
 
         componentWillMount: function () {
             var template = comment.templates_fp;
+            var state = {};
 
             chromeUtil.getLocalStorageSync("fp_obj")
                 .then(function (err, result) {
@@ -187,7 +200,31 @@ define(function (require, exports) {
                                 rows.push(result[e])
                         }
 
-                        this.setState({rows: rows});
+                        state.rows = rows;
+                    }
+
+                    return chromeUtil.getLocalStorageSync("parameter_fp");
+                }.bind(this))
+                .then(function (err, result) {
+                    var default_fp_obj = {
+                        portal_branch: this.state.portal_branch,
+                        isRegressionStyle: this.state.isRegressionStyle
+                    };
+
+                    console.log('result' + result.portal_branch)
+
+                    if (result) {
+                        state.isRegressionStyle = result.isRegressionStyle;
+                        state.portal_branch = result.portal_branch;
+                        this.setState(state);
+                        console.log(this.state.portal_branch)
+                    }
+                    else {
+                        var parameter_fp = default_fp_obj;
+
+                        chromeUtil.setLocalStorage({"parameter_fp": parameter_fp}, function () {
+                            console.log("Init parameter_fp %o successfully", parameter_fp)
+                        })
                     }
                 }.bind(this));
         },
@@ -195,6 +232,10 @@ define(function (require, exports) {
         render: function () {
             return (
                 <div className="smartkey">
+                    <ParametersBox parameter={{
+                isRegressionStyle: this.state.isRegressionStyle,
+                portal_branch: this.state.portal_branch
+            }}/>
                     <table id="fp_basic" className="table table-striped table-condensed">
                         <tbody>
                         <tr>
@@ -213,7 +254,6 @@ define(function (require, exports) {
     exports.FixPackCommentListBox = (
         <div id='fixpack' className="row">
             <p>Fix Pack Comment List</p>
-            <ParametersBox />
             <FixPackCommentListBox />
         </div>
     );

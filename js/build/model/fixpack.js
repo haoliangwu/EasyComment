@@ -116,18 +116,12 @@ define(function (require, exports) {
                 'div',
                 { className: 'col-sm-4' },
                 'Regression Style:',
-                React.createElement(
-                    'strong',
-                    null,
-                    'YES'
-                ),
-                React.createElement('input', { type: 'radio', name: 'regression', value: 'y' }),
-                React.createElement(
-                    'strong',
-                    null,
-                    'NO'
-                ),
-                React.createElement('input', { type: 'radio', name: 'regression', value: 'n' })
+                React.createElement('input', { type: 'radio', id: 'sex_0', value: 'y', name: 'is_regression',
+                    defaultChecked: this.props.isRegression }),
+                ' YES',
+                React.createElement('input', { type: 'radio', id: 'sex_1', value: 'n', name: 'is_regression',
+                    defaultChecked: !this.props.isRegression }),
+                ' NO'
             );
         }
     });
@@ -142,7 +136,7 @@ define(function (require, exports) {
                 'Portal Version:',
                 React.createElement(
                     'select',
-                    null,
+                    { ref: 'portal_version' },
                     React.createElement(
                         'option',
                         { value: '6.2.10 EE SP13' },
@@ -155,6 +149,12 @@ define(function (require, exports) {
                     )
                 )
             );
+        },
+
+        componentDidMount: function componentDidMount() {
+            var portal_version = React.findDOMNode(this.refs.portal_version);
+            console.log(this.props.portal_version);
+            $(portal_version).val(this.props.portal_version);
         }
     });
 
@@ -162,11 +162,13 @@ define(function (require, exports) {
         displayName: 'ParametersBox',
 
         render: function render() {
+            var parameter = this.props.parameter;
+
             return React.createElement(
                 'div',
                 { className: 'row' },
-                React.createElement(IsRregression, null),
-                React.createElement(PortalVersion, null)
+                React.createElement(IsRregression, { isRegression: parameter.isRegressionStyle }),
+                React.createElement(PortalVersion, { portal_version: parameter.portal_branch })
             );
         }
     });
@@ -175,11 +177,16 @@ define(function (require, exports) {
         displayName: 'FixPackCommentListBox',
 
         getInitialState: function getInitialState() {
-            return { rows: [] };
+            return {
+                rows: [],
+                isRegressionStyle: false,
+                portal_branch: '6.2.10 EE SP13'
+            };
         },
 
         componentWillMount: function componentWillMount() {
             var template = comment.templates_fp;
+            var state = {};
 
             chromeUtil.getLocalStorageSync("fp_obj").then((function (err, result) {
                 var e;
@@ -207,7 +214,29 @@ define(function (require, exports) {
                         if (result.hasOwnProperty(e)) rows.push(result[e]);
                     }
 
-                    this.setState({ rows: rows });
+                    state.rows = rows;
+                }
+
+                return chromeUtil.getLocalStorageSync("parameter_fp");
+            }).bind(this)).then((function (err, result) {
+                var default_fp_obj = {
+                    portal_branch: this.state.portal_branch,
+                    isRegressionStyle: this.state.isRegressionStyle
+                };
+
+                console.log('result' + result.portal_branch);
+
+                if (result) {
+                    state.isRegressionStyle = result.isRegressionStyle;
+                    state.portal_branch = result.portal_branch;
+                    this.setState(state);
+                    console.log(this.state.portal_branch);
+                } else {
+                    var parameter_fp = default_fp_obj;
+
+                    chromeUtil.setLocalStorage({ "parameter_fp": parameter_fp }, function () {
+                        console.log("Init parameter_fp %o successfully", parameter_fp);
+                    });
                 }
             }).bind(this));
         },
@@ -216,6 +245,10 @@ define(function (require, exports) {
             return React.createElement(
                 'div',
                 { className: 'smartkey' },
+                React.createElement(ParametersBox, { parameter: {
+                        isRegressionStyle: this.state.isRegressionStyle,
+                        portal_branch: this.state.portal_branch
+                    } }),
                 React.createElement(
                     'table',
                     { id: 'fp_basic', className: 'table table-striped table-condensed' },
@@ -256,7 +289,6 @@ define(function (require, exports) {
             null,
             'Fix Pack Comment List'
         ),
-        React.createElement(ParametersBox, null),
         React.createElement(FixPackCommentListBox, null)
     );
 });

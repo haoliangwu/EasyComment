@@ -26,9 +26,9 @@ define(function (require) {
             }
         });
 
-        //custom.init();
-        //qar.init();
-        //fixpack.init();
+        custom.init();
+        qar.init();
+        fixpack.init();
 
         chromeUtil.getLocalStorage('team', function (result) {
             if (result.team) {
@@ -74,24 +74,6 @@ define(function (require) {
             }
         },
 
-        componentWillMount: function () {
-            chromeUtil.getLocalStorage('team', function (result) {
-                if (result.team) {
-                    if (result.team == 'fp') {
-                        this.showFixPack();
-                    }
-                    else {
-                        this.showQAR();
-                    }
-                }
-                else {
-                    chromeUtil.setLocalStorage({"team": "fp"}, function () {
-                        console.log("Init team to %s and Init setting", "fp");
-                    });
-                }
-            }.bind(this));
-        },
-
         render: function () {
             return (
                 <div>
@@ -111,6 +93,24 @@ define(function (require) {
                     </div>
                 </div>
             );
+        },
+
+        componentDidMount: function () {
+            chromeUtil.getLocalStorage('team', function (result) {
+                if (result.team) {
+                    if (result.team == 'fp') {
+                        this.showFixPack();
+                    }
+                    else {
+                        this.showQAR();
+                    }
+                }
+                else {
+                    chromeUtil.setLocalStorage({"team": "fp"}, function () {
+                        console.log("Init team to %s and Init setting", "fp");
+                    });
+                }
+            }.bind(this));
         }
     });
 
