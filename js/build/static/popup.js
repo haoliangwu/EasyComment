@@ -186,5 +186,7 @@ define(function (require) {
         }
     });
 
-    React.render(React.createElement(PopupBox, null), document.getElementById('_main'));
+    //React.render(
+    //    <PopupBox />, document.getElementById('_main')
+    //);
 });
