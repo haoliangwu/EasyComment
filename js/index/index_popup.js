@@ -19,5 +19,5 @@ seajs.config({
     }
 });
 
-seajs.use('build/static/popup');
+//seajs.use('build/static/popup');
 seajs.use('build/reactUI/popup/index');
