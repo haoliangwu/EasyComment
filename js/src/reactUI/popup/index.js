@@ -1,7 +1,8 @@
 define(function (require) {
     var React = require('react');
-    var $ = require('jquery')
+    var $ = require('jquery');
 
+    var promise = require('promise');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var magic = require('./component/magic');
@@ -10,6 +11,17 @@ define(function (require) {
 
     chromeUtil.getLocalStorageSync('team')
         .then(function (err, team) {
+            if (!team)
+                return chromeUtil.setLocalStorageSync({team: 'fp'});
+            else
+                return (function () {
+                    var p = new promise.Promise();
+                    p.done(null, team);
+                    return p;
+                })();
+        })
+        .then(function (err, team) {
+
             var MagicBox = React.createClass({
                 render: function () {
                     return (magic.MagicBox);
@@ -62,6 +74,10 @@ define(function (require) {
                         case 'qar':
                             temp = qar.QARBox();
                             break;
+                        default:
+                            temp = (
+                                <div>There is something wrong in Team Initiation.</div>
+                            )
                     }
 
                     return temp;
@@ -82,7 +98,7 @@ define(function (require) {
 
                     chromeUtil.setLocalStorage({"team": state.team}, function () {
                         console.log('Set Team to %s', state.team)
-                    })
+                    });
 
                     this.setState(state);
                 },

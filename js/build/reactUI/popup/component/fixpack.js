@@ -5,6 +5,7 @@ define(function (require, exports) {
 
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
+    var templates = require('comment');
     var comment = require('../../util/comment');
 
     var defaultPortalVersion = '6.2.10 EE SP13';
@@ -162,13 +163,11 @@ define(function (require, exports) {
             },
 
             componentDidMount: function componentDidMount() {
-                var template = comment.templates_fp;
-                var state = {};
+                var template = templates.templates_fp;
 
                 chromeUtil.getLocalStorageSync("fp_obj").then((function (err, result) {
                     var e;
                     var rows = [];
-
                     if (!result) {
                         var obj = {};
 
@@ -177,22 +176,24 @@ define(function (require, exports) {
                                 obj[e] = {
                                     id: e,
                                     key: e,
-                                    des: comment.descriptions_fp[e],
+                                    des: templates.descriptions_fp[e],
                                     template: template[e]
                                 };
+
+                                rows.push(obj[e]);
                             }
                         }
 
-                        chromeUtil.setLocalStorage({ 'fp_obj': obj }, function () {
+                        chromeUtil.setLocalStorage({ 'fp_obj': obj }, (function () {
                             console.log("Initiate fixpack obj to %o successfully.", obj);
-                        });
+                            this.setState({ rows: rows });
+                        }).bind(this));
                     } else {
                         for (e in result) {
                             if (result.hasOwnProperty(e)) rows.push(result[e]);
                         }
 
-                        state.rows = rows;
-                        this.setState(state);
+                        this.setState({ rows: rows });
                     }
                 }).bind(this));
             }

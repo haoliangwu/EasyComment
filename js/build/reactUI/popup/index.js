@@ -4,13 +4,21 @@ define(function (require) {
     var React = require('react');
     var $ = require('jquery');
 
+    var promise = require('promise');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var magic = require('./component/magic');
     var fixpack = require('./component/fixpack');
     var qar = require('./component/qar');
 
-    chromeUtil.getLocalStorageSync('team').then((function (err, team) {
+    chromeUtil.getLocalStorageSync('team').then(function (err, team) {
+        if (!team) return chromeUtil.setLocalStorageSync({ team: 'fp' });else return (function () {
+            var p = new promise.Promise();
+            p.done(null, team);
+            return p;
+        })();
+    }).then((function (err, team) {
+
         var MagicBox = React.createClass({
             displayName: 'MagicBox',
 
@@ -83,6 +91,12 @@ define(function (require) {
                     case 'qar':
                         temp = qar.QARBox();
                         break;
+                    default:
+                        temp = React.createElement(
+                            'div',
+                            null,
+                            'There is something wrong in Team Initiation.'
+                        );
                 }
 
                 return temp;
