@@ -80,6 +80,10 @@ define(function (require) {
                         state.team = 'qar';
                     }
 
+                    chromeUtil.setLocalStorage({"team": state.team}, function () {
+                        console.log('Set Team to %s', state.team)
+                    })
+
                     this.setState(state);
                 },
 
@@ -103,6 +107,13 @@ define(function (require) {
                             <BasicBox team={this.state.team}/>
                         </div>
                     );
+                },
+
+                componentDidMount: function () {
+                    chromeUtil.getLocalStorageSync('team')
+                        .then(function (err, team) {
+                            this.setState({team: team});
+                        }.bind(this))
                 }
             });
 

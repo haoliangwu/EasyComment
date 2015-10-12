@@ -3,11 +3,7 @@ define(function (require, exports) {
 
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
-    //model
     var comment = require('../../util/comment');
-
-    //ui
-
 
     var defaultPortalVersion = '6.2.10 EE SP13';
 
@@ -17,10 +13,10 @@ define(function (require, exports) {
                 return (
                     <div className="col-sm-4">
                         Regression Style:
-                        <input type="radio" id="sex_0" value="y" name="is_regression"
-                               defaultChecked={this.props.isRegression}/> YES
-                        <input type="radio" id="sex_1" value="n" name="is_regression"
-                               defaultChecked={!this.props.isRegression}/> NO
+                        <input type="radio" value="1" name="is_regression" ref='isReg_y'
+                               onChange={this.props.handleChecked} checked={this.props.isRegression}/> YES
+                        <input type="radio" value="0" name="is_regression" ref='isReg_n'
+                               onChange={this.props.handleChecked} checked={!this.props.isRegression}/> NO
                     </div>
                 );
             }
@@ -31,7 +27,8 @@ define(function (require, exports) {
                 return (
                     <div className="col-sm-5 col-sm-offset-3">
                         Portal Version:
-                        <select ref='portal_version' defaultValue={this.props.value}>
+                        <select ref='portal_version' value={this.props.portal_branch}
+                                onChange={this.props.handleChange}>
                             <option value="6.2.10 EE SP13">
                                 6.2.10 EE SP13
                             </option>
@@ -45,14 +42,79 @@ define(function (require, exports) {
         });
 
         var FixPackCommentTitleBox = React.createClass({
+            handleChecked: function (e) {
+                var value = Boolean(parseInt(e.target.value));
+
+                this.setState({isRegression: value});
+
+                chromeUtil.getLocalStorageSync('parameter_fp')
+                    .then(function (err, results) {
+                        results.isRegression = value;
+
+                        chromeUtil.setLocalStorage({"parameter_fp": results}, function () {
+                            console.log('Set fixpack parameter obj to %o', results)
+                        })
+                    })
+            },
+
+            handleChange: function (e) {
+                var value = e.target.value;
+
+                this.setState({portal_branch: value});
+
+                chromeUtil.getLocalStorageSync('parameter_fp')
+                    .then(function (err, results) {
+                        results.portal_branch = value;
+
+                        chromeUtil.setLocalStorage({"parameter_fp": results}, function () {
+                            console.log('Set fixpack parameter obj to %o', results)
+                        })
+                    })
+            },
+
+            getInitialState: function () {
+                return {
+                    isRegression: false,
+                    portal_branch: defaultPortalVersion
+                }
+            },
+
             render: function () {
                 return (
                     <div className='row'>
                         <p>Fix Pack Comment List</p>
-                        <IsRregression isRegression={this.props.setting.isRegression}/>
-                        <PortalVersion value={this.props.setting.value}/>
+                        <IsRregression isRegression={this.state.isRegression}
+                                       handleChecked={this.handleChecked}/>
+                        <PortalVersion portal_branch={this.state.portal_branch}
+                                       handleChange={this.handleChange}/>
+
                     </div>
                 )
+            },
+
+            componentDidMount: function () {
+                var state = {};
+
+                chromeUtil.getLocalStorageSync('parameter_fp')
+                    .then(function (err, result) {
+                        var default_fp_obj = {
+                            portal_branch: this.state.portal_branch,
+                            isRegressionStyle: this.state.isRegression
+                        };
+
+                        if (result) {
+                            state.isRegression = result.isRegression;
+                            state.portal_branch = result.portal_branch;
+                            this.setState(state);
+                        }
+                        else {
+                            var parameter_fp = default_fp_obj;
+
+                            chromeUtil.setLocalStorage({"parameter_fp": parameter_fp}, function () {
+                                console.log("Init parameter_fp %o successfully", parameter_fp)
+                            })
+                        }
+                    }.bind(this));
             }
         });
 
@@ -76,7 +138,7 @@ define(function (require, exports) {
             render: function () {
                 return (
                     <div className='row'>
-                        <FixPackCommentTitleBox setting={this.state.setting}/>
+                        <FixPackCommentTitleBox/>
                         {comment.CommentBox(this.props.team, this.state.rows)}
                     </div>
                 )
@@ -115,31 +177,12 @@ define(function (require, exports) {
                             }
 
                             state.rows = rows;
-                        }
-
-                        return chromeUtil.getLocalStorageSync("parameter_fp");
-                    }.bind(this))
-                    .then(function (err, result) {
-                        var default_fp_obj = {
-                            portal_branch: this.state.portal_branch,
-                            isRegressionStyle: this.state.isRegressionStyle
-                        };
-
-                        if (result) {
-                            state.isRegressionStyle = result.isRegressionStyle;
-                            state.portal_branch = result.portal_branch;
                             this.setState(state);
                         }
-                        else {
-                            var parameter_fp = default_fp_obj;
 
-                            chromeUtil.setLocalStorage({"parameter_fp": parameter_fp}, function () {
-                                console.log("Init parameter_fp %o successfully", parameter_fp)
-                            })
-                        }
                     }.bind(this));
             }
-        })
+        });
 
         return (
             <FixPackCommentListBox/>

@@ -102,6 +102,10 @@ define(function (require) {
                     state.team = 'qar';
                 }
 
+                chromeUtil.setLocalStorage({ "team": state.team }, function () {
+                    console.log('Set Team to %s', state.team);
+                });
+
                 this.setState(state);
             },
 
@@ -125,6 +129,12 @@ define(function (require) {
                     React.createElement(TeamBox, { team: this.state.team, handleSwitch: this.handleSwitchTeam }),
                     React.createElement(BasicBox, { team: this.state.team })
                 );
+            },
+
+            componentDidMount: function componentDidMount() {
+                chromeUtil.getLocalStorageSync('team').then((function (err, team) {
+                    this.setState({ team: team });
+                }).bind(this));
             }
         });
 

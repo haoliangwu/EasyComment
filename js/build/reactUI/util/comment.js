@@ -1,7 +1,6 @@
 'use strict';
 
 define(function (require, exports) {
-    console.log('this is comment');
     var $ = require('jquery');
     var React = require('react');
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
