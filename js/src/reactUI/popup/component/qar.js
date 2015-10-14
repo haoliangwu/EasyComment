@@ -4,14 +4,69 @@ define(function (require, exports) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var templates = require('comment');
+
     var comment = require('../../util/comment');
+    var dropdown = require('../../util/dropdown');
 
     exports.QARBox = function () {
+        var EnvironmentBox = React.createClass({
+            getDefaultProps: function () {
+                return {
+                    os: 'Win7 64x',
+                    server: 'Tomcat 7.0.62',
+                    db: 'MySql 5.5',
+                    browser: 'FF Latest'
+                }
+            },
+
+            render: function () {
+                return (
+                    <div>
+
+                        <div clasName='row'>
+                            <div className='row'>
+                                <div className='col-xs-6'><p>Environment Setting:</p></div>
+                            </div>
+                            <div className='row'>
+                                {dropdown.singleButtonDropDown('OS')}
+                            </div>
+                            <div className='row'>
+                                {dropdown.singleButtonDropDown('Server')}
+                            </div>
+                            <div className='row'>
+                                {dropdown.singleButtonDropDown('DataBase')}
+                            </div>
+                            <div className='row'>
+                                {dropdown.singleButtonDropDown('Browser')}
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        })
+
+        var PortalTrunkBox = React.createClass({
+            getDefaultProps: function () {
+                return {
+                    gitk_61: '61 GIT ID',
+                    gitk_62: '62 GIT ID',
+                    gitk_master: 'master GIT ID'
+                }
+            },
+
+            render: function () {
+                return (
+                    <div className='row'>
+                    </div>
+                )
+            }
+        })
 
         var QARCommentTitleBox = React.createClass({
             render: function () {
                 return (
                     <div className='row'>
+                        <EnvironmentBox/>
                         <p>QA-R Comment List</p>
                     </div>
                 )

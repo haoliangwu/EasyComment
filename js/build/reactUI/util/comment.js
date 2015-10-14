@@ -24,10 +24,14 @@ define(function (require, exports) {
 
             chromeUtil.getLocalStorage(team + '_obj', function (result) {
                 var custom_obj = result[team + '_obj'];
-                cc_obj.template = custom_obj[id].template;
-                custom_obj[id] = cc_obj;
+
+                if (custom_obj[id]) {
+                    cc_obj.template = custom_obj[id].template;
+                }
 
                 var temp = {};
+
+                custom_obj[id] = cc_obj;
                 temp[team + '_obj'] = custom_obj;
 
                 chromeUtil.setLocalStorage(temp, function () {
@@ -88,7 +92,7 @@ define(function (require, exports) {
             null,
             React.createElement(
                 'table',
-                { id: 'fp_basic', className: 'table table-striped table-condensed' },
+                { className: 'table table-striped table-condensed' },
                 React.createElement(
                     'tbody',
                     null,

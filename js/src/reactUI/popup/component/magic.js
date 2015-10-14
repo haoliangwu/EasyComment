@@ -40,10 +40,9 @@ define(function (require, exports) {
 
         render: function () {
             return (
-                <div className={'col-xs-'+this.props.magic.rows}>
-                    <button id={this.props.magic.id} className="btn btn-default"
-                            onClick={this.buttonRedirect}>{this.props.magic.name}</button>
-                </div>
+                <button id={this.props.magic.id}
+                        className={'col-xs-'+this.props.magic.rows+" btn btn-default"}
+                        onClick={this.buttonRedirect}>{this.props.magic.name}</button>
             );
         }
     });
@@ -57,7 +56,7 @@ define(function (require, exports) {
             });
 
             return (
-                <div>
+                <div className='row'>
                     {temp}
                 </div>
             );

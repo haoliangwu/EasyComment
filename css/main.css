@@ -23,12 +23,6 @@ td, th{
     padding: 5px;
 }
 
-div[class="team"] {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 20px;
-}
-
 html body {
     width: 780px;
     height:100%;

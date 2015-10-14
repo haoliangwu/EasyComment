@@ -10,6 +10,7 @@ define(function (require) {
     var magic = require('./component/magic');
     var fixpack = require('./component/fixpack');
     var qar = require('./component/qar');
+    var custom = require('./component/custom');
 
     chromeUtil.getLocalStorageSync('team').then(function (err, team) {
         if (!team) return chromeUtil.setLocalStorageSync({ team: 'fp' });else return (function () {
@@ -103,6 +104,14 @@ define(function (require) {
             }
         });
 
+        var CustomBox = React.createClass({
+            displayName: 'CustomBox',
+
+            render: function render() {
+                return custom.CustomBox();
+            }
+        });
+
         var PopupBox = React.createClass({
             displayName: 'PopupBox',
 
@@ -141,7 +150,8 @@ define(function (require) {
                     { id: 'popupBox', className: 'container-fluid' },
                     React.createElement(MagicBox, null),
                     React.createElement(TeamBox, { team: this.state.team, handleSwitch: this.handleSwitchTeam }),
-                    React.createElement(BasicBox, { team: this.state.team })
+                    React.createElement(BasicBox, { team: this.state.team }),
+                    React.createElement(CustomBox, null)
                 );
             },
 

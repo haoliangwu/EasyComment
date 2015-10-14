@@ -20,10 +20,14 @@ define(function (require, exports) {
 
             chromeUtil.getLocalStorage(team + '_obj', function (result) {
                 var custom_obj = result[team + '_obj'];
-                cc_obj.template = custom_obj[id].template;
-                custom_obj[id] = cc_obj;
+
+                if (custom_obj[id]) {
+                    cc_obj.template = custom_obj[id].template;
+                }
 
                 var temp = {};
+
+                custom_obj[id] = cc_obj;
                 temp[team + '_obj'] = custom_obj;
 
                 chromeUtil.setLocalStorage(temp, function () {
@@ -60,16 +64,16 @@ define(function (require, exports) {
         }
     });
 
-    exports.CommentBox = function (team,rows) {
+    exports.CommentBox = function (team, rows) {
         var CommentRows = [];
 
-        rows.forEach(function (c,i) {
+        rows.forEach(function (c, i) {
             CommentRows.push(<CommentRowBox key={i} rows={c} team={team}/>);
         });
 
         return (
             <div>
-                <table id="fp_basic" className="table table-striped table-condensed">
+                <table className="table table-striped table-condensed">
                     <tbody>
                     <tr>
                         <th className="one">Smart Key</th>

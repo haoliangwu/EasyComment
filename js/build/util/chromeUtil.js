@@ -26,7 +26,6 @@ define(function (require, exports, module) {
             var p = new promise.Promise();
 
             chrome.storage.local.set(obj, function () {
-                console.log('Setting %o finished..', obj);
                 p.done();
             });
 

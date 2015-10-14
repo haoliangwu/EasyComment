@@ -8,6 +8,7 @@ define(function (require) {
     var magic = require('./component/magic');
     var fixpack = require('./component/fixpack');
     var qar = require('./component/qar');
+    var custom=require('./component/custom')
 
     chromeUtil.getLocalStorageSync('team')
         .then(function (err, team) {
@@ -84,6 +85,12 @@ define(function (require) {
                 }
             });
 
+            var CustomBox = React.createClass({
+                render:function() {
+                    return custom.CustomBox();
+                }
+            });
+
             var PopupBox = React.createClass({
                 handleSwitchTeam: function (e) {
                     var state = {};
@@ -121,6 +128,7 @@ define(function (require) {
                             <MagicBox/>
                             <TeamBox team={this.state.team} handleSwitch={this.handleSwitchTeam}/>
                             <BasicBox team={this.state.team}/>
+                            <CustomBox/>
                         </div>
                     );
                 },

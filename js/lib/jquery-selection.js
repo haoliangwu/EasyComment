@@ -379,8 +379,6 @@
 
     };
 
-
-
     if(require){
         var $=require('jquery')
         jquery_selection($);

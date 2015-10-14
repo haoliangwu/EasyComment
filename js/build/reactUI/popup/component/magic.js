@@ -38,14 +38,11 @@ define(function (require, exports) {
 
         render: function render() {
             return React.createElement(
-                'div',
-                { className: 'col-xs-' + this.props.magic.rows },
-                React.createElement(
-                    'button',
-                    { id: this.props.magic.id, className: 'btn btn-default',
-                        onClick: this.buttonRedirect },
-                    this.props.magic.name
-                )
+                'button',
+                { id: this.props.magic.id,
+                    className: 'col-xs-' + this.props.magic.rows + " btn btn-default",
+                    onClick: this.buttonRedirect },
+                this.props.magic.name
             );
         }
     });
@@ -62,7 +59,7 @@ define(function (require, exports) {
 
             return React.createElement(
                 'div',
-                null,
+                { className: 'row' },
                 temp
             );
         }
