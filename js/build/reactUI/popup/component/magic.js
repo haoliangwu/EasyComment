@@ -70,7 +70,7 @@ define(function (require, exports) {
         { className: 'row' },
         React.createElement(
             'p',
-            null,
+            { className: 'block_title' },
             'Magic'
         ),
         React.createElement(MagicButtonBox, { buttons: buttons })

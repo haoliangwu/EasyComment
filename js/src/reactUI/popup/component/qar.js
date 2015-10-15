@@ -8,13 +8,24 @@ define(function (require, exports) {
     var comment = require('../../util/comment');
     var dropdown = require('../../util/dropdown');
 
+    var qar = require('qar');
+
     exports.QARBox = function () {
         var EnvironmentBox = React.createClass({
             getDefaultProps: function () {
                 return {
                     os: 'Win7 64x',
                     server: 'Tomcat 7.0.62',
-                    db: 'MySql 5.5',
+                    database: 'MySql 5.5',
+                    browser: 'FF Latest'
+                }
+            },
+
+            getInitialState: function () {
+                return {
+                    os: 'Win7 64x',
+                    server: 'Tomcat 7.0.62',
+                    database: 'MySql 5.5',
                     browser: 'FF Latest'
                 }
             },
@@ -22,23 +33,15 @@ define(function (require, exports) {
             render: function () {
                 return (
                     <div>
-
                         <div clasName='row'>
                             <div className='row'>
-                                <div className='col-xs-6'><p>Environment Setting:</p></div>
+                                <div className='col-xs-6'><p className='block_title'>Environment Setting</p></div>
+                                <div className='col-xs-5'><p className='block_title'>Current Value</p></div>
                             </div>
-                            <div className='row'>
-                                {dropdown.singleButtonDropDown('OS')}
-                            </div>
-                            <div className='row'>
-                                {dropdown.singleButtonDropDown('Server')}
-                            </div>
-                            <div className='row'>
-                                {dropdown.singleButtonDropDown('DataBase')}
-                            </div>
-                            <div className='row'>
-                                {dropdown.singleButtonDropDown('Browser')}
-                            </div>
+                            {dropdown.singleButtonDropDown('OS', qar.os_options, this.state.os)}
+                            {dropdown.singleButtonDropDown('Server', qar.server_options, this.state.server)}
+                            {dropdown.singleButtonDropDown('DataBase', qar.db_options, this.state.database)}
+                            {dropdown.singleButtonDropDown('Browser', qar.browser_options, this.state.browser)}
                         </div>
                     </div>
                 )
@@ -67,7 +70,8 @@ define(function (require, exports) {
                 return (
                     <div className='row'>
                         <EnvironmentBox/>
-                        <p>QA-R Comment List</p>
+
+                        <p className='block_title'>QA-R Comment List</p>
                     </div>
                 )
             }

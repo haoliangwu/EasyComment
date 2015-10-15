@@ -83,7 +83,7 @@ define(function (require, exports) {
             render: function () {
                 return (
                     <div className='row'>
-                        <p>Fix Pack Comment List</p>
+                        <p className='block_title'>Fix Pack Comment List</p>
                         <IsRregression isRegression={this.state.isRegression}
                                        handleChecked={this.handleChecked}/>
                         <PortalVersion portal_branch={this.state.portal_branch}

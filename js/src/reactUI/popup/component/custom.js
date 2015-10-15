@@ -10,7 +10,7 @@ define(function (require, exports) {
             render: function () {
                 return (
                     <div className='row'>
-                        <p>Custom Comment List</p>
+                        <p className='block_title'>Custom Comment List</p>
                     </div>
                 );
             }

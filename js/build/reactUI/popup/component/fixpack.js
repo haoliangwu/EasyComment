@@ -100,7 +100,7 @@ define(function (require, exports) {
                     { className: 'row' },
                     React.createElement(
                         'p',
-                        null,
+                        { className: 'block_title' },
                         'Fix Pack Comment List'
                     ),
                     React.createElement(IsRregression, { isRegression: this.state.isRegression,

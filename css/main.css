@@ -1,4 +1,4 @@
-p {
+p.block_title {
     text-align: center;
     font-size: 25px;
     color: slategray;
@@ -23,9 +23,10 @@ td, th{
     padding: 5px;
 }
 
-html body {
+body {
     width: 780px;
     height:100%;
+    padding-right: 20px;
 }
 
 .table_input {

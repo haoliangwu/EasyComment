@@ -17,7 +17,7 @@ define(function (require, exports) {
                     { className: 'row' },
                     React.createElement(
                         'p',
-                        null,
+                        { className: 'block_title' },
                         'Custom Comment List'
                     )
                 );

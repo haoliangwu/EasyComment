@@ -46,7 +46,7 @@ define(function (require) {
                     null,
                     React.createElement(
                         'p',
-                        null,
+                        { className: 'block_title' },
                         'Team Setting(Current is ',
                         this.props.team == 'fp' ? 'Fix Pack' : 'QA-R',
                         ')'

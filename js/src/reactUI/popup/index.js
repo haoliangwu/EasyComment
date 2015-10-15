@@ -43,7 +43,7 @@ define(function (require) {
 
                     return (
                         <div>
-                            <p>Team Setting(Current is {this.props.team == 'fp' ? 'Fix Pack' : 'QA-R'})</p>
+                            <p className='block_title'>Team Setting(Current is {this.props.team == 'fp' ? 'Fix Pack' : 'QA-R'})</p>
 
                             <div className="row">
                                 <div className="col-xs-3 col-xs-offset-3">

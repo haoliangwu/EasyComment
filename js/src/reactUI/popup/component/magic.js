@@ -66,7 +66,7 @@ define(function (require, exports) {
 
     exports.MagicBox = (
         <div className="row">
-            <p>Magic</p>
+            <p className='block_title'>Magic</p>
             <MagicButtonBox buttons={buttons}/>
         </div>
     );
