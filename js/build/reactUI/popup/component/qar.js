@@ -17,6 +17,23 @@ define(function (require, exports) {
         var EnvironmentBox = React.createClass({
             displayName: 'EnvironmentBox',
 
+            checkedHandler: function checkedHandler(e) {
+                var isChecked = e.target.checked;
+                var id = e.target.id;
+                var obj = this.state.isChecked;
+
+                obj[id] = isChecked;
+
+                chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
+                    result.enable_branch = obj;
+                    return chromeUtil.setLocalStorageSync({
+                        parameter_qar: result
+                    });
+                });
+
+                this.setState(obj);
+            },
+
             switchHandler: function switchHandler() {
                 this.setState({
                     isPortal: !this.state.isPortal
@@ -29,26 +46,54 @@ define(function (require, exports) {
                     server: 'Tomcat',
                     database: 'MySql 5.5',
                     browser: 'FF Latest',
+
                     gitk_61x: '',
                     gitk_62x: '',
                     gitk_master: '',
+
                     server_61x: '',
                     server_62x: '',
-                    server_master: ''
+                    server_master: '',
+
+                    enable_branch: {
+                        master: true,
+                        _62x: true,
+                        _61x: true
+                    }
                 };
             },
 
             getInitialState: function getInitialState() {
                 return {
-                    os: 'Win7 64x',
-                    server: 'Tomcat 7.0.62',
-                    database: 'MySql 5.5',
-                    browser: 'FF Latest',
-                    isPortal: true
+                    isChecked: {
+                        master: true,
+                        _62x: true,
+                        _61x: true
+                    }
                 };
             },
 
             render: function render() {
+                var portal_branch_detail = [];
+
+                if (this.state.isChecked.master) portal_branch_detail.push(React.createElement(
+                    'div',
+                    { className: 'row' },
+                    input.singleInputWithTag('Master')
+                ));
+
+                if (this.state.isChecked._62x) portal_branch_detail.push(React.createElement(
+                    'div',
+                    { className: 'row' },
+                    input.singleInputWithTag('6.2.x EE')
+                ));
+
+                if (this.state.isChecked._61x) portal_branch_detail.push(React.createElement(
+                    'div',
+                    { className: 'row' },
+                    input.singleInputWithTag('6.1.x EE')
+                ));
+
                 return React.createElement(
                     'div',
                     { className: 'container-fluid' },
@@ -70,22 +115,22 @@ define(function (require, exports) {
                             React.createElement(
                                 'div',
                                 { className: 'row' },
-                                dropdown.singleButtonDropDown('OS', qar.os_options, this.state.os)
+                                dropdown.singleButtonDropDown('OS', qar.os_options, this.props.os)
                             ),
                             React.createElement(
                                 'div',
                                 { className: 'row' },
-                                dropdown.singleButtonDropDown('Server', qar.server_options, this.state.server)
+                                dropdown.singleButtonDropDown('Server', qar.server_options, this.props.server)
                             ),
                             React.createElement(
                                 'div',
                                 { className: 'row' },
-                                dropdown.singleButtonDropDown('DataBase', qar.db_options, this.state.database)
+                                dropdown.singleButtonDropDown('DataBase', qar.db_options, this.props.database)
                             ),
                             React.createElement(
                                 'div',
                                 { className: 'row' },
-                                dropdown.singleButtonDropDown('Browser', qar.browser_options, this.state.browser)
+                                dropdown.singleButtonDropDown('Browser', qar.browser_options, this.props.browser)
                             )
                         )
                     ),
@@ -108,18 +153,47 @@ define(function (require, exports) {
                             React.createElement(
                                 'div',
                                 { className: 'row' },
-                                input.singleInputWithTag('Master')
+                                React.createElement(
+                                    'dt',
+                                    null,
+                                    'Fix Portal Version'
+                                ),
+                                React.createElement(
+                                    'dd',
+                                    null,
+                                    React.createElement(
+                                        'label',
+                                        { className: 'checkbox-inline' },
+                                        React.createElement(
+                                            'input',
+                                            { type: 'checkbox', id: 'master', onChange: this.checkedHandler,
+                                                checked: this.state.isChecked.master },
+                                            ' Master'
+                                        )
+                                    ),
+                                    React.createElement(
+                                        'label',
+                                        { className: 'checkbox-inline' },
+                                        React.createElement(
+                                            'input',
+                                            { type: 'checkbox', id: '_62x', onChange: this.checkedHandler,
+                                                checked: this.state.isChecked._62x },
+                                            ' 6.2.x EE'
+                                        )
+                                    ),
+                                    React.createElement(
+                                        'label',
+                                        { className: 'checkbox-inline' },
+                                        React.createElement(
+                                            'input',
+                                            { type: 'checkbox', id: '_61x', onChange: this.checkedHandler,
+                                                checked: this.state.isChecked._61x },
+                                            ' 6.1.x EE'
+                                        )
+                                    )
+                                )
                             ),
-                            React.createElement(
-                                'div',
-                                { className: 'row' },
-                                input.singleInputWithTag('6.2.x EE')
-                            ),
-                            React.createElement(
-                                'div',
-                                { className: 'row' },
-                                input.singleInputWithTag('6.1.x EE')
-                            )
+                            portal_branch_detail
                         )
                     )
                 );
@@ -129,7 +203,11 @@ define(function (require, exports) {
                 chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
                     if (!result) return chromeUtil.setLocalStorageSync({
                         parameter_qar: this.props
-                    });
+                    });else {
+                        this.setState({
+                            isChecked: result.enable_branch
+                        });
+                    }
                 }).bind(this));
             }
         });

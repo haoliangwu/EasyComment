@@ -19,13 +19,12 @@ define(function (require, exports) {
 
     var SingleInputWithTag = React.createClass({
         changeHandler: function () {
-            var tag = this.refs.PS_tag.getDOMNode().firstChild.nodeValue;
+            var tag = this.refs.PS_tag.getDOMNode();
             var value = this.refs.PS_value.getDOMNode().value;
 
             chromeUtil.getLocalStorageSync('parameter_qar')
                 .then(function (err, result) {
-                    console.log(result);
-                    result[bridge.get(tag)] = value
+                    result[bridge.get($(tag).text())] = value
                     return chromeUtil.setLocalStorageSync({
                         parameter_qar: result
                     })
@@ -41,20 +40,22 @@ define(function (require, exports) {
         getInitialState: function () {
             return {
                 value: this.props.value,
-                menu:['version1','version2','version3']
+                menu: ['version1', 'version2', 'version3']
             }
         },
 
         render: function () {
             return (
-                <div className="input-group">
-                    <span ref='PS_tag' className="input-group-addon">{this.props.tag}</span>
-                    <input ref='PS_value' type="text" className="form-control"
-                           placeholder={this.props.tag+' Git ID'} onChange={this.changeHandler}>
-                    </input>
+                <div>
+                    <div className="input-group col-xs-12">
+                        <span ref='PS_tag' className="input-group-addon">{this.props.tag}</span>
+                        <input ref='PS_value' type="text" className="form-control"
+                               placeholder={this.props.tag+' Git ID'} onChange={this.changeHandler}>
+                        </input>
+                        <div className='input-group-btn'>
+                            {dropdown.singleButtonDropDownAddOn(this.props.tag, this.state.menu)}
+                        </div>
 
-                    <div className='input-group-btn'>
-                        {dropdown.singleButtonDropDownAddOn(this.props.tag, this.state.menu)}
                     </div>
                 </div>
             );
@@ -63,8 +64,8 @@ define(function (require, exports) {
         componentDidMount: function () {
             chromeUtil.getLocalStorageSync('parameter_qar')
                 .then(function (err, result) {
-                    var tag = this.refs.PS_tag.getDOMNode().firstChild.nodeValue;
-                    this.refs.PS_value.getDOMNode().value = result[bridge.get(tag)];
+                    var tag = this.refs.PS_tag.getDOMNode();
+                    this.refs.PS_value.getDOMNode().value = result[bridge.get($(tag).text())];
                     this.setState({
                         menu: qar.server_versions[result.server]
                     })

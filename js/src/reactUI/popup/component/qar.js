@@ -13,6 +13,24 @@ define(function (require, exports) {
 
     exports.QARBox = function () {
         var EnvironmentBox = React.createClass({
+            checkedHandler: function (e) {
+                var isChecked = e.target.checked;
+                var id = e.target.id;
+                var obj = this.state.isChecked;
+
+                obj[id] = isChecked;
+
+                chromeUtil.getLocalStorageSync('parameter_qar')
+                    .then(function (err, result) {
+                        result.enable_branch = obj;
+                        return chromeUtil.setLocalStorageSync({
+                            parameter_qar: result
+                        })
+                    });
+
+                this.setState(obj);
+            },
+
             switchHandler: function () {
                 this.setState({
                     isPortal: !(this.state.isPortal)
@@ -25,26 +43,55 @@ define(function (require, exports) {
                     server: 'Tomcat',
                     database: 'MySql 5.5',
                     browser: 'FF Latest',
+
                     gitk_61x: '',
-                    gitk_62x:'',
-                    gitk_master:'',
-                    server_61x:'',
-                    server_62x:'',
-                    server_master:''
+                    gitk_62x: '',
+                    gitk_master: '',
+
+                    server_61x: '',
+                    server_62x: '',
+                    server_master: '',
+
+                    enable_branch: {
+                        master: true,
+                        _62x: true,
+                        _61x: true
+                    }
                 };
             },
 
             getInitialState: function () {
                 return {
-                    os: 'Win7 64x',
-                    server: 'Tomcat 7.0.62',
-                    database: 'MySql 5.5',
-                    browser: 'FF Latest',
-                    isPortal: true
+                    isChecked: {
+                        master: true,
+                        _62x: true,
+                        _61x: true
+                    }
                 }
             },
 
             render: function () {
+                var portal_branch_detail = [];
+
+                if (this.state.isChecked.master)
+                    portal_branch_detail.push((
+                        <div className='row'>
+                            {input.singleInputWithTag('Master')}
+                        </div>))
+
+                if (this.state.isChecked._62x)
+                    portal_branch_detail.push((
+                        <div className='row'>
+                            {input.singleInputWithTag('6.2.x EE')}
+                        </div>))
+
+                if (this.state.isChecked._61x)
+                    portal_branch_detail.push((
+                        <div className='row'>
+                            {input.singleInputWithTag('6.1.x EE')}
+                        </div>
+                    ))
+
                 return (
                     <div className='container-fluid'>
                         <div className='row'>
@@ -53,16 +100,16 @@ define(function (require, exports) {
                                     <p className='block_title'>Device Setting</p>
                                 </div>
                                 <div className='row'>
-                                    {dropdown.singleButtonDropDown('OS', qar.os_options, this.state.os)}
+                                    {dropdown.singleButtonDropDown('OS', qar.os_options, this.props.os)}
                                 </div>
                                 <div className='row'>
-                                    {dropdown.singleButtonDropDown('Server', qar.server_options, this.state.server)}
+                                    {dropdown.singleButtonDropDown('Server', qar.server_options, this.props.server)}
                                 </div>
                                 <div className='row'>
-                                    {dropdown.singleButtonDropDown('DataBase', qar.db_options, this.state.database)}
+                                    {dropdown.singleButtonDropDown('DataBase', qar.db_options, this.props.database)}
                                 </div>
                                 <div className='row'>
-                                    {dropdown.singleButtonDropDown('Browser', qar.browser_options, this.state.browser)}
+                                    {dropdown.singleButtonDropDown('Browser', qar.browser_options, this.props.browser)}
                                 </div>
                             </div>
                         </div>
@@ -73,14 +120,24 @@ define(function (require, exports) {
                                         Setting</p>
                                 </div>
                                 <div className='row'>
-                                    {input.singleInputWithTag('Master')}
+                                    <dt>Fix Portal Version</dt>
+                                    <dd>
+                                        <label className="checkbox-inline">
+                                            <input type="checkbox" id='master' onChange={this.checkedHandler}
+                                                   checked={this.state.isChecked.master}> Master</input>
+                                        </label>
+                                        <label className="checkbox-inline">
+                                            <input type="checkbox" id='_62x' onChange={this.checkedHandler}
+                                                   checked={this.state.isChecked._62x}> 6.2.x EE</input>
+                                        </label>
+                                        <label className="checkbox-inline">
+                                            <input type="checkbox" id='_61x' onChange={this.checkedHandler}
+                                                   checked={this.state.isChecked._61x}> 6.1.x EE</input>
+                                        </label>
+                                    </dd>
                                 </div>
-                                <div className='row'>
-                                    {input.singleInputWithTag('6.2.x EE')}
-                                </div>
-                                <div className='row'>
-                                    {input.singleInputWithTag('6.1.x EE')}
-                                </div>
+
+                                {portal_branch_detail}
                             </div>
                         </div>
                     </div>
@@ -94,6 +151,12 @@ define(function (require, exports) {
                             return chromeUtil.setLocalStorageSync({
                                 parameter_qar: this.props
                             })
+                        else {
+                            this.setState({
+                                isChecked: result.enable_branch
+                            })
+                        }
+
                     }.bind(this));
             }
         })
