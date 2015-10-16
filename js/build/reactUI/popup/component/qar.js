@@ -9,6 +9,7 @@ define(function (require, exports) {
 
     var comment = require('../../util/comment');
     var dropdown = require('../../util/dropdown');
+    var input = require('../../util/input');
 
     var qar = require('qar');
 
@@ -16,12 +17,24 @@ define(function (require, exports) {
         var EnvironmentBox = React.createClass({
             displayName: 'EnvironmentBox',
 
+            switchHandler: function switchHandler() {
+                this.setState({
+                    isPortal: !this.state.isPortal
+                });
+            },
+
             getDefaultProps: function getDefaultProps() {
                 return {
-                    os: 'Win7 64x',
-                    server: 'Tomcat 7.0.62',
+                    os: 'Win7',
+                    server: 'Tomcat',
                     database: 'MySql 5.5',
-                    browser: 'FF Latest'
+                    browser: 'FF Latest',
+                    gitk_61x: '',
+                    gitk_62x: '',
+                    gitk_master: '',
+                    server_61x: '',
+                    server_62x: '',
+                    server_master: ''
                 };
             },
 
@@ -30,61 +43,94 @@ define(function (require, exports) {
                     os: 'Win7 64x',
                     server: 'Tomcat 7.0.62',
                     database: 'MySql 5.5',
-                    browser: 'FF Latest'
+                    browser: 'FF Latest',
+                    isPortal: true
                 };
             },
 
             render: function render() {
                 return React.createElement(
                     'div',
-                    null,
+                    { className: 'container-fluid' },
                     React.createElement(
                         'div',
-                        { clasName: 'row' },
+                        { className: 'row' },
                         React.createElement(
                             'div',
-                            { className: 'row' },
+                            { className: 'col-xs-10 col-xs-offset-1' },
                             React.createElement(
                                 'div',
-                                { className: 'col-xs-6' },
+                                { className: 'row' },
                                 React.createElement(
                                     'p',
                                     { className: 'block_title' },
-                                    'Environment Setting'
+                                    'Device Setting'
                                 )
                             ),
                             React.createElement(
                                 'div',
-                                { className: 'col-xs-5' },
+                                { className: 'row' },
+                                dropdown.singleButtonDropDown('OS', qar.os_options, this.state.os)
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                dropdown.singleButtonDropDown('Server', qar.server_options, this.state.server)
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                dropdown.singleButtonDropDown('DataBase', qar.db_options, this.state.database)
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                dropdown.singleButtonDropDown('Browser', qar.browser_options, this.state.browser)
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'row' },
+                        React.createElement(
+                            'div',
+                            { className: 'col-xs-10 col-xs-offset-1' },
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
                                 React.createElement(
                                     'p',
                                     { className: 'block_title' },
-                                    'Current Value'
+                                    this.state.isPortal ? 'Portal ' : 'Plugin ',
+                                    ' Portal Setting'
                                 )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                input.singleInputWithTag('Master')
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                input.singleInputWithTag('6.2.x EE')
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                input.singleInputWithTag('6.1.x EE')
                             )
-                        ),
-                        dropdown.singleButtonDropDown('OS', qar.os_options, this.state.os),
-                        dropdown.singleButtonDropDown('Server', qar.server_options, this.state.server),
-                        dropdown.singleButtonDropDown('DataBase', qar.db_options, this.state.database),
-                        dropdown.singleButtonDropDown('Browser', qar.browser_options, this.state.browser)
+                        )
                     )
                 );
-            }
-        });
-
-        var PortalTrunkBox = React.createClass({
-            displayName: 'PortalTrunkBox',
-
-            getDefaultProps: function getDefaultProps() {
-                return {
-                    gitk_61: '61 GIT ID',
-                    gitk_62: '62 GIT ID',
-                    gitk_master: 'master GIT ID'
-                };
             },
 
-            render: function render() {
-                return React.createElement('div', { className: 'row' });
+            componentDidMount: function componentDidMount() {
+                chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
+                    if (!result) return chromeUtil.setLocalStorageSync({
+                        parameter_qar: this.props
+                    });
+                }).bind(this));
             }
         });
 

@@ -4,29 +4,30 @@ p.block_title {
     color: slategray;
 }
 
-.parameter_fixpack select{
-    width:55%;
+.parameter_fixpack select {
+    width: 55%;
 }
 
 table {
-    border:2px solid #e0e0e0;
+    border: 2px solid #e0e0e0;
     border-collapse: collapse;
     width: 100%;
 }
 
-th{
+th {
     background-color: #CCCCCC;
 }
 
-td, th{
-    border:2px solid #e0e0e0;
+td, th {
+    border: 2px solid #e0e0e0;
     padding: 5px;
 }
 
 body {
     width: 780px;
-    height:100%;
+    height: 100%;
     padding-right: 20px;
+    padding-left: 20px;
 }
 
 .table_input {
@@ -35,31 +36,32 @@ body {
     background-color: transparent;
 }
 
-.parameter_qar input{
-    width:100%;
+.parameter_qar input {
+    width: 100%;
 }
 
 #fp_basic input, #qar_basic input {
-    height:100%;
+    height: 100%;
 }
 
-.one{
+.one {
     width: 20%;
 }
 
-.two{
+.two {
     width: 60%;
 }
 
-.three{
+.three {
     width: 12%;
 }
 
-#custom_toggle{
-    float:left;
+#custom_toggle {
+    float: left;
 }
-#custom_new{
-    float:right;
+
+#custom_new {
+    float: right;
 }
 
 .btn-xs {
@@ -69,8 +71,10 @@ body {
     border-radius: 3px;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd){
+.table-striped > tbody > tr:nth-of-type(odd) {
     background-color: #FFFFCC;
 }
+
+
 
 
