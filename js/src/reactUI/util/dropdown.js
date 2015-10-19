@@ -5,11 +5,16 @@ define(function (require, exports) {
 
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
-    var bridge= new Map(
+    var qar = require('qar');
+
+    var bridge = new Map(
         [
             ['Master', 'master'],
             ['6.2.x EE', '62x'],
-            ['6.1.x EE', '61x']
+            ['6.1.x EE', '61x'],
+            ['Master(R)', 'master_r'],
+            ['6.2.x EE(R)', '62x_r'],
+            ['6.1.x EE(R)', '61x_r']
         ]
     )
 
@@ -100,10 +105,26 @@ define(function (require, exports) {
                 }.bind(this));
         }
     })
+
+    exports.singleButtonDropDown = function (title, menuList, currentValue, eventHandler) {
+        return <SingleButtonDropDown title={title} menu={menuList} value={currentValue}/>
+    };
+
     var SingleButtonDropDownAddOn = React.createClass({
+        clickHandler: function () {
+            chromeUtil.getLocalStorageSync('parameter_qar')
+                .then(function (err, result) {
+                    this.setState({
+                        menu: qar.server_versions[result.server]
+                    });
+
+                }.bind(this));
+        },
+
         chooseHandler: function (e) {
             var id = this.refs.ES_title.getDOMNode().id.toLowerCase();
             var value = $(e.target).text();
+
             chromeUtil.getLocalStorageSync('parameter_qar')
                 .then(function (err, result) {
                     result[id] = value
@@ -120,20 +141,22 @@ define(function (require, exports) {
         getDefaultProps: function () {
             return {
                 title: 'Server',
-                menu: ['option1', 'option2', 'option3']
+                menu: ['version1', 'version2', 'version3']
             }
         },
 
         getInitialState: function () {
             return {
-                value: this.props.value
+                value: this.props.value,
+                menu: ['version1', 'version2', 'version3']
             }
         },
 
         render: function () {
             var rows = [];
 
-            this.props.menu.forEach(function (c, i) {
+            if(this.state.menu)
+            this.state.menu.forEach(function (c, i) {
                 var row = (
                     <li key={'env_'+i} onClick={this.chooseHandler}><a href='#'><p className="text-center">{c}</p>
                     </a>
@@ -144,13 +167,15 @@ define(function (require, exports) {
 
             return (
                 <div className="input-group-btn">
-                    <button ref='ES_title' id={'server_'+bridge.get(this.props.title)} type="button"
+                    <button ref='ES_title' id={'server_'+bridge.get(this.props.title)} onClick={this.clickHandler}
+                            type="button"
                             className="btn btn-default col-xs-11"
                             data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         (<strong><u>{this.state.value}</u></strong>)
                     </button>
-                    <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+                    <button type="button" className="btn btn-danger dropdown-toggle" onClick={this.clickHandler}
+                            data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         <span className="caret"></span>
                     </button>
@@ -186,10 +211,6 @@ define(function (require, exports) {
                 }.bind(this));
         }
     })
-
-    exports.singleButtonDropDown = function (title, menuList, currentValue, eventHandler) {
-        return <SingleButtonDropDown title={title} menu={menuList} value={currentValue}/>
-    };
 
     exports.singleButtonDropDownAddOn = function (title, menuList, currentValue, eventHandler) {
         return <SingleButtonDropDownAddOn title={title} menu={menuList} value={currentValue}/>

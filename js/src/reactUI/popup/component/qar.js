@@ -8,6 +8,7 @@ define(function (require, exports) {
     var comment = require('../../util/comment');
     var dropdown = require('../../util/dropdown');
     var input = require('../../util/input')
+    var setting = require('../../../model/setting')
 
     var qar = require('qar');
 
@@ -23,12 +24,18 @@ define(function (require, exports) {
                 chromeUtil.getLocalStorageSync('parameter_qar')
                     .then(function (err, result) {
                         result.enable_branch = obj;
+
                         return chromeUtil.setLocalStorageSync({
                             parameter_qar: result
                         })
+                    })
+                    .then(function () {
+                        setting.syncQARComment();
                     });
 
                 this.setState(obj);
+
+
             },
 
             switchHandler: function () {
@@ -55,7 +62,10 @@ define(function (require, exports) {
                     enable_branch: {
                         master: true,
                         _62x: true,
-                        _61x: true
+                        _61x: true,
+                        master_r: true,
+                        _62x_r: true,
+                        _61x_r: true
                     }
                 };
             },
@@ -65,30 +75,53 @@ define(function (require, exports) {
                     isChecked: {
                         master: true,
                         _62x: true,
-                        _61x: true
+                        _61x: true,
+                        master_r: true,
+                        _62x_r: true,
+                        _61x_r: true
                     }
                 }
             },
 
             render: function () {
                 var portal_branch_detail = [];
+                var portal_branch_detail_r = [];
 
                 if (this.state.isChecked.master)
                     portal_branch_detail.push((
-                        <div className='row'>
+                        <div key='master' className='row'>
                             {input.singleInputWithTag('Master')}
                         </div>))
 
                 if (this.state.isChecked._62x)
                     portal_branch_detail.push((
-                        <div className='row'>
+                        <div key='62x' className='row'>
                             {input.singleInputWithTag('6.2.x EE')}
                         </div>))
 
                 if (this.state.isChecked._61x)
                     portal_branch_detail.push((
-                        <div className='row'>
+                        <div key='61x' className='row'>
                             {input.singleInputWithTag('6.1.x EE')}
+                        </div>
+                    ))
+
+                if (this.state.isChecked.master_r)
+                    portal_branch_detail_r.push((
+                        <div key='master' className='row'>
+                            {input.singleInputWithTag('Master(R)')}
+                        </div>))
+
+                if (this.state.isChecked._62x_r)
+                    portal_branch_detail_r.push((
+                        <div key='62x' className='row'>
+                            {input.singleInputWithTag('6.2.x EE(R)')}
+                        </div>))
+
+                if (this.state.isChecked._61x_r)
+                    portal_branch_detail_r.push((
+                        <div key='61x' className='row'>
+                            {input.singleInputWithTag('6.1.x EE(R)')}
                         </div>
                     ))
 
@@ -97,7 +130,7 @@ define(function (require, exports) {
                         <div className='row'>
                             <div className='col-xs-10 col-xs-offset-1'>
                                 <div className='row'>
-                                    <p className='block_title'>Device Setting</p>
+                                    <p className='block_title'>Device Detail Setting</p>
                                 </div>
                                 <div className='row'>
                                     {dropdown.singleButtonDropDown('OS', qar.os_options, this.props.os)}
@@ -113,14 +146,33 @@ define(function (require, exports) {
                                 </div>
                             </div>
                         </div>
+
                         <div className='row'>
                             <div className='col-xs-10 col-xs-offset-1'>
                                 <div className='row'>
-                                    <p className='block_title'>{this.state.isPortal ? 'Portal ' : 'Plugin '} Portal
+                                    <p className='block_title'>Portal Detail
                                         Setting</p>
                                 </div>
                                 <div className='row'>
-                                    <dt>Fix Portal Version</dt>
+                                    <dt>Reproduced Portal Version</dt>
+                                    <dd>
+                                        <label className="checkbox-inline">
+                                            <input type="checkbox" id='master_r' onChange={this.checkedHandler}
+                                                   checked={this.state.isChecked.master_r}> Master</input>
+                                        </label>
+                                        <label className="checkbox-inline">
+                                            <input type="checkbox" id='_62x_r' onChange={this.checkedHandler}
+                                                   checked={this.state.isChecked._62x_r}> 6.2.x EE</input>
+                                        </label>
+                                        <label className="checkbox-inline">
+                                            <input type="checkbox" id='_61x_r' onChange={this.checkedHandler}
+                                                   checked={this.state.isChecked._61x_r}> 6.1.x EE</input>
+                                        </label>
+                                    </dd>
+                                </div>
+                                {portal_branch_detail_r}
+                                <div className='row'>
+                                    <dt>Fixed Portal Version</dt>
                                     <dd>
                                         <label className="checkbox-inline">
                                             <input type="checkbox" id='master' onChange={this.checkedHandler}
@@ -136,7 +188,6 @@ define(function (require, exports) {
                                         </label>
                                     </dd>
                                 </div>
-
                                 {portal_branch_detail}
                             </div>
                         </div>

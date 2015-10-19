@@ -5,6 +5,8 @@ define(function (require, exports) {
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
     var promise = require('promise');
 
+    var templates = require('comment');
+
     function setting_export() {
         var export_obj = {
             fixpack: {},
@@ -73,7 +75,31 @@ define(function (require, exports) {
         });
     };
 
-    exports['export'] = function () {};
+    exports.syncQARComment = function () {
+        chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
+            var isChecked = result.enable_branch;
 
-    exports['import'] = function () {};
+            var template = templates.generateQAR(isChecked);
+
+            console.log(template.pai);
+
+            var e;
+            var obj = {};
+
+            for (e in template) {
+                if (template.hasOwnProperty(e)) {
+                    obj[e] = {
+                        id: e,
+                        key: e,
+                        des: templates.descriptions_qar[e],
+                        template: template[e]
+                    };
+                }
+            }
+
+            return chromeUtil.setLocalStorage({ 'qar_obj': obj }, function () {
+                console.log("Sync qar obj to %o successfully.", obj);
+            });
+        });
+    };
 });

@@ -10,6 +10,7 @@ define(function (require, exports) {
     var comment = require('../../util/comment');
     var dropdown = require('../../util/dropdown');
     var input = require('../../util/input');
+    var setting = require('../../../model/setting');
 
     var qar = require('qar');
 
@@ -26,9 +27,12 @@ define(function (require, exports) {
 
                 chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
                     result.enable_branch = obj;
+
                     return chromeUtil.setLocalStorageSync({
                         parameter_qar: result
                     });
+                }).then(function () {
+                    setting.syncQARComment();
                 });
 
                 this.setState(obj);
@@ -58,7 +62,10 @@ define(function (require, exports) {
                     enable_branch: {
                         master: true,
                         _62x: true,
-                        _61x: true
+                        _61x: true,
+                        master_r: true,
+                        _62x_r: true,
+                        _61x_r: true
                     }
                 };
             },
@@ -68,30 +75,52 @@ define(function (require, exports) {
                     isChecked: {
                         master: true,
                         _62x: true,
-                        _61x: true
+                        _61x: true,
+                        master_r: true,
+                        _62x_r: true,
+                        _61x_r: true
                     }
                 };
             },
 
             render: function render() {
                 var portal_branch_detail = [];
+                var portal_branch_detail_r = [];
 
                 if (this.state.isChecked.master) portal_branch_detail.push(React.createElement(
                     'div',
-                    { className: 'row' },
+                    { key: 'master', className: 'row' },
                     input.singleInputWithTag('Master')
                 ));
 
                 if (this.state.isChecked._62x) portal_branch_detail.push(React.createElement(
                     'div',
-                    { className: 'row' },
+                    { key: '62x', className: 'row' },
                     input.singleInputWithTag('6.2.x EE')
                 ));
 
                 if (this.state.isChecked._61x) portal_branch_detail.push(React.createElement(
                     'div',
-                    { className: 'row' },
+                    { key: '61x', className: 'row' },
                     input.singleInputWithTag('6.1.x EE')
+                ));
+
+                if (this.state.isChecked.master_r) portal_branch_detail_r.push(React.createElement(
+                    'div',
+                    { key: 'master', className: 'row' },
+                    input.singleInputWithTag('Master(R)')
+                ));
+
+                if (this.state.isChecked._62x_r) portal_branch_detail_r.push(React.createElement(
+                    'div',
+                    { key: '62x', className: 'row' },
+                    input.singleInputWithTag('6.2.x EE(R)')
+                ));
+
+                if (this.state.isChecked._61x_r) portal_branch_detail_r.push(React.createElement(
+                    'div',
+                    { key: '61x', className: 'row' },
+                    input.singleInputWithTag('6.1.x EE(R)')
                 ));
 
                 return React.createElement(
@@ -109,7 +138,7 @@ define(function (require, exports) {
                                 React.createElement(
                                     'p',
                                     { className: 'block_title' },
-                                    'Device Setting'
+                                    'Device Detail Setting'
                                 )
                             ),
                             React.createElement(
@@ -146,8 +175,7 @@ define(function (require, exports) {
                                 React.createElement(
                                     'p',
                                     { className: 'block_title' },
-                                    this.state.isPortal ? 'Portal ' : 'Plugin ',
-                                    ' Portal Setting'
+                                    'Portal Detail Setting'
                                 )
                             ),
                             React.createElement(
@@ -156,7 +184,51 @@ define(function (require, exports) {
                                 React.createElement(
                                     'dt',
                                     null,
-                                    'Fix Portal Version'
+                                    'Reproduced Portal Version'
+                                ),
+                                React.createElement(
+                                    'dd',
+                                    null,
+                                    React.createElement(
+                                        'label',
+                                        { className: 'checkbox-inline' },
+                                        React.createElement(
+                                            'input',
+                                            { type: 'checkbox', id: 'master_r', onChange: this.checkedHandler,
+                                                checked: this.state.isChecked.master_r },
+                                            ' Master'
+                                        )
+                                    ),
+                                    React.createElement(
+                                        'label',
+                                        { className: 'checkbox-inline' },
+                                        React.createElement(
+                                            'input',
+                                            { type: 'checkbox', id: '_62x_r', onChange: this.checkedHandler,
+                                                checked: this.state.isChecked._62x_r },
+                                            ' 6.2.x EE'
+                                        )
+                                    ),
+                                    React.createElement(
+                                        'label',
+                                        { className: 'checkbox-inline' },
+                                        React.createElement(
+                                            'input',
+                                            { type: 'checkbox', id: '_61x_r', onChange: this.checkedHandler,
+                                                checked: this.state.isChecked._61x_r },
+                                            ' 6.1.x EE'
+                                        )
+                                    )
+                                )
+                            ),
+                            portal_branch_detail_r,
+                            React.createElement(
+                                'div',
+                                { className: 'row' },
+                                React.createElement(
+                                    'dt',
+                                    null,
+                                    'Fixed Portal Version'
                                 ),
                                 React.createElement(
                                     'dd',

@@ -11,7 +11,7 @@ define(function (require, exports) {
 
     var qar = require('qar');
 
-    var bridge = new Map([['Master', 'gitk_master'], ['6.2.x EE', 'gitk_62x'], ['6.1.x EE', 'gitk_61x']]);
+    var bridge = new Map([['Master', 'gitk_master'], ['6.2.x EE', 'gitk_62x'], ['6.1.x EE', 'gitk_61x'], ['Master(R)', 'gitk_master_r'], ['6.2.x EE(R)', 'gitk_62x_r'], ['6.1.x EE(R)', 'gitk_61x_r']]);
 
     var SingleInputWithTag = React.createClass({
         displayName: 'SingleInputWithTag',
@@ -30,36 +30,32 @@ define(function (require, exports) {
 
         getDefaultProps: function getDefaultProps() {
             return {
-                tag: 'Master'
+                tag: 'Master',
+                menu: ['version1', 'version2', 'version3']
             };
         },
 
         getInitialState: function getInitialState() {
             return {
-                value: this.props.value,
-                menu: ['version1', 'version2', 'version3']
+                value: this.props.value
             };
         },
 
         render: function render() {
             return React.createElement(
                 'div',
-                null,
+                { className: 'input-group col-xs-12' },
+                React.createElement(
+                    'span',
+                    { ref: 'PS_tag', className: 'input-group-addon' },
+                    this.props.tag
+                ),
+                React.createElement('input', { ref: 'PS_value', type: 'text', className: 'form-control',
+                    placeholder: this.props.tag + ' Git ID', onChange: this.changeHandler }),
                 React.createElement(
                     'div',
-                    { className: 'input-group col-xs-12' },
-                    React.createElement(
-                        'span',
-                        { ref: 'PS_tag', className: 'input-group-addon' },
-                        this.props.tag
-                    ),
-                    React.createElement('input', { ref: 'PS_value', type: 'text', className: 'form-control',
-                        placeholder: this.props.tag + ' Git ID', onChange: this.changeHandler }),
-                    React.createElement(
-                        'div',
-                        { className: 'input-group-btn' },
-                        dropdown.singleButtonDropDownAddOn(this.props.tag, this.state.menu)
-                    )
+                    { className: 'input-group-btn' },
+                    dropdown.singleButtonDropDownAddOn(this.props.tag, this.props.menu)
                 )
             );
         },
