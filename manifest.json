@@ -26,6 +26,7 @@
       "js": [
         "js/lib/jquery-2.1.4.min.js",
         "js/lib/jquery-selection.js",
+        "js/lib/underscore-1.8.2.min.js",
         "js/content_scripts/common.js"
       ]
     },

@@ -50,49 +50,15 @@ $(document).ready(function () {
 });
 
 function commentTemplate(obj) {
-    var LPS = obj.LPS;
-    var LPE = obj.LPE;
-    var BPR = obj.BPR;
-    var fix_pack_name = obj.fix_pack_name;
-    var fix_pack_name_without_branch = fix_pack_name.match(/portal-\d*/ig);
-    var portal_branch = obj.portal_branch;
-    var regression_env = obj.isRegressionStyle ? '+ {the depends on patches}.' : '.';
-    var template = {};
+    var metadata = {
+        LPS: obj.LPS,
+        LPE: obj.LPE,
+        BPR: obj.BPR,
+        fix_pack_name: obj.fix_pack_name,
+        fix_pack_name_without_branch: obj.fix_pack_name.match(/portal-\d*/ig),
+        portal_branch: obj.portal_branch,
+        regression_env: obj.isRegressionStyle ? '+ {the depends on patches}.' : '.'
+    }
 
-    getLocalStorage('fp_obj', function (result) {
-        var obj = result.fp_obj;
-        for (var e in obj) {
-            if (obj.hasOwnProperty(e)) {
-                var temp = obj[e].template;
-                temp = temp.replace(/\$LPS/ig, LPS);
-                temp = temp.replace(/\$portal_branch/ig, portal_branch);
-                temp = temp.replace(/\$fix_pack_name_without_branch/ig, fix_pack_name_without_branch);
-                temp = temp.replace(/\$fix_pack_name/ig, fix_pack_name);
-                temp = temp.replace(/\$BPR/ig, BPR);
-                temp = temp.replace(/\$regression_env/ig, regression_env);
-                template[obj[e].key] = temp;
-            }
-        }
-
-        getLocalStorage('custom_obj', function (result) {
-            var obj = result.custom_obj;
-            for (var e in obj) {
-                if (obj.hasOwnProperty(e)) {
-                    var temp = obj[e].template;
-                    temp = temp.replace(/\$LPS/ig, LPS);
-                    temp = temp.replace(/\$portal_branch/ig, portal_branch);
-                    temp = temp.replace(/\$fix_pack_name_without_branch/ig, fix_pack_name_without_branch);
-                    temp = temp.replace(/\$fix_pack_name/ig, fix_pack_name);
-                    temp = temp.replace(/\$BPR/ig, BPR);
-                    temp = temp.replace(/\$regression_env/ig, regression_env);
-                    template[obj[e].key] = temp;
-                }
-            }
-
-            convert_selected_fixpack(template);
-        })
-
-    });
-
-
+    comment_compile(metadata, 'fp_obj');
 }

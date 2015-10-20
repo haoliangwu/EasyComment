@@ -48,25 +48,25 @@ define(function (require, exports) {
     };
 
     var templates_fp = {
-        "pa": "PASSED Manual Testing for " + "$LPS" + ".\n" + "\n" + "Reproduced on:\n" + "$portal_branch" + ".\n" + "\n" + "Passed on:\n" + "$portal_branch" + " + " + "$fix_pack_name" + ".",
+        "pa": "PASSED Manual Testing for " + "${LPS}" + ".\n" + "\n" + "Reproduced on:\n" + "${portal_branch}" + ".\n" + "\n" + "Passed on:\n" + "${portal_branch}" + " + " + "${fix_pack_name}" + ".",
 
-        "pacr": "PASSED Manual Testing for " + "$LPS" + ".\n" + "\n" + "Cannot be reproduced on:\n" + "$portal_branch" + "$regression_env" + "\n" + "Due to this issue is caused by " + "$LPS" + " and " + "$LPS" + " is also in the same patch, so I can't reproduced it.\n" + "\n" + "Passed on:\n" + "$portal_branch" + " + " + "$fix_pack_name" + ".",
+        "pacr": "PASSED Manual Testing for " + "${LPS}" + ".\n" + "\n" + "Cannot be reproduced on:\n" + "${portal_branch}" + "${regression_env}" + "\n" + "Due to this issue is caused by " + "${LPS}" + " and " + "${LPS}" + " is also in the same patch, so I can't reproduced it.\n" + "\n" + "Passed on:\n" + "${portal_branch}" + " + " + "${fix_pack_name}" + ".",
 
-        "fcr": "FAILED Manual Testing for " + "$LPS" + "(" + "$BPR" + ").\n" + "\n" + "Cannot be reproduced on:\n" + "$portal_branch" + "$regression_env" + "\n",
+        "fcr": "FAILED Manual Testing for " + "${LPS}" + "(" + "${BPR}" + ").\n" + "\n" + "Cannot be reproduced on:\n" + "${portal_branch}" + "${regression_env}" + "\n",
 
-        "f": "FAILED Manual Testing for " + "$LPS" + "(" + "$BPR" + ").\n" + "\n" + "Reproduced on:\n" + "$portal_branch" + "$regression_env" + "\n" + "\n" + "Failed on:\n" + "$portal_branch" + " + " + "$fix_pack_name" + ".",
+        "f": "FAILED Manual Testing for " + "${LPS}" + "(" + "${BPR}" + ").\n" + "\n" + "Reproduced on:\n" + "${portal_branch}" + "${regression_env}" + "\n" + "\n" + "Failed on:\n" + "${portal_branch}" + " + " + "${fix_pack_name}" + ".",
 
         "ct": "This can't be tested by manual.\n" + "{code:xml}\nHere is the proof. It can be the comment from the LPS, message from email or Skype.\n{code}",
 
-        "rm": "I'll close this sub-task as complete because it is removed from " + "$fix_pack_name" + ".",
+        "rm": "I'll close this sub-task as complete because it is removed from " + "${fix_pack_name}" + ".",
 
-        "bprc": "Can't reproduce " + "$LPS" + " on " + "$portal_branch" + "$regression_env" + "\n" + "[No/A] regression was found on " + "$portal_branch" + " + " + "$fix_pack_name" + " by using the steps in " + "$LPS" + ".\n" + "{Give more information about the regression you have found}",
+        "bprc": "Can't reproduce " + "${LPS}" + " on " + "${portal_branch}" + "${regression_env}" + "\n" + "[No/A] regression was found on " + "${portal_branch}" + " + " + "${fix_pack_name}" + " by using the steps in " + "${LPS}" + ".\n" + "{Give more information about the regression you have found}",
 
-        "bprf": "Fail to test " + "$LPS" + " on " + "$portal_branch" + " + " + "$fix_pack_name" + ".\n" + "$LPS" + "[can/can't] be reproduced on Portal {portal-head-branch} GIT ID: {GITK}.\n" + "NOTE: Additional information that you think is helpful. If there is a lot thing you need to add, feel free to add a new comment instead.",
+        "bprf": "Fail to test " + "${LPS}" + " on " + "${portal_branch}" + " + " + "${fix_pack_name}" + ".\n" + "${LPS}" + "[can/can't] be reproduced on Portal {portal-head-branch} GIT ID: {GITK}.\n" + "NOTE: Additional information that you think is helpful. If there is a lot thing you need to add, feel free to add a new comment instead.",
 
-        "crv": "The " + "$LPS" + " can't be reproduced on " + "$portal_branch" + ", need another person to verify this again.",
+        "crv": "The " + "${LPS}" + " can't be reproduced on " + "${portal_branch}" + ", need another person to verify this again.",
 
-        "fv": "The " + "$LPS" + " is failed on " + "$portal_branch" + " + " + "$fix_pack_name" + ", need another person to verify this again.",
+        "fv": "The " + "${LPS}" + " is failed on " + "${portal_branch}" + " + " + "${fix_pack_name}" + ", need another person to verify this again.",
 
         "mail": "Send email to developer for help.",
 
@@ -86,15 +86,15 @@ define(function (require, exports) {
 
     function generateQAR(isChecked) {
         console.log(isChecked);
-        var rep_master = isChecked.master_r ? "$server_master_r" + " + " + "$db" + ". " + "Portal Master GIT ID: " + "$gitk_master_r" + ".\n" : '';
-        var rep_62 = isChecked._62x_r ? "$server_62_r" + " + " + "$db" + ". " + "Portal ee-6.2.x EE GIT ID: " + "$gitk_62x_r" + ".\n" : '';
-        var rep_61 = isChecked._61x_r ? "$server_61_r" + " + " + "$db" + ". " + "Portal ee-6.1.x EE GIT ID: " + "$gitk_61x_r" + ".\n" : '';
+        var rep_master = isChecked.master_r ? "${server_master_r}" + " + " + "${db}" + ". " + "Portal Master GIT ID: " + "${gitk_master_r}" + ".\n" : '';
+        var rep_62 = isChecked._62x_r ? "${server_62_r}" + " + " + "${db}" + ". " + "Portal ee-6.2.x EE GIT ID: " + "${gitk_62x_r}" + ".\n" : '';
+        var rep_61 = isChecked._61x_r ? "${server_61_r}" + " + " + "${db}" + ". " + "Portal ee-6.1.x EE GIT ID: " + "${gitk_61x_r}" + ".\n" : '';
 
         var rep = rep_master + rep_62 + rep_61;
 
-        var fix_master = isChecked.master ? "$server_master" + " + " + "$db" + ". " + "Portal Master GIT ID: " + "$gitk_master" + ".\n" : '';
-        var fix_62 = isChecked._62x ? "$server_62" + " + " + "$db" + ". " + "Portal ee-6.2.x EE GIT ID: " + "$gitk_62x" + ".\n" : '';
-        var fix_61 = isChecked._61x ? "$server_61" + " + " + "$db" + ". " + "Portal ee-6.1.x EE GIT ID: " + "$gitk_61x" + ".\n" : '';
+        var fix_master = isChecked.master ? "${server_master}" + " + " + "${db}" + ". " + "Portal Master GIT ID: " + "${gitk_master}" + ".\n" : '';
+        var fix_62 = isChecked._62x ? "${server_62}" + " + " + "${db}" + ". " + "Portal ee-6.2.x EE GIT ID: " + "${gitk_62x}" + ".\n" : '';
+        var fix_61 = isChecked._61x ? "${server_61}" + " + " + "${db}" + ". " + "Portal ee-6.1.x EE GIT ID: " + "${gitk_61x}" + ".\n" : '';
 
         var fix = fix_master + fix_62 + fix_61;
 

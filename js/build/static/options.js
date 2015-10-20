@@ -153,7 +153,7 @@ define(function (require, exports, module) {
                     }
                     $('#save').click(function () {
                         obj.template = $('#template').val();
-                        fp_obj[id_comment] = obj;
+                        qar_obj[id_comment] = obj;
                         chrome.storage.local.set({ 'qar_obj': qar_obj }, function () {
                             console.log("Update fp obj %o.", obj);
                         });
