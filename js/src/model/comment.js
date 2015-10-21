@@ -112,7 +112,6 @@ define(function (require, exports) {
 
 
     function generateQAR(isChecked) {
-        console.log(isChecked)
         var rep_master = (isChecked.master_r) ? "${server_master_r}" + " + " + "${db}" + ". " + "Portal Master GIT ID: " + "${gitk_master_r}" + ".\n" : '';
         var rep_62 = (isChecked._62x_r) ? "${server_62_r}" + " + " + "${db}" + ". " + "Portal ee-6.2.x EE GIT ID: " + "${gitk_62x_r}" + ".\n" : '';
         var rep_61 = (isChecked._61x_r) ? "${server_61_r}" + " + " + "${db}" + ". " + "Portal ee-6.1.x EE GIT ID: " + "${gitk_61x_r}" + ".\n" : '';

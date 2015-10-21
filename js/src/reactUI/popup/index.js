@@ -146,5 +146,4 @@ define(function (require) {
             );
 
         }.bind(this));
-
 });
