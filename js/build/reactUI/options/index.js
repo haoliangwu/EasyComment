@@ -9,6 +9,9 @@ define(function (require) {
 
     var home = require('./component/home');
     var cp = require('./component/control_panel');
+    var mt = require('./component/magic_tools');
+    var dm = require('./component/data_manufactor');
+    var kb = require('./component/kb');
 
     //nav
     var Navigation = React.createClass({
@@ -94,17 +97,17 @@ define(function (require) {
                 React.createElement(
                     'div',
                     { role: 'tabpanel', className: 'tab-pane tab-pane-options', id: 'magic_tools' },
-                    'MT'
+                    mt.index
                 ),
                 React.createElement(
                     'div',
                     { role: 'tabpanel', className: 'tab-pane tab-pane-options', id: 'data_manufactor' },
-                    'DM'
+                    dm.index
                 ),
                 React.createElement(
                     'div',
                     { role: 'tabpanel', className: 'tab-pane tab-pane-options', id: 'knowledge_base' },
-                    'KB'
+                    kb.index
                 )
             );
         }

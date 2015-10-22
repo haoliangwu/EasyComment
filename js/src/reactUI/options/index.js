@@ -7,6 +7,9 @@ define(function (require) {
 
     var home = require('./component/home');
     var cp = require('./component/control_panel');
+    var mt = require('./component/magic_tools');
+    var dm = require('./component/data_manufactor');
+    var kb = require('./component/kb');
 
     //nav
     var Navigation = React.createClass({
@@ -36,9 +39,9 @@ define(function (require) {
                 <div className="tab-content">
                     <div role="tabpanel" className="tab-pane tab-pane-options active" id="home">{home.index}</div>
                     <div role="tabpanel" className="tab-pane tab-pane-options" id="control_panel">{cp.index}</div>
-                    <div role="tabpanel" className="tab-pane tab-pane-options" id="magic_tools">MT</div>
-                    <div role="tabpanel" className="tab-pane tab-pane-options" id="data_manufactor">DM</div>
-                    <div role="tabpanel" className="tab-pane tab-pane-options" id="knowledge_base">KB</div>
+                    <div role="tabpanel" className="tab-pane tab-pane-options" id="magic_tools">{mt.index}</div>
+                    <div role="tabpanel" className="tab-pane tab-pane-options" id="data_manufactor">{dm.index}</div>
+                    <div role="tabpanel" className="tab-pane tab-pane-options" id="knowledge_base">{kb.index}</div>
                 </div>
             )
 
