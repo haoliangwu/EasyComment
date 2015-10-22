@@ -1,124 +1,35 @@
-.title{
-    width:20%;
-}
-
-.input_text input{
-    width:50%;
-}
-
-.input_textarea{
-    width:100%;
-}
-
-.input_textarea textarea{
-    height:35%;
-    width:100%;
-}
-
-.tool-bar{
-    border: 1px solid #ADCD3C;
-    background-color: #EEFAFF;
-    height:60%
-}
-
-#browser_tb{
-    margin: auto;
-}
-
-#setting_toolbar{
-    margin-top:1%;
-    margin-left:15%;
-}
-
-.editor{
-}
-
-.editor div{
-
-}
-
-td, th{
-    border:2px solid #e0e0e0;
-    height:42px;
-}
-
-p {
-    margin-left:20%;
-    font-style: oblique;
-    color:#888888;
-}
-
-table input{
-    width:100%;
+/*bootstrap native style overload global*/
+.jumbotron-options{
+    margin-bottom: 0;
     height:100%;
-    background-color: transparent;
-    border:0;
 }
 
-.dl-horizontal dt{
-
-    width: 260px;
+/*custom style global*/
+.full-height{
+    height:100%;
 }
 
-.dl-horizontal dd {
-    margin-left: 280px;
-}
-/*magic*/
-#magic{
-    margin-top:2%;
+/*module style*/
+/*the option panel*/
+.options_panel{
+    border: 1px #ddd solid;
 }
 
-#magic p{
-    margin-left:40%;
+/*the tab of option panel*/
+.tab-pane-options{
+    height:55%;
 }
 
-#editor{
-    height:60%;
-    width: 80%;
-    background-color: #FFFFDD;
-
+.tag-content-options-nav{
+    position:absolute;
+    bottom:0px;
+    right:0px;
 }
 
-#magic_mb, #magic_ct, #magic_de, #magic_other{
-    margin-left:5%;
-    margin-right:5%;
-    margin-top:2%;
+/*the content of option panel*/
+.tab-content-options{
 }
 
-/*magic_mb*/
 
-/*magic_ct*/
-#custom_size{
-    width:300px;
-}
 
-/*magic_de*/
-#magic_de p{
-    margin-left:3%;
-}
-
-.steps_div{
-    height:30%;
-}
-
-.results{
-    height:30%;
-}
-
-.note_div{
-    height:30%;
-}
-
-/*other tools*/
-#create_all_things{
-    height: 85%;
-}
-
-#magic_other p{
-    font-size:14px;
-}
-
-.menulist{
-    height: 10%;
-}
 
