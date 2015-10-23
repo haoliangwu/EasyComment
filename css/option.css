@@ -9,6 +9,10 @@
     height:100%;
 }
 
+.list-inline dt{
+    margin-top:10px;
+}
+
 /*module style*/
 /*the option panel*/
 .options_panel{
@@ -29,6 +33,7 @@
 
 /*the content of option panel*/
 .tab-content-options{
+    margin:15px;
 }
 
 

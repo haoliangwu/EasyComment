@@ -130,8 +130,6 @@ define(function (require) {
 
             var tab_id = $.getURLParam('tab_id');
 
-            console.log('a[href="' + tab_id + '"]');
-
             if (tab_id) $tabs.find('a[href="#' + tab_id + '"]').click();
         }
     });
