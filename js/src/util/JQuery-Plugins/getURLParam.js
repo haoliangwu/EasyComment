@@ -1,14 +1,13 @@
-define(function (require) {
-    var $ = require('jquery')
+define(function (require,exports) {
 
-    (function ($) {
-        $.getUrlParam = function (name) {
+    var getURLParam = function ($) {
+        $.getURLParam = function (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return decodeURI(r[2]);
             return null;
         }
-    })($);
+    };
 
-    exports.$ = $;
+    exports.getURLParam = getURLParam;
 });

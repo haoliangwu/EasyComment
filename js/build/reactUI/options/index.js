@@ -5,6 +5,8 @@ define(function (require) {
     var bootstrap = require('bootstrap');
     var $ = require('jquery');
 
+    require('$getURLParam').getURLParam($);
+
     var chromeUtil = require('chromeUtil').chromeLocalStorage;
 
     var home = require('./component/home');
@@ -67,13 +69,6 @@ define(function (require) {
                     )
                 )
             );
-        },
-
-        componentDidMount: function componentDidMount() {
-            $('#nav-tabs a').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            });
         }
     });
 
@@ -113,6 +108,33 @@ define(function (require) {
         }
     });
 
-    React.render(React.createElement(Navigation, null), document.getElementById('_nav'));
-    React.render(React.createElement(ContentPanel, null), document.getElementById('_content_panel'));
+    var OptionsBox = React.createClass({
+        displayName: 'OptionsBox',
+
+        render: function render() {
+            return React.createElement(
+                'div',
+                { className: 'col-xs-8 col-xs-offset-2 options_panel' },
+                React.createElement(Navigation, null),
+                React.createElement(ContentPanel, null)
+            );
+        },
+
+        componentDidMount: function componentDidMount() {
+            var $tabs = $('#nav-tabs');
+
+            $tabs.find('a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+
+            var tab_id = $.getURLParam('tab_id');
+
+            console.log('a[href="' + tab_id + '"]');
+
+            if (tab_id) $tabs.find('a[href="#' + tab_id + '"]').click();
+        }
+    });
+
+    React.render(React.createElement(OptionsBox, null), document.getElementById('_main'));
 });

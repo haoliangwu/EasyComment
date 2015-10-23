@@ -13,6 +13,7 @@
 /*the option panel*/
 .options_panel{
     border: 1px #ddd solid;
+    padding:1px;
 }
 
 /*the tab of option panel*/

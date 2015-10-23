@@ -16,7 +16,7 @@ seajs.config({
 
         //util
         'chromeUtil': 'build/util/chromeUtil.js',
-        'getURLParam': 'build/util/JQuery-Plugins/getURLParam.js'
+        '$getURLParam': 'build/util/JQuery-Plugins/getURLParam.js'
     }
 
 });

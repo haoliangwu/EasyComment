@@ -4,36 +4,27 @@ define(function (require, exports) {
     //UI module
     var buttons = [
         {
-            id: 'mb',
-            name: 'Multiple Browsers',
-            rows: 3
+            id: 'control_panel',
+            name: 'Control Panel'
         },
         {
-            id: 'ct',
-            name: 'Custom Tables',
-            rows: 3
+            id: 'magic_tools',
+            name: 'Magic Tools'
         },
         {
-            id: 'de',
-            name: 'Descriptions',
-            rows: 2
+            id: 'data_manufactor',
+            name: 'Data Manufactor'
         },
         {
-            id: 'other',
-            name: 'Other Tools',
-            rows: 2
+            id: 'knowledge_base',
+            name: 'Knowledge Base'
         },
-        {
-            id: 'ei',
-            name: 'Export/Import',
-            rows: 2
-        }
     ];
 
     //React Components
     var MagicButton = React.createClass({
         buttonRedirect: function () {
-            var redirectURL = '/options.html?magic=';
+            var redirectURL = '/options.html?tab_id=';
 
             window.open(redirectURL + this.props.magic.id);
         },
@@ -41,7 +32,7 @@ define(function (require, exports) {
         render: function () {
             return (
                 <button id={this.props.magic.id}
-                        className={'col-xs-'+this.props.magic.rows+" btn btn-default"}
+                        className='col-xs-3 btn btn-default'
                         onClick={this.buttonRedirect}>{this.props.magic.name}</button>
             );
         }
@@ -66,7 +57,7 @@ define(function (require, exports) {
 
     exports.MagicBox = (
         <div className="row">
-            <p className='block_title'>Magic</p>
+            <p className='block_title'>Extension Setting Panel Shortcut</p>
             <MagicButtonBox buttons={buttons}/>
         </div>
     );
