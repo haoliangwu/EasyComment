@@ -30,8 +30,8 @@ define(function (require, exports) {
                         Portal Version:
                         <select ref='portal_version' value={this.props.portal_branch}
                                 onChange={this.props.handleChange}>
-                            <option value="6.2.10 EE SP13">
-                                6.2.10 EE SP13
+                            <option value="6.2.10 EE SP14">
+                                6.2.10 EE SP14
                             </option>
                             <option value="6.1.30 EE GA3 SP4">
                                 6.1.30 EE GA3 SP4

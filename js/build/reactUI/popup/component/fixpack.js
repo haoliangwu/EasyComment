@@ -43,8 +43,8 @@ define(function (require, exports) {
                             onChange: this.props.handleChange },
                         React.createElement(
                             'option',
-                            { value: '6.2.10 EE SP13' },
-                            '6.2.10 EE SP13'
+                            { value: '6.2.10 EE SP14' },
+                            '6.2.10 EE SP14'
                         ),
                         React.createElement(
                             'option',
