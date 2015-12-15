@@ -24,13 +24,14 @@ $(document).ready(function () {
 
 function commentTemplate(obj) {
     var metadata = {
-        server: obj.server ? obj.server : 'Tomcat 7.0.xx',
-        server_master: obj.server_master ? obj.server_master : 'Master Server',
-        server_62: obj.server_62x ? obj.server_62x : '6.2.x Server',
-        server_61: obj.server_61x ? obj.server_61x : '6.1.x Server',
-        server_master_r: obj.server_master_r ? obj.server_master_r : 'Master(R) Server',
-        server_62_r: obj.server_62x_r ? obj.server_62x_r : '6.2.x(R) Server',
-        server_61_r: obj.server_61x_r ? obj.server_61x_r : '6.1.x(R) Server',
+        server_master: obj.server_master ? obj.server + ' ' + obj.server_master : 'Master Server',
+        server_62: obj.server_62x ? obj.server + ' ' + obj.server_62x : '6.2.x Server',
+        server_61: obj.server_61x ? obj.server + ' ' + obj.server_61x : '6.1.x Server',
+
+        server_master_r: obj.server_master_r ? obj.server + ' ' + obj.server_master_r : 'Master(R) Server',
+        server_62_r: obj.server_62x_r ? obj.server + ' ' + obj.server_62x_r : '6.2.x(R) Server',
+        server_61_r: obj.server_61x_r ? obj.server + ' ' + obj.server_61x_r : '6.1.x(R) Server',
+
         db: obj.database ? obj.database : 'MySQL 5.5.xx',
         gitk_master: obj.gitk_master ? obj.gitk_master : 'GIT ID of master branch',
         gitk_62x: obj.gitk_62x ? obj.gitk_62x : 'GIT ID of 62 branch',
@@ -38,7 +39,7 @@ function commentTemplate(obj) {
         gitk_master_r: obj.gitk_master_r ? obj.gitk_master_r : 'GIT ID of master(R) branch',
         gitk_62x_r: obj.gitk_62x_r ? obj.gitk_62x_r : 'GIT ID of 62(R) branch',
         gitk_61x_r: obj.gitk_61x_r ? obj.gitk_61x_r : 'GIT ID of 61(R) branch'
-    }
+    };
 
     comment_compile(metadata, 'qar_obj');
 }
