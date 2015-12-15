@@ -8,7 +8,7 @@ define(function (require, exports) {
     var templates = require('comment');
     var comment = require('../../util/comment');
 
-    var defaultPortalVersion = '6.2.10 EE SP13';
+    var defaultPortalVersion = '6.2.10 EE SP14';
 
     exports.FixPackBox = function () {
         var IsRregression = React.createClass({
@@ -43,8 +43,8 @@ define(function (require, exports) {
                             onChange: this.props.handleChange },
                         React.createElement(
                             'option',
-                            { value: '6.2.10 EE SP13' },
-                            '6.2.10 EE SP13'
+                            { value: '6.2.10 EE SP14' },
+                            '6.2.10 EE SP14'
                         ),
                         React.createElement(
                             'option',
