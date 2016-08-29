@@ -272,7 +272,7 @@ define(function (require, exports) {
             },
 
             componentDidMount: function componentDidMount() {
-                chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
+                chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
                     if (!result) return chromeUtil.setLocalStorageSync({
                         parameter_qar: this.props
                     });else {
@@ -280,7 +280,7 @@ define(function (require, exports) {
                             isChecked: result.enable_branch
                         });
                     }
-                }).bind(this));
+                }.bind(this));
             }
         });
 
@@ -328,7 +328,7 @@ define(function (require, exports) {
             componentDidMount: function componentDidMount() {
                 var template = templates.templates_qar;
 
-                chromeUtil.getLocalStorageSync("qar_obj").then((function (err, result) {
+                chromeUtil.getLocalStorageSync("qar_obj").then(function (err, result) {
                     var e;
                     var rows = [];
 
@@ -348,10 +348,10 @@ define(function (require, exports) {
                             }
                         }
 
-                        chromeUtil.setLocalStorage({ 'qar_obj': obj }, (function () {
+                        chromeUtil.setLocalStorage({ 'qar_obj': obj }, function () {
                             console.log("Initiate qar obj to %o successfully.", obj);
                             this.setState({ rows: rows });
-                        }).bind(this));
+                        }.bind(this));
                     } else {
                         for (e in result) {
                             if (result.hasOwnProperty(e)) rows.push(result[e]);
@@ -359,7 +359,7 @@ define(function (require, exports) {
 
                         this.setState({ rows: rows });
                     }
-                }).bind(this));
+                }.bind(this));
             }
         });
 

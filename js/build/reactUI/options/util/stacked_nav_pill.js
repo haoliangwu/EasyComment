@@ -19,7 +19,7 @@ define(function (require) {
             var tabs_HTML = [];
             var tab_contents_HTML = [];
 
-            this.props.tabs.forEach((function (v, i) {
+            this.props.tabs.forEach(function (v, i) {
                 var label = v.toLowerCase().replace(' ', '_');
 
                 tabs_HTML.push(React.createElement(
@@ -37,7 +37,7 @@ define(function (require) {
                         id: label },
                     this.props.tab_contents[label]
                 ));
-            }).bind(this));
+            }.bind(this));
 
             return React.createElement(
                 'div',

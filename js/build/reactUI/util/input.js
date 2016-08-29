@@ -61,13 +61,13 @@ define(function (require, exports) {
         },
 
         componentDidMount: function componentDidMount() {
-            chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
+            chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
                 var tag = this.refs.PS_tag.getDOMNode();
                 this.refs.PS_value.getDOMNode().value = result[bridge.get($(tag).text())];
                 this.setState({
                     menu: qar.server_versions[result.server]
                 });
-            }).bind(this));
+            }.bind(this));
         }
     });
 
