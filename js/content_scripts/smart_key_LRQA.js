@@ -14,7 +14,7 @@ $(document).ready(function () {
                 getLocalStorage("parameter_fp", function (result) {
                     var obj = result.parameter_fp;
                     var title = $("#summary-val").text();
-                    var fix_pack_name = title.match(/portal-\d{2}-\d{4}/ig) ? title.match(/portal-\d{2}-\d{4}/ig)[0] : "portal-version-branch";
+                    var fix_pack_name = title.match(/portal-\d+-\d+/ig) ? title.match(/portal-\d+-\d+/ig)[0] : "portal-version-branch";
                     var LPE = title.match(/LPE-\d{5}/ig) ? title.match(/LPE-\d{5}/ig)[0] : "LPE-*****";
                     var LPS = title.match(/LPS-\d{5}/ig) ? title.match(/LPS-\d{5}/ig)[0] : "LPS-*****";
                     var portal_branch = obj.portal_branch ? obj.portal_branch : "Portal-Branch";
@@ -22,7 +22,7 @@ $(document).ready(function () {
                     $(".issue-link.link-title").each(function () {
                         var text = $(this).text();
                         //console.log(text);
-                        if (text.match(/BPR-\d{4}/ig)) {
+                        if (text.match(/BPR-\d{4,5}/ig)) {
                             BPR = text;
                         }
                     });
