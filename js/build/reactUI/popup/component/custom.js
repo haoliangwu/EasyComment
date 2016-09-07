@@ -30,7 +30,7 @@ define(function (require, exports) {
             AddNewComment: function AddNewComment() {
                 var rows = this.state.rows;
 
-                chromeUtil.getLocalStorageSync('custom_count').then((function (err, count) {
+                chromeUtil.getLocalStorageSync('custom_count').then(function (err, count) {
                     count++;
 
                     var cc_obj = {
@@ -45,7 +45,7 @@ define(function (require, exports) {
                     this.setState({ rows: rows });
 
                     return chromeUtil.setLocalStorageSync({ custom_count: count });
-                }).bind(this));
+                }.bind(this));
             },
 
             getDefaultProps: function getDefaultProps() {
@@ -75,7 +75,7 @@ define(function (require, exports) {
             },
 
             componentDidMount: function componentDidMount() {
-                chromeUtil.getLocalStorageSync("custom_obj").then((function (err, result) {
+                chromeUtil.getLocalStorageSync("custom_obj").then(function (err, result) {
                     var e;
                     var rows = [];
 
@@ -90,7 +90,7 @@ define(function (require, exports) {
 
                         this.setState({ rows: rows });
                     }
-                }).bind(this));
+                }.bind(this));
             }
 
         });

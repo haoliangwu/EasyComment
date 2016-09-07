@@ -6,7 +6,7 @@ define(function (require, exports) {
     var templates = require('comment');
     var comment = require('../../util/comment');
 
-    var defaultPortalVersion = '6.2.10 EE SP14';
+    var defaultPortalVersion = '6.2.10 EE SP15';
 
     exports.FixPackBox = function () {
         var IsRregression = React.createClass({
@@ -28,15 +28,9 @@ define(function (require, exports) {
                 return (
                     <div className="col-sm-5 col-sm-offset-3">
                         Portal Version:
-                        <select ref='portal_version' value={this.props.portal_branch}
+                        <input ref='portal_version' value={this.props.portal_branch}
                                 onChange={this.props.handleChange}>
-                            <option value="6.2.10 EE SP14">
-                                6.2.10 EE SP14
-                            </option>
-                            <option value="6.1.30 EE GA3 SP4">
-                                6.1.30 EE GA3 SP4
-                            </option>
-                        </select>
+                        </input>
                     </div>
                 );
             }

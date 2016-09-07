@@ -45,7 +45,7 @@ define(function (require, exports) {
         render: function render() {
             var rows = [];
 
-            this.props.menu.forEach((function (c, i) {
+            this.props.menu.forEach(function (c, i) {
                 var row = React.createElement(
                     'li',
                     { key: 'env_' + i, onClick: this.chooseHandler },
@@ -61,7 +61,7 @@ define(function (require, exports) {
                 );
 
                 rows.push(row);
-            }).bind(this));
+            }.bind(this));
 
             return React.createElement(
                 'div',
@@ -100,7 +100,7 @@ define(function (require, exports) {
         },
 
         componentDidMount: function componentDidMount() {
-            chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
+            chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
                 var default_qar_obj = {
                     os: 'Win7 64x',
                     server: 'Tomcat 7.0.62',
@@ -116,7 +116,7 @@ define(function (require, exports) {
                         value: result[id]
                     });
                 }
-            }).bind(this));
+            }.bind(this));
         }
     });
 
@@ -128,11 +128,11 @@ define(function (require, exports) {
         displayName: 'SingleButtonDropDownAddOn',
 
         clickHandler: function clickHandler() {
-            chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
+            chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
                 this.setState({
                     menu: qar.server_versions[result.server]
                 });
-            }).bind(this));
+            }.bind(this));
         },
 
         chooseHandler: function chooseHandler(e) {
@@ -168,7 +168,7 @@ define(function (require, exports) {
         render: function render() {
             var rows = [];
 
-            if (this.state.menu) this.state.menu.forEach((function (c, i) {
+            if (this.state.menu) this.state.menu.forEach(function (c, i) {
                 var row = React.createElement(
                     'li',
                     { key: 'env_' + i, onClick: this.chooseHandler },
@@ -184,7 +184,7 @@ define(function (require, exports) {
                 );
 
                 rows.push(row);
-            }).bind(this));
+            }.bind(this));
 
             return React.createElement(
                 'div',
@@ -224,7 +224,7 @@ define(function (require, exports) {
         },
 
         componentDidMount: function componentDidMount() {
-            chromeUtil.getLocalStorageSync('parameter_qar').then((function (err, result) {
+            chromeUtil.getLocalStorageSync('parameter_qar').then(function (err, result) {
                 var default_qar_obj = {
                     os: 'Win7 64x',
                     server: 'Tomcat 7.0.62',
@@ -240,7 +240,7 @@ define(function (require, exports) {
                         value: result[id]
                     });
                 }
-            }).bind(this));
+            }.bind(this));
         }
     });
 

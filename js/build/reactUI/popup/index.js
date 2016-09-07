@@ -13,12 +13,12 @@ define(function (require) {
     var custom = require('./component/custom');
 
     chromeUtil.getLocalStorageSync('team').then(function (err, team) {
-        if (!team) return chromeUtil.setLocalStorageSync({ team: 'fp' });else return (function () {
+        if (!team) return chromeUtil.setLocalStorageSync({ team: 'fp' });else return function () {
             var p = new promise.Promise();
             p.done(null, team);
             return p;
-        })();
-    }).then((function (err, team) {
+        }();
+    }).then(function (err, team) {
 
         var MagicBox = React.createClass({
             displayName: 'MagicBox',
@@ -156,12 +156,12 @@ define(function (require) {
             },
 
             componentDidMount: function componentDidMount() {
-                chromeUtil.getLocalStorageSync('team').then((function (err, team) {
+                chromeUtil.getLocalStorageSync('team').then(function (err, team) {
                     this.setState({ team: team });
-                }).bind(this));
+                }.bind(this));
             }
         });
 
         React.render(React.createElement(PopupBox, null), document.getElementById('_main'));
-    }).bind(this));
+    }.bind(this));
 });

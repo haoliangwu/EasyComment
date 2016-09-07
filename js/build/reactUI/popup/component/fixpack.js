@@ -8,7 +8,7 @@ define(function (require, exports) {
     var templates = require('comment');
     var comment = require('../../util/comment');
 
-    var defaultPortalVersion = '6.2.10 EE SP14';
+    var defaultPortalVersion = '6.2.10 EE SP15';
 
     exports.FixPackBox = function () {
         var IsRregression = React.createClass({
@@ -37,21 +37,8 @@ define(function (require, exports) {
                     'div',
                     { className: 'col-sm-5 col-sm-offset-3' },
                     'Portal Version:',
-                    React.createElement(
-                        'select',
-                        { ref: 'portal_version', value: this.props.portal_branch,
-                            onChange: this.props.handleChange },
-                        React.createElement(
-                            'option',
-                            { value: '6.2.10 EE SP14' },
-                            '6.2.10 EE SP14'
-                        ),
-                        React.createElement(
-                            'option',
-                            { value: '6.1.30 EE GA3 SP4' },
-                            '6.1.30 EE GA3 SP4'
-                        )
-                    )
+                    React.createElement('input', { ref: 'portal_version', value: this.props.portal_branch,
+                        onChange: this.props.handleChange })
                 );
             }
         });
@@ -113,7 +100,7 @@ define(function (require, exports) {
             componentDidMount: function componentDidMount() {
                 var state = {};
 
-                chromeUtil.getLocalStorageSync('parameter_fp').then((function (err, result) {
+                chromeUtil.getLocalStorageSync('parameter_fp').then(function (err, result) {
                     var default_fp_obj = {
                         portal_branch: this.state.portal_branch,
                         isRegressionStyle: this.state.isRegression
@@ -130,7 +117,7 @@ define(function (require, exports) {
                             console.log("Init parameter_fp %o successfully", parameter_fp);
                         });
                     }
-                }).bind(this));
+                }.bind(this));
             }
         });
 
@@ -165,7 +152,7 @@ define(function (require, exports) {
             componentDidMount: function componentDidMount() {
                 var template = templates.templates_fp;
 
-                chromeUtil.getLocalStorageSync("fp_obj").then((function (err, result) {
+                chromeUtil.getLocalStorageSync("fp_obj").then(function (err, result) {
                     var e;
                     var rows = [];
                     if (!result) {
@@ -184,10 +171,10 @@ define(function (require, exports) {
                             }
                         }
 
-                        chromeUtil.setLocalStorage({ 'fp_obj': obj }, (function () {
+                        chromeUtil.setLocalStorage({ 'fp_obj': obj }, function () {
                             console.log("Initiate fixpack obj to %o successfully.", obj);
                             this.setState({ rows: rows });
-                        }).bind(this));
+                        }.bind(this));
                     } else {
                         for (e in result) {
                             if (result.hasOwnProperty(e)) rows.push(result[e]);
@@ -195,7 +182,7 @@ define(function (require, exports) {
 
                         this.setState({ rows: rows });
                     }
-                }).bind(this));
+                }.bind(this));
             }
         });
 
